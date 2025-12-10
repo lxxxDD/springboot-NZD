@@ -1,0 +1,216 @@
+{
+	"easycom": {
+		"autoscan": true,
+		// 注意一定要放在custom里，否则无效，https://ask.dcloud.net.cn/question/131175
+		"custom": {
+			"^u--(.*)": "@/uni_modules/uview-plus/components/u-$1/u-$1.vue",
+			"^up-(.*)": "@/uni_modules/uview-plus/components/u-$1/u-$1.vue",
+			"^u-([^-].*)": "@/uni_modules/uview-plus/components/u-$1/u-$1.vue"
+		}
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "校园生活助手",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/services/food",
+			"style": {
+				"navigationBarTitleText": "校园服务",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/services/repair",
+			"style": {
+				"navigationBarTitleText": "校园报修",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/repair/create",
+			"style": {
+				"navigationBarTitleText": "发起报修",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/repair/detail",
+			"style": {
+				"navigationBarTitleText": "报修详情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/market/market",
+			"style": {
+				"navigationBarTitleText": "三手市场",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/market/create",
+			"style": {
+				"navigationBarTitleText": "发布商品",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/market/detail",
+			"style": {
+				"navigationBarTitleText": "商品详情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/market/edit",
+			"style": {
+				"navigationBarTitleText": "编辑商品",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/market/order-detail",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/market/manage",
+			"style": {
+				"navigationBarTitleText": "交易管理",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/messages/messages",
+			"style": {
+				"navigationBarTitleText": "消息中心",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/messages/chat",
+			"style": {
+				"navigationBarTitleText": "聊天",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/profile/info",
+			"style": {
+				"navigationBarTitleText": "个人信息管理",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/profile/transactions",
+			"style": {
+				"navigationBarTitleText": "交易记录",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/profile/settings",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "我的订单篮",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/payment/payment",
+			"style": {
+				"navigationBarTitleText": "支付订单",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/notifications/notifications",
+			"style": {
+				"navigationBarTitleText": "通知",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/orders/orders",
+			"style": {
+				"navigationBarTitleText": "订单",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/activity/list",
+			"style": {
+				"navigationBarTitleText": "校园活动",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/activity/detail",
+			"style": {
+				"navigationBarTitleText": "活动详情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/news/detail",
+			"style": {
+				"navigationBarTitleText": "新闻详情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/orders/detail",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/topup/topup",
+			"style": {
+				"navigationBarTitleText": "充值",
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

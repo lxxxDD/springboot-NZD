@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusLife Admin | Vue Bits 动画集成版 (Fixed)</title>
+
+    <!-- 字体 -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 样式库 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus@2.3.14/dist/index.css" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Outfit', 'Noto Sans SC', 'sans-serif'] },
+                    colors: {
+                        cyber: {
+                            bg: '#030712',
+                            card: 'rgba(17, 24, 39, 0.7)',
+                            border: 'rgba(255, 255, 255, 0.1)',
+                            primary: '#6366f1',
+                            secondary: '#ec4899',
+                            accent: '#06b6d4'
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Vue 全家桶 -->
+    <script src="https://unpkg.com/vue@3.3.4/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4.2.5/dist/vue-router.global.js"></script>
+    <!-- 修复关键：Pinia 必须依赖 VueDemi -->
+    <script src="https://unpkg.com/vue-demi@0.14.6/lib/index.iife.js"></script>
+    <script src="https://unpkg.com/pinia@2.1.7/dist/pinia.iife.js"></script>
+    <script src="https://unpkg.com/element-plus@2.3.14/dist/index.full.js"></script>
+    <script src="https://unpkg.com/@element-plus/icons-vue@2.1.0/dist/index.iife.min.js"></script>
+
+    <!-- 核心动画库：GSAP (Vue Bits 的动力源) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- 图表库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+    <style>
+        /* 全局样式重置 */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+            --glass-bg: rgba(17, 24, 39, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: #030712;
+            color: #f8fafc;
+            font-family: 'Outfit', sans-serif;
+            overflow: hidden;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        /* 滚动条 */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        /* 霓虹卡片 */
+        .neon-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        /* 流光边框遮罩 */
+        .neon-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* 按钮发光 */
+        .btn-glow {
+            background: var(--primary-gradient) !important;
+            border: none !important;
+            color: white !important;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+
+        /* 侧边栏选中态 */
+        .el-menu-item.is-active {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.15) 0%, transparent) !important;
+            border-left: 3px solid #ec4899;
+            color: #fff !important;
+        }
+
+        .el-menu-item:hover {
+            background: rgba(255, 255, 255, 0.03) !important;
+        }
+
+        /* Element UI 覆盖 */
+        .el-table,
+        .el-table__expanded-cell {
+            background: transparent !important;
+        }
+
+        .el-table th,
+        .el-table tr {
+            background: transparent !important;
+        }
+
+        .el-table td,
+        .el-table th.is-leaf {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
+
+        .el-table--enable-row-hover .el-table__body tr:hover>td {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        .el-input__wrapper {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            box-shadow: none !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+
+        /* 动态背景 blobs */
+        .light-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.3;
+            animation: blob 15s infinite alternate;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fixed inset-0 z-[-1] bg-[#030712]">
+        <div class="light-blob bg-indigo-600 w-96 h-96 top-0 left-0"></div>
+        <div class="light-blob bg-pink-600 w-96 h-96 bottom-0 right-0 animation-delay-2000"></div>
+    </div>
+
+    <div id="app" v-cloak>
+        <router-view></router-view>
+    </div>
+
+    <script>
+        window.onload = function () {
+            const { createApp, ref, computed, watch, defineComponent, onMounted, h } = Vue;
+            const { createRouter, createWebHashHistory, useRoute, useRouter } = VueRouter;
+            const { createPinia, defineStore } = Pinia;
+
+            // -----------------------------------------------------------
+            // 1. Vue Bits 组件复刻 (Powered by GSAP)
+            // -----------------------------------------------------------
+
+            // [Vue Bits] SplitText: 文字拆分入场
+            const SplitText = defineComponent({
+                props: { text: String, delay: { type: Number, default: 0.05 } },
+                setup(props) {
+                    const charRefs = ref([]);
+
+                    onMounted(() => {
+                        gsap.fromTo(charRefs.value,
+                            { y: 50, opacity: 0, filter: 'blur(10px)' },
+                            {
+                                y: 0, opacity: 1, filter: 'blur(0px)',
+                                duration: 0.8, stagger: props.delay, ease: "back.out(1.7)"
+                            }
+                        );
+                    });
+
+                    return () => h('span', { class: 'inline-block overflow-hidden' },
+                        props.text.split('').map((char, i) =>
+                            h('span', {
+                                ref: el => charRefs.value[i] = el,
+                                class: 'inline-block whitespace-pre',
+                                style: 'will-change: transform, opacity, filter;'
+                            }, char)
+                        )
+                    );
+                }
+            });
+
+            // [Vue Bits] NumberTicker: 数字滚动
+            const NumberTicker = defineComponent({
+                props: { value: { type: Number, default: 0 }, prefix: { type: String, default: '' }, suffix: { type: String, default: '' } },
+                setup(props) {
+                    const displayValue = ref(0);
+                    onMounted(() => {
+                        gsap.to(displayValue, {
+                            value: props.value,
+                            duration: 2,
+                            ease: "power2.out",
+                            onUpdate: () => { displayValue.value = Math.round(displayValue.value); } // 确保整数
+                        });
+                    });
+                    // 处理千分位
+                    const formatted = computed(() => {
+                        return displayValue.value.toLocaleString();
+                    });
+                    return { formatted };
+                },
+                template: `<span class="tabular-nums">{{ prefix }}{{ formatted }}{{ suffix }}</span>`
+            });
+
+            // [Vue Bits] BlurReveal: 模糊显现容器
+            const BlurReveal = defineComponent({
+                props: { delay: { type: Number, default: 0 } },
+                setup(props, { slots }) {
+                    const elRef = ref(null);
+                    onMounted(() => {
+                        gsap.fromTo(elRef.value,
+                            { opacity: 0, y: 20, filter: 'blur(12px)' },
+                            { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, delay: props.delay, ease: "power3.out" }
+                        );
+                    });
+                    return () => h('div', { ref: elRef }, slots.default ? slots.default() : []);
+                }
+            });
+
+            // -----------------------------------------------------------
+            // 2. 业务组件
+            // -----------------------------------------------------------
+
+            const NeonStatCard = defineComponent({
+                components: { NumberTicker, BlurReveal },
+                props: ['title', 'value', 'prefix', 'trend', 'isUp', 'icon', 'accent', 'delay'],
+                template: `
+                    <blur-reveal :delay="delay">
+                        <div class="neon-card p-6 relative group">
+                            <!-- 动态光晕 -->
+                            <div class="absolute -top-10 -right-10 w-32 h-32 bg-current rounded-full opacity-10 blur-[40px] group-hover:opacity-20 transition-opacity" :style="{ color: accent }"></div>
+                            
+                            <div class="flex justify-between items-start relative z-10">
+                                <div>
+                                    <p class="text-slate-400 text-xs font-bold tracking-wider uppercase mb-1">{{ title }}</p>
+                                    <h3 class="text-3xl font-bold text-white">
+                                        <number-ticker :value="value" :prefix="prefix" />
+                                    </h3>
+                                </div>
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-lg"
+                                     :style="{ background: \`linear-gradient(135deg, \${accent}cc, \${accent}33)\` }">
+                                    <el-icon size="20"><component :is="icon" /></el-icon>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex items-center gap-2 relative z-10">
+                                <span class="px-2 py-0.5 rounded text-xs font-bold flex items-center"
+                                      :class="isUp ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'">
+                                    <el-icon class="mr-1"><component :is="isUp ? 'Top' : 'Bottom'" /></el-icon>
+                                    {{ trend }}%
+                                </span>
+                                <span class="text-xs text-slate-500">较上周</span>
+                            </div>
+                        </div>
+                    </blur-reveal>
+                `
+            });
+
+            // -----------------------------------------------------------
+            // 3. 页面视图
+            // -----------------------------------------------------------
+
+            const Dashboard = defineComponent({
+                components: { SplitText, NeonStatCard, BlurReveal },
+                template: `
+                    <div class="p-8 min-h-full">
+                        <!-- Header -->
+                        <div class="flex flex-col md:flex-row justify-between items-end mb-10">
+                            <div>
+                                <h1 class="text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                                    <split-text text="控制台" />
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500">
+                                        <split-text text="Ultra" :delay="0.1" />
+                                    </span>
+                                </h1>
+                                <blur-reveal :delay="0.5">
+                                    <p class="text-slate-400">系统状态: <span class="text-emerald-400 font-mono">ONLINE</span> · 节点同步率 99.9%</p>
+                                </blur-reveal>
+                            </div>
+                            <blur-reveal :delay="0.6">
+                                <div class="flex gap-4">
+                                    <el-button class="!bg-white/5 !border-white/10 !text-white hover:!bg-white/10">系统日志</el-button>
+                                    <el-button type="primary" icon="Lightning" class="btn-glow !rounded-xl">部署更新</el-button>
+                                </div>
+                            </blur-reveal>
+                        </div>
+
+                        <!-- 统计卡片 (带数字滚动动画) -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <neon-stat-card title="总营收 Revenue" :value="824560" prefix="¥" trend="24.5" :isUp="true" icon="Wallet" accent="#6366f1" :delay="0.1" />
+                            <neon-stat-card title="活跃用户 DAU" :value="12450" trend="8.2" :isUp="true" icon="User" accent="#ec4899" :delay="0.2" />
+                            <neon-stat-card title="API 请求数" :value="1042300" trend="5.1" :isUp="false" icon="Cpu" accent="#06b6d4" :delay="0.3" />
+                            <neon-stat-card title="异常告警 Alerts" :value="3" trend="12.0" :isUp="false" icon="Bell" accent="#f59e0b" :delay="0.4" />
+                        </div>
+
+                        <!-- 图表区 -->
+                        <blur-reveal :delay="0.6" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <div class="lg:col-span-2 neon-card p-6">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h3 class="text-lg font-bold text-white">全息流量监控</h3>
+                                    <div class="flex gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                                        <span class="text-xs text-indigo-400">实时数据流</span>
+                                    </div>
+                                </div>
+                                <div ref="chartEl" class="w-full h-80"></div>
+                            </div>
+
+                            <div class="neon-card p-0 flex flex-col">
+                                <div class="p-6 border-b border-white/5"><h3 class="text-lg font-bold text-white">安全审计日志</h3></div>
+                                <div class="flex-1 overflow-auto p-4 space-y-3">
+                                    <div v-for="i in 6" :key="i" class="flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
+                                        <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-slate-800 border border-white/10 text-xs font-mono text-slate-400 group-hover:text-indigo-400 group-hover:border-indigo-500/50 transition-colors">
+                                            {{ i < 10 ? '0'+i : i }}
+                                        </div>
+                                        <div>
+                                            <div class="text-sm text-slate-200">检测到异常登录尝试</div>
+                                            <div class="text-xs text-slate-600 font-mono">IP: 192.168.0.{{ 100+i }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </blur-reveal>
+                    </div>
+                `,
+                setup() {
+                    const chartEl = ref(null);
+                    onMounted(() => {
+                        const chart = echarts.init(chartEl.value);
+                        chart.setOption({
+                            grid: { top: 10, right: 10, bottom: 20, left: 40 },
+                            tooltip: { trigger: 'axis', backgroundColor: 'rgba(0,0,0,0.8)', borderColor: '#6366f1', textStyle: { color: '#fff' } },
+                            xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], axisLine: { lineStyle: { color: '#334155' } } },
+                            yAxis: { type: 'value', splitLine: { lineStyle: { color: '#334155' } } },
+                            series: [{
+                                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                                type: 'line', smooth: true, showSymbol: false,
+                                lineStyle: { color: '#6366f1', width: 4, shadowBlur: 10, shadowColor: 'rgba(99,102,241,0.5)' },
+                                areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(99,102,241,0.3)' }, { offset: 1, color: 'transparent' }]) }
+                            }]
+                        });
+                        window.onresize = () => chart.resize();
+                    });
+                    return { chartEl };
+                }
+            });
+
+            // -----------------------------------------------------------
+            // 4. Layout & Generic Page (修复了 SidebarItem 逻辑)
+            // -----------------------------------------------------------
+            const SidebarItem = defineComponent({
+                props: {
+                    item: { type: Object, required: true },
+                    basePath: { type: String, default: '' }
+                },
+                template: `
+                    <template v-if="!item.hidden">
+                        <!-- 
+                            修复逻辑：使用 hasOneShowingChild 判断。
+                            如果只有一个子节点且不显式显示根节点，则直接渲染子节点。
+                            这避免了渲染没有 meta 属性的根布局路由，从而解决 'title' of undefined 报错。
+                        -->
+                        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.alwaysShow">
+                            <el-menu-item :index="resolvePath(onlyOneChild.path)">
+                                <el-icon v-if="onlyOneChild.meta && onlyOneChild.meta.icon"><component :is="onlyOneChild.meta.icon" /></el-icon>
+                                <template #title>{{ onlyOneChild.meta?.title }}</template>
+                            </el-menu-item>
+                        </template>
+
+                        <el-sub-menu v-else :index="resolvePath(item.path)">
+                            <template #title>
+                                <el-icon v-if="item.meta && item.meta.icon"><component :is="item.meta.icon" /></el-icon>
+                                <!-- 增加 v-if="item.meta" 保护 -->
+                                <span v-if="item.meta">{{ item.meta.title }}</span>
+                            </template>
+                            <sidebar-item v-for="child in item.children" :key="child.path" :item="child" :base-path="resolvePath(item.path)" />
+                        </el-sub-menu>
+                    </template>
+                `,
+                setup(props) {
+                    const onlyOneChild = ref(null);
+
+                    const hasOneShowingChild = (children = [], parent) => {
+                        const showingChildren = children.filter(item => !item.hidden);
+                        // 当只有一个子路由时，默认显示该子路由
+                        if (showingChildren.length === 1) {
+                            onlyOneChild.value = showingChildren[0];
+                            return true;
+                        }
+                        // 如果没有子路由，则显示父路由本身
+                        if (showingChildren.length === 0) {
+                            onlyOneChild.value = { ...parent, path: '', noShowingChildren: true };
+                            return true;
+                        }
+                        return false;
+                    };
+
+                    const resolvePath = (routePath) => {
+                        const basePath = props.basePath.replace(/\/$/, '');
+                        const path = routePath.replace(/^\//, '');
+                        return `${basePath}/${path}`.replace(/^\/\//, '/');
+                    };
+
+                    return { onlyOneChild, hasOneShowingChild, resolvePath };
+                }
+            });
+
+            const Layout = defineComponent({
+                components: { SidebarItem },
+                template: `
+                    <div class="flex h-screen w-full relative z-10">
+                        <div class="h-full flex flex-col transition-all duration-300 border-r border-white/5 backdrop-blur-xl bg-slate-900/50" :style="{ width: isCollapsed ? '64px' : '260px' }">
+                            <div class="h-20 flex items-center justify-center shrink-0">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-pink-600 flex items-center justify-center text-white font-bold shadow-[0_0_15px_rgba(236,72,153,0.5)]">CL</div>
+                                <span v-if="!isCollapsed" class="ml-3 text-xl font-bold text-white tracking-wide">Campus<span class="text-indigo-400">Hub</span></span>
+                            </div>
+                            <el-scrollbar class="flex-1 py-4">
+                                <el-menu :default-active="route.path" :collapse="isCollapsed" background-color="transparent" text-color="#94a3b8" active-text-color="#fff" class="border-none px-2" router>
+                                    <sidebar-item v-for="r in routes" :key="r.path" :item="r" :base-path="r.path" />
+                                </el-menu>
+                            </el-scrollbar>
+                        </div>
+                        <div class="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+                            <div class="h-16 flex items-center justify-between px-8 z-40 border-b border-white/5 backdrop-blur-sm">
+                                <button @click="toggleSidebar" class="p-2 text-slate-400 hover:text-white transition-colors"><el-icon size="20"><component :is="isCollapsed ? 'Expand' : 'Fold'" /></el-icon></button>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                                </div>
+                            </div>
+                            <div class="flex-1 overflow-auto relative scroll-smooth p-0"><router-view /></div>
+                        </div>
+                    </div>
+                `,
+                setup() {
+                    const isCollapsed = ref(false);
+                    const route = useRoute();
+                    const router = useRouter();
+                    const routes = computed(() => router.options.routes.filter(r => !r.hidden));
+                    return { isCollapsed, toggleSidebar: () => isCollapsed.value = !isCollapsed.value, route, routes };
+                }
+            });
+
+            // 通用页面
+            const GenericPage = defineComponent({
+                components: { BlurReveal },
+                template: `
+                    <div class="p-8">
+                        <blur-reveal>
+                            <h2 class="text-3xl font-bold text-white mb-6">{{ meta.title }}</h2>
+                            <div class="neon-card p-0 overflow-hidden min-h-[500px]">
+                                <el-table :data="tableData" style="width: 100%" size="large">
+                                    <el-table-column prop="id" label="ID" width="100" />
+                                    <el-table-column prop="name" label="名称" />
+                                    <el-table-column prop="status" label="状态">
+                                        <template #default="{row}"><span class="text-emerald-400">{{row.status}}</span></template>
+                                    </el-table-column>
+                                </el-table>
+                            </div>
+                        </blur-reveal>
+                    </div>
+                `,
+                setup() {
+                    const route = useRoute();
+                    const tableData = Array(10).fill(0).map((_, i) => ({ id: 1000 + i, name: '演示数据 Item ' + i, status: 'Active' }));
+                    return { meta: route.meta, tableData };
+                }
+            });
+
+            // 路由配置
+            const routes = [
+                { path: '/', component: Layout, redirect: '/dashboard', children: [{ path: 'dashboard', component: Dashboard, meta: { title: '控制台', icon: 'Odometer' } }] },
+                { path: '/user', component: Layout, meta: { title: '用户管理', icon: 'User' }, children: [{ path: 'list', component: GenericPage, meta: { title: '用户列表' } }] },
+                { path: '/service', component: Layout, meta: { title: '服务管理', icon: 'Service' }, children: [{ path: 'repair', component: GenericPage, meta: { title: '报修管理' } }] },
+                { path: '/settings', component: Layout, meta: { title: '系统设置', icon: 'Setting' }, children: [{ path: 'account', component: GenericPage, meta: { title: '账号管理' } }] },
+            ];
+
+            const app = createApp({});
+            for (const [key, component] of Object.entries(ElementPlusIconsVue)) app.component(key, component);
+            app.use(createPinia());
+            app.use(createRouter({ history: createWebHashHistory(), routes }));
+            app.use(ElementPlus);
+            app.mount('#app');
+        };
+    </script>
+</body>
+
+</html>
