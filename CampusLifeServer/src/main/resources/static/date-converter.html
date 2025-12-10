@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日期转换工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .tool-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-card h3 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .tool-card h3::before {
+            content: '🕒';
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .result.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .result.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .current-time {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .current-time h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .time-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .time-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .time-item label {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .time-item .value {
+            font-size: 1.1rem;
+            font-weight: 500;
+            font-family: 'Courier New', monospace;
+        }
+
+        .patterns-info {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .patterns-info h4 {
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+
+        .patterns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .pattern-item {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .time-display {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>日期转换工具</h1>
+            <p>强大的日期时间格式转换和计算工具</p>
+        </div>
+
+        <div class="content">
+            <!-- 当前时间显示 -->
+            <div class="current-time">
+                <h2>当前时间</h2>
+                <button class="btn" onclick="updateCurrentTime()" style="width: auto; margin-bottom: 20px;">刷新时间</button>
+                <div class="time-display" id="currentTimeDisplay">
+                    <!-- 动态填充 -->
+                </div>
+            </div>
+
+            <!-- 工具卡片网格 -->
+            <div class="tool-grid">
+                <!-- 时间戳转日期 -->
+                <div class="tool-card">
+                    <h3>时间戳转日期</h3>
+                    <div class="form-group">
+                        <label>时间戳（毫秒）</label>
+                        <input type="text" class="form-control" id="timestampInput" placeholder="例: 1697184000000">
+                    </div>
+                    <div class="form-group">
+                        <label>输出格式</label>
+                        <select class="form-control" id="timestampPattern">
+                            <option value="yyyy-MM-dd HH:mm:ss">yyyy-MM-dd HH:mm:ss</option>
+                            <option value="yyyy-MM-dd">yyyy-MM-dd</option>
+                            <option value="yyyyMMdd">yyyyMMdd</option>
+                            <option value="yyyy-MM-dd HH:mm:ss.SSS">yyyy-MM-dd HH:mm:ss.SSS</option>
+                        </select>
+                    </div>
+                    <button class="btn" onclick="convertTimestampToString()">转换</button>
+                    <div class="result" id="timestampResult"></div>
+                </div>
+
+                <!-- 日期转时间戳 -->
+                <div class="tool-card">
+                    <h3>日期转时间戳</h3>
+                    <div class="form-group">
+                        <label>日期字符串</label>
+                        <input type="text" class="form-control" id="dateStringInput" placeholder="例: 2023-10-13 15:30:00">
+                    </div>
+                    <div class="form-group">
+                        <label>输入格式</label>
+                        <select class="form-control" id="dateStringPattern">
+                            <option value="yyyy-MM-dd HH:mm:ss">yyyy-MM-dd HH:mm:ss</option>
+                            <option value="yyyy-MM-dd">yyyy-MM-dd</option>
+                            <option value="yyyyMMdd">yyyyMMdd</option>
+                            <option value="yyyy-MM-dd HH:mm:ss.SSS">yyyy-MM-dd HH:mm:ss.SSS</option>
+                        </select>
+                    </div>
+                    <button class="btn" onclick="convertStringToTimestamp()">转换</button>
+                    <div class="result" id="dateStringResult"></div>
+                </div>
+
+                <!-- 日期格式转换 -->
+                <div class="tool-card">
+                    <h3>日期格式转换</h3>
+                    <div class="form-group">
+                        <label>日期字符串</label>
+                        <input type="text" class="form-control" id="formatDateInput" placeholder="例: 2023-10-13">
+                    </div>
+                    <div class="form-group">
+                        <label>原格式</label>
+                        <select class="form-control" id="fromPattern">
+                            <option value="yyyy-MM-dd">yyyy-MM-dd</option>
+                            <option value="yyyy-MM-dd HH:mm:ss">yyyy-MM-dd HH:mm:ss</option>
+                            <option value="yyyyMMdd">yyyyMMdd</option>
+                            <option value="MM-dd">MM-dd</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>目标格式</label>
+                        <select class="form-control" id="toPattern">
+                            <option value="yyyyMMdd">yyyyMMdd</option>
+                            <option value="yyyy-MM-dd">yyyy-MM-dd</option>
+                            <option value="yyyy年MM月dd日">yyyy年MM月dd日</option>
+                            <option value="MM/dd/yyyy">MM/dd/yyyy</option>
+                        </select>
+                    </div>
+                    <button class="btn" onclick="formatDate()">转换</button>
+                    <div class="result" id="formatResult"></div>
+                </div>
+
+                <!-- 日期计算 -->
+                <div class="tool-card">
+                    <h3>日期计算</h3>
+                    <div class="form-group">
+                        <label>日期</label>
+                        <input type="text" class="form-control" id="calcDateInput" placeholder="例: 2023-10-13">
+                    </div>
+                    <div class="form-group">
+                        <label>操作</label>
+                        <select class="form-control" id="calcOperation">
+                            <option value="addDays">加减天数</option>
+                            <option value="addMonths">加减月数</option>
+                            <option value="addYears">加减年数</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>数值（负数表示减）</label>
+                        <input type="number" class="form-control" id="calcValue" placeholder="例: 30 或 -7">
+                    </div>
+                    <button class="btn" onclick="calculateDate()">计算</button>
+                    <div class="result" id="calcResult"></div>
+                </div>
+
+                <!-- 日期差计算 -->
+                <div class="tool-card">
+                    <h3>日期差计算</h3>
+                    <div class="form-group">
+                        <label>开始日期</label>
+                        <input type="text" class="form-control" id="startDateInput" placeholder="例: 2023-10-01">
+                    </div>
+                    <div class="form-group">
+                        <label>结束日期</label>
+                        <input type="text" class="form-control" id="endDateInput" placeholder="例: 2023-10-13">
+                    </div>
+                    <button class="btn" onclick="calculateDaysBetween()">计算天数差</button>
+                    <div class="result" id="daysBetweenResult"></div>
+                </div>
+
+                <!-- 年龄计算 -->
+                <div class="tool-card">
+                    <h3>年龄计算</h3>
+                    <div class="form-group">
+                        <label>出生日期</label>
+                        <input type="text" class="form-control" id="birthDateInput" placeholder="例: 1990-05-15">
+                    </div>
+                    <button class="btn" onclick="calculateAge()">计算年龄</button>
+                    <div class="result" id="ageResult"></div>
+                </div>
+            </div>
+
+            <!-- 格式说明 -->
+            <div class="patterns-info">
+                <h4>常用日期格式说明</h4>
+                <div class="patterns-grid">
+                    <div class="pattern-item">yyyy-MM-dd → 2023-10-13</div>
+                    <div class="pattern-item">yyyy-MM-dd HH:mm:ss → 2023-10-13 15:30:45</div>
+                    <div class="pattern-item">yyyyMMdd → 20231013</div>
+                    <div class="pattern-item">yyyy年MM月dd日 → 2023年10月13日</div>
+                    <div class="pattern-item">MM/dd/yyyy → 10/13/2023</div>
+                    <div class="pattern-item">HH:mm:ss → 15:30:45</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '/api/date';
+
+        // 页面加载时更新当前时间
+        window.onload = function() {
+            updateCurrentTime();
+        };
+
+        // 更新当前时间显示
+        async function updateCurrentTime() {
+            try {
+                const response = await fetch(`${API_BASE}/current`);
+                const data = await response.json();
+                
+                const display = document.getElementById('currentTimeDisplay');
+                display.innerHTML = `
+                    <div class="time-item">
+                        <label>时间戳（毫秒）</label>
+                        <div class="value">${data.timestamp}</div>
+                    </div>
+                    <div class="time-item">
+                        <label>时间戳（秒）</label>
+                        <div class="value">${data.timestampSeconds}</div>
+                    </div>
+                    <div class="time-item">
+                        <label>日期时间</label>
+                        <div class="value">${data.dateTime}</div>
+                    </div>
+                    <div class="time-item">
+                        <label>日期</label>
+                        <div class="value">${data.date}</div>
+                    </div>
+                    <div class="time-item">
+                        <label>时间</label>
+                        <div class="value">${data.time}</div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('获取当前时间失败:', error);
+            }
+        }
+
+        // 时间戳转日期字符串
+        async function convertTimestampToString() {
+            const timestamp = document.getElementById('timestampInput').value;
+            const pattern = document.getElementById('timestampPattern').value;
+            const resultDiv = document.getElementById('timestampResult');
+
+            if (!timestamp) {
+                showResult(resultDiv, '请输入时间戳', false);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/timestamp-to-string`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ timestamp, pattern })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult(resultDiv, `转换结果: ${data.result}`, true);
+                } else {
+                    showResult(resultDiv, data.error, false);
+                }
+            } catch (error) {
+                showResult(resultDiv, '转换失败: ' + error.message, false);
+            }
+        }
+
+        // 日期字符串转时间戳
+        async function convertStringToTimestamp() {
+            const dateStr = document.getElementById('dateStringInput').value;
+            const pattern = document.getElementById('dateStringPattern').value;
+            const resultDiv = document.getElementById('dateStringResult');
+
+            if (!dateStr) {
+                showResult(resultDiv, '请输入日期字符串', false);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/string-to-timestamp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ dateStr, pattern })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult(resultDiv, `时间戳: ${data.result}`, true);
+                } else {
+                    showResult(resultDiv, data.error, false);
+                }
+            } catch (error) {
+                showResult(resultDiv, '转换失败: ' + error.message, false);
+            }
+        }
+
+        // 日期格式转换
+        async function formatDate() {
+            const dateStr = document.getElementById('formatDateInput').value;
+            const fromPattern = document.getElementById('fromPattern').value;
+            const toPattern = document.getElementById('toPattern').value;
+            const resultDiv = document.getElementById('formatResult');
+
+            if (!dateStr) {
+                showResult(resultDiv, '请输入日期字符串', false);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/format`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ dateStr, fromPattern, toPattern })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult(resultDiv, `转换结果: ${data.result}`, true);
+                } else {
+                    showResult(resultDiv, data.error, false);
+                }
+            } catch (error) {
+                showResult(resultDiv, '转换失败: ' + error.message, false);
+            }
+        }
+
+        // 日期计算
+        async function calculateDate() {
+            const dateStr = document.getElementById('calcDateInput').value;
+            const operation = document.getElementById('calcOperation').value;
+            const value = document.getElementById('calcValue').value;
+            const resultDiv = document.getElementById('calcResult');
+
+            if (!dateStr || !value) {
+                showResult(resultDiv, '请填写完整信息', false);
+                return;
+            }
+
+            try {
+                let endpoint = '';
+                let body = { dateStr, pattern: 'yyyy-MM-dd' };
+                
+                if (operation === 'addDays') {
+                    endpoint = 'add-days';
+                    body.days = parseInt(value);
+                } else if (operation === 'addMonths') {
+                    endpoint = 'add-months';
+                    body.months = parseInt(value);
+                } else if (operation === 'addYears') {
+                    endpoint = 'add-years';
+                    body.years = parseInt(value);
+                }
+
+                const response = await fetch(`${API_BASE}/${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult(resultDiv, `计算结果: ${data.result}`, true);
+                } else {
+                    showResult(resultDiv, data.error, false);
+                }
+            } catch (error) {
+                showResult(resultDiv, '计算失败: ' + error.message, false);
+            }
+        }
+
+        // 计算日期差
+        async function calculateDaysBetween() {
+            const startDate = document.getElementById('startDateInput').value;
+            const endDate = document.getElementById('endDateInput').value;
+            const resultDiv = document.getElementById('daysBetweenResult');
+
+            if (!startDate || !endDate) {
+                showResult(resultDiv, '请输入开始和结束日期', false);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/days-between`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ startDate, endDate, pattern: 'yyyy-MM-dd' })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult(resultDiv, `相差天数: ${data.result} 天`, true);
+                } else {
+                    showResult(resultDiv, data.error, false);
+                }
+            } catch (error) {
+                showResult(resultDiv, '计算失败: ' + error.message, false);
+            }
+        }
+
+        // 计算年龄
+        async function calculateAge() {
+            const birthDate = document.getElementById('birthDateInput').value;
+            const resultDiv = document.getElementById('ageResult');
+
+            if (!birthDate) {
+                showResult(resultDiv, '请输入出生日期', false);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/age`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ birthDate, pattern: 'yyyy-MM-dd' })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult(resultDiv, `年龄: ${data.result} 岁`, true);
+                } else {
+                    showResult(resultDiv, data.error, false);
+                }
+            } catch (error) {
+                showResult(resultDiv, '计算失败: ' + error.message, false);
+            }
+        }
+
+        // 显示结果
+        function showResult(element, message, isSuccess) {
+            element.textContent = message;
+            element.className = `result ${isSuccess ? 'success' : 'error'}`;
+        }
+    </script>
+</body>
+</html>

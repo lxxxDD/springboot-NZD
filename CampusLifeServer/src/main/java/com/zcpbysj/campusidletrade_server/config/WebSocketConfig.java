@@ -1,0 +1,20 @@
+package com.zcpbysj.campusidletrade_server.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+
+/**
+ * WebSocket配置
+ */
+@Configuration
+public class WebSocketConfig {
+
+    /**
+     * 注入ServerEndpointExporter，自动注册使用@ServerEndpoint注解的bean
+     */
+    @Bean
+    public ServerEndpointExporter serverEndpointExporter() {
+        return new ServerEndpointExporter();
+    }
+}

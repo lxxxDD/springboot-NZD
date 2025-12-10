@@ -1,0 +1,74 @@
+#服务器端口配
+server:
+  port: 8080
+
+#数据库配置
+# 数据库连接配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库 URL：替换为你的数据库名（示例中为 graduation）、用户名、密码
+    url: jdbc:mysql://localhost:3306/campus_life_app?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    username: root       # 你的 MySQL 用户名（默认常为 root）
+    password: 123456     # 你的 MySQL 密码（安装时设置的密码）
+  # 文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 控制台打印 SQL（调试用，上线可关闭）
+    map-underscore-to-camel-case: true  # 开启驼峰映射
+  type-aliases-package: com.zcpbysj.campusidletrade_server.entity  # 实体类包
+  mapper-locations: classpath:mapper/*.xml  # 可选，XML 路径
+
+# Knife4j 配置
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  group-configs:
+    - group: all
+      paths-to-match: /api/**
+    - group: user
+      paths-to-match: /api/user/**,/api/admin/**
+    - group: canteen
+      paths-to-match: /api/canteen/**,/api/stall/**,/api/dish/**,/api/order/**
+    - group: goods
+      paths-to-match: /api/goods-category/**,/api/goods/**
+    - group: social
+      paths-to-match: /api/post/**
+    - group: repair
+      paths-to-match: /api/repair-order/**
+    - group: system
+      paths-to-match: /api/banner/**,/api/system/**
+
+# Knife4j 增强配置
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+# JWT 配置
+jwt:
+  # 密钥（至少 64 字符用于 HS512 算法）- 生产环境请更换为随机生成的密钥
+  secret: campusIdleTrade2024SecretKeyForJWTTokenGenerationMustBe64CharactersLongForHS512Algorithm
+  # Token 有效期（毫秒）：24 小时 = 24 * 60 * 60 * 1000
+  expiration: 86400000
+  # 刷新 Token 有效期（毫秒）：7 天 = 7 * 24 * 60 * 60 * 1000
+  refresh-expiration: 604800000
+
+# 文件上传配置
+file:
+  upload:
+    # 文件上传路径（相对路径或绝对路径）
+    path: uploads
+  access:
+    # 文件访问URL前缀
+    url: http://localhost:8080/uploads/
