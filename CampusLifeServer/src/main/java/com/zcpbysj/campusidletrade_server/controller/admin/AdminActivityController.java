@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zcpbysj.campusidletrade_server.common.Result;
 import com.zcpbysj.campusidletrade_server.entity.Activity;
-import com.zcpbysj.campusidletrade_server.entity.dto.StatusDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.admin.StatusDTO;
 import com.zcpbysj.campusidletrade_server.service.IActivityService;
 import com.zcpbysj.campusidletrade_server.service.ISystemLogService;
 import io.swagger.v3.oas.annotations.Operation;

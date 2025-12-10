@@ -1,6 +1,6 @@
 package com.zcpbysj.campusidletrade_server.controller;
 
-import com.zcpbysj.campusidletrade_server.entity.vo.CanteenVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.food.CanteenVO;
 import com.zcpbysj.campusidletrade_server.service.ICanteenService;
 import com.zcpbysj.campusidletrade_server.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;

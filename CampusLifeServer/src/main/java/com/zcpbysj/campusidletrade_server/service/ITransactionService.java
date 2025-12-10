@@ -2,8 +2,8 @@ package com.zcpbysj.campusidletrade_server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zcpbysj.campusidletrade_server.entity.TransactionRecord;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.TransactionVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.market.TransactionVO;
 
 /**
  * 交易记录服务接口

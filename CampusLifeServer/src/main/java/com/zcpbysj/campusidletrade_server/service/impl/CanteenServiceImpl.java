@@ -3,7 +3,7 @@ package com.zcpbysj.campusidletrade_server.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zcpbysj.campusidletrade_server.entity.Canteen;
-import com.zcpbysj.campusidletrade_server.entity.vo.CanteenVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.food.CanteenVO;
 import com.zcpbysj.campusidletrade_server.mapper.CanteenMapper;
 import com.zcpbysj.campusidletrade_server.service.ICanteenService;
 import org.springframework.beans.BeanUtils;

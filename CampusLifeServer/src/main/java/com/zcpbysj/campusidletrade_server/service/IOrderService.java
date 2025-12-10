@@ -2,9 +2,9 @@ package com.zcpbysj.campusidletrade_server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zcpbysj.campusidletrade_server.entity.Order;
-import com.zcpbysj.campusidletrade_server.entity.dto.CreateOrderDTO;
-import com.zcpbysj.campusidletrade_server.entity.vo.OrderVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.dto.order.CreateOrderDTO;
+import com.zcpbysj.campusidletrade_server.entity.vo.order.OrderVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 
 /**
  * 订单服务接口

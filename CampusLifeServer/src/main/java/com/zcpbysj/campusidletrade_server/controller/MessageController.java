@@ -1,10 +1,10 @@
 package com.zcpbysj.campusidletrade_server.controller;
 
 import com.zcpbysj.campusidletrade_server.common.Result;
-import com.zcpbysj.campusidletrade_server.entity.dto.SendMessageDTO;
-import com.zcpbysj.campusidletrade_server.entity.vo.ConversationVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.MessageVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.dto.message.SendMessageDTO;
+import com.zcpbysj.campusidletrade_server.entity.vo.message.ConversationVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.message.MessageVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 import com.zcpbysj.campusidletrade_server.service.IMessageService;
 import com.zcpbysj.campusidletrade_server.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,8 +1,8 @@
 package com.zcpbysj.campusidletrade_server.controller;
 
 import com.zcpbysj.campusidletrade_server.common.Result;
-import com.zcpbysj.campusidletrade_server.entity.vo.NewsVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.news.NewsVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 import com.zcpbysj.campusidletrade_server.service.INewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

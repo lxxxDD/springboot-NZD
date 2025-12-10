@@ -1,9 +1,9 @@
 package com.zcpbysj.campusidletrade_server.service;
 
-import com.zcpbysj.campusidletrade_server.entity.vo.ChatMessageVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.ChatResponseVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.ChatSessionVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.chat.ChatMessageVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.chat.ChatResponseVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.chat.ChatSessionVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 
 import java.util.List;
 

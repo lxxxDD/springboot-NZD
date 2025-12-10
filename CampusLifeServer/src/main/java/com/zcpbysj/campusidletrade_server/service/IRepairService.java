@@ -2,9 +2,9 @@ package com.zcpbysj.campusidletrade_server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zcpbysj.campusidletrade_server.entity.Repair;
-import com.zcpbysj.campusidletrade_server.entity.dto.CreateRepairDTO;
-import com.zcpbysj.campusidletrade_server.entity.dto.RateRepairDTO;
-import com.zcpbysj.campusidletrade_server.entity.vo.RepairVO;
+import com.zcpbysj.campusidletrade_server.entity.dto.repair.CreateRepairDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.repair.RateRepairDTO;
+import com.zcpbysj.campusidletrade_server.entity.vo.repair.RepairVO;
 
 import java.util.List;
 

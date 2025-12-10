@@ -2,8 +2,8 @@ package com.zcpbysj.campusidletrade_server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zcpbysj.campusidletrade_server.entity.News;
-import com.zcpbysj.campusidletrade_server.entity.vo.NewsVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.news.NewsVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 
 /**
  * 新闻服务接口

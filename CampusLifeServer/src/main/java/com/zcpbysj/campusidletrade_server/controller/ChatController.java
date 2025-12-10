@@ -1,11 +1,11 @@
 package com.zcpbysj.campusidletrade_server.controller;
 
 import com.zcpbysj.campusidletrade_server.common.Result;
-import com.zcpbysj.campusidletrade_server.entity.dto.ChatRequestDTO;
-import com.zcpbysj.campusidletrade_server.entity.vo.ChatMessageVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.ChatResponseVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.ChatSessionVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.dto.chat.ChatRequestDTO;
+import com.zcpbysj.campusidletrade_server.entity.vo.chat.ChatMessageVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.chat.ChatResponseVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.chat.ChatSessionVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 import com.zcpbysj.campusidletrade_server.service.IChatService;
 import com.zcpbysj.campusidletrade_server.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;

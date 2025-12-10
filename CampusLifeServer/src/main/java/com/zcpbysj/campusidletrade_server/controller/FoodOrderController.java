@@ -1,9 +1,9 @@
 package com.zcpbysj.campusidletrade_server.controller;
 
 import com.zcpbysj.campusidletrade_server.common.Result;
-import com.zcpbysj.campusidletrade_server.entity.dto.CreateFoodOrderDTO;
-import com.zcpbysj.campusidletrade_server.entity.vo.FoodOrderVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.dto.food.CreateFoodOrderDTO;
+import com.zcpbysj.campusidletrade_server.entity.vo.food.FoodOrderVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 import com.zcpbysj.campusidletrade_server.service.IFoodOrderService;
 import com.zcpbysj.campusidletrade_server.util.JwtUtil;
 import lombok.RequiredArgsConstructor;

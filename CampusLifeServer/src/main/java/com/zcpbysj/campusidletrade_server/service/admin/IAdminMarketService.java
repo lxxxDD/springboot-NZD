@@ -1,7 +1,7 @@
 package com.zcpbysj.campusidletrade_server.service.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zcpbysj.campusidletrade_server.entity.vo.MarketItemVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.market.MarketItemVO;
 
 /**
  * 管理端-二手市场服务接口

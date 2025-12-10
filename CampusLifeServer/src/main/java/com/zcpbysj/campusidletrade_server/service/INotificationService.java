@@ -2,8 +2,8 @@ package com.zcpbysj.campusidletrade_server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zcpbysj.campusidletrade_server.entity.Notification;
-import com.zcpbysj.campusidletrade_server.entity.vo.NotificationVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.notification.NotificationVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 
 import java.util.Map;
 

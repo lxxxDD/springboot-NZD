@@ -1,12 +1,12 @@
 package com.zcpbysj.campusidletrade_server.controller;
 
 import com.zcpbysj.campusidletrade_server.common.Result;
-import com.zcpbysj.campusidletrade_server.entity.dto.CreateMarketItemDTO;
-import com.zcpbysj.campusidletrade_server.entity.dto.UpdateItemStatusDTO;
-import com.zcpbysj.campusidletrade_server.entity.dto.UpdateMarketItemDTO;
-import com.zcpbysj.campusidletrade_server.entity.vo.MarketItemListVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.MarketItemVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.dto.market.CreateMarketItemDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.market.UpdateItemStatusDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.market.UpdateMarketItemDTO;
+import com.zcpbysj.campusidletrade_server.entity.vo.market.MarketItemListVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.market.MarketItemVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 import com.zcpbysj.campusidletrade_server.entity.MarketCategory;
 import com.zcpbysj.campusidletrade_server.service.IMarketCategoryService;
 import com.zcpbysj.campusidletrade_server.service.IMarketItemService;

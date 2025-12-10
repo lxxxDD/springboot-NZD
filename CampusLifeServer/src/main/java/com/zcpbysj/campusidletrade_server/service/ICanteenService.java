@@ -2,7 +2,7 @@ package com.zcpbysj.campusidletrade_server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zcpbysj.campusidletrade_server.entity.Canteen;
-import com.zcpbysj.campusidletrade_server.entity.vo.CanteenVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.food.CanteenVO;
 
 import java.util.List;
 

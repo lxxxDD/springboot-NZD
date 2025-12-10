@@ -1,9 +1,9 @@
 package com.zcpbysj.campusidletrade_server.controller;
 
 import com.zcpbysj.campusidletrade_server.common.Result;
-import com.zcpbysj.campusidletrade_server.entity.dto.CreateRepairDTO;
-import com.zcpbysj.campusidletrade_server.entity.dto.RateRepairDTO;
-import com.zcpbysj.campusidletrade_server.entity.vo.RepairVO;
+import com.zcpbysj.campusidletrade_server.entity.dto.repair.CreateRepairDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.repair.RateRepairDTO;
+import com.zcpbysj.campusidletrade_server.entity.vo.repair.RepairVO;
 import com.zcpbysj.campusidletrade_server.service.IRepairService;
 import com.zcpbysj.campusidletrade_server.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;

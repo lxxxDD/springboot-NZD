@@ -1,12 +1,12 @@
 package com.zcpbysj.campusidletrade_server.controller;
 
 import com.zcpbysj.campusidletrade_server.common.Result;
-import com.zcpbysj.campusidletrade_server.entity.dto.LoginDTO;
-import com.zcpbysj.campusidletrade_server.entity.dto.RegisterDTO;
-import com.zcpbysj.campusidletrade_server.entity.dto.TopupDTO;
-import com.zcpbysj.campusidletrade_server.entity.dto.UpdateProfileDTO;
-import com.zcpbysj.campusidletrade_server.entity.vo.LoginVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.UserInfoVO;
+import com.zcpbysj.campusidletrade_server.entity.dto.user.LoginDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.user.RegisterDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.user.TopupDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.user.UpdateProfileDTO;
+import com.zcpbysj.campusidletrade_server.entity.vo.user.LoginVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.user.UserInfoVO;
 import com.zcpbysj.campusidletrade_server.service.IUserService;
 import com.zcpbysj.campusidletrade_server.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;

@@ -2,11 +2,11 @@ package com.zcpbysj.campusidletrade_server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zcpbysj.campusidletrade_server.entity.MarketItem;
-import com.zcpbysj.campusidletrade_server.entity.dto.CreateMarketItemDTO;
-import com.zcpbysj.campusidletrade_server.entity.dto.UpdateMarketItemDTO;
-import com.zcpbysj.campusidletrade_server.entity.vo.MarketItemListVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.MarketItemVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.dto.market.CreateMarketItemDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.market.UpdateMarketItemDTO;
+import com.zcpbysj.campusidletrade_server.entity.vo.market.MarketItemListVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.market.MarketItemVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 
 import java.util.List;
 

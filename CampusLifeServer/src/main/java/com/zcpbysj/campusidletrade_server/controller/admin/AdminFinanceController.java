@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zcpbysj.campusidletrade_server.common.Result;
 import com.zcpbysj.campusidletrade_server.entity.TransactionRecord;
 import com.zcpbysj.campusidletrade_server.entity.User;
-import com.zcpbysj.campusidletrade_server.entity.vo.AdminTransactionVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.admin.AdminTransactionVO;
 import com.zcpbysj.campusidletrade_server.service.ITransactionService;
 import com.zcpbysj.campusidletrade_server.service.IUserService;
 import lombok.RequiredArgsConstructor;

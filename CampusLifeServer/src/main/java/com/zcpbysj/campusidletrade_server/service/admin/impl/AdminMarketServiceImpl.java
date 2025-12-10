@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zcpbysj.campusidletrade_server.entity.MarketItem;
 import com.zcpbysj.campusidletrade_server.entity.User;
-import com.zcpbysj.campusidletrade_server.entity.vo.MarketItemVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.market.MarketItemVO;
 import com.zcpbysj.campusidletrade_server.service.IMarketItemService;
 import com.zcpbysj.campusidletrade_server.service.ISystemLogService;
 import com.zcpbysj.campusidletrade_server.service.IUserService;
@@ -49,7 +49,7 @@ public class AdminMarketServiceImpl implements IAdminMarketService {
         List<MarketItemVO> voList = resultPage.getRecords().stream().map(item -> {
             MarketItemVO vo = new MarketItemVO();
             BeanUtils.copyProperties(item, vo);
-            User seller = userService.getById(item.getUserId());
+            User seller = userService.getById(item.getSellerId());
             if (seller != null) {
                 vo.setSellerName(seller.getUsername());
                 vo.setSellerAvatar(seller.getAvatar());
@@ -88,7 +88,7 @@ public class AdminMarketServiceImpl implements IAdminMarketService {
         }
         MarketItemVO vo = new MarketItemVO();
         BeanUtils.copyProperties(item, vo);
-        User seller = userService.getById(item.getUserId());
+        User seller = userService.getById(item.getSellerId());
         if (seller != null) {
             vo.setSellerName(seller.getUsername());
             vo.setSellerAvatar(seller.getAvatar());

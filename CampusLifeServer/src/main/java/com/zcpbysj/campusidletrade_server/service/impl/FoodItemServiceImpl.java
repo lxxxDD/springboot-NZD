@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zcpbysj.campusidletrade_server.entity.Canteen;
 import com.zcpbysj.campusidletrade_server.entity.FoodItem;
-import com.zcpbysj.campusidletrade_server.entity.vo.FoodItemVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.food.FoodItemVO;
 import com.zcpbysj.campusidletrade_server.mapper.FoodItemMapper;
 import com.zcpbysj.campusidletrade_server.service.ICanteenService;
 import com.zcpbysj.campusidletrade_server.service.IFoodItemService;

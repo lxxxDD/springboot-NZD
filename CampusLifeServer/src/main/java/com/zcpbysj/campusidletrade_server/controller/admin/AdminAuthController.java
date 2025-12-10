@@ -3,7 +3,7 @@ package com.zcpbysj.campusidletrade_server.controller.admin;
 import com.zcpbysj.campusidletrade_server.common.Result;
 import com.zcpbysj.campusidletrade_server.entity.Admin;
 import com.zcpbysj.campusidletrade_server.entity.Role;
-import com.zcpbysj.campusidletrade_server.entity.dto.AdminLoginDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.admin.AdminLoginDTO;
 import com.zcpbysj.campusidletrade_server.service.IAdminService;
 import com.zcpbysj.campusidletrade_server.service.IRoleService;
 import com.zcpbysj.campusidletrade_server.util.JwtUtil;

@@ -1,11 +1,11 @@
 package com.zcpbysj.campusidletrade_server.controller;
 
 import com.zcpbysj.campusidletrade_server.common.Result;
-import com.zcpbysj.campusidletrade_server.entity.dto.CancelOrderDTO;
-import com.zcpbysj.campusidletrade_server.entity.dto.CreateOrderDTO;
-import com.zcpbysj.campusidletrade_server.entity.dto.PayOrderDTO;
-import com.zcpbysj.campusidletrade_server.entity.vo.OrderVO;
-import com.zcpbysj.campusidletrade_server.entity.vo.PageVO;
+import com.zcpbysj.campusidletrade_server.entity.dto.order.CancelOrderDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.order.CreateOrderDTO;
+import com.zcpbysj.campusidletrade_server.entity.dto.order.PayOrderDTO;
+import com.zcpbysj.campusidletrade_server.entity.vo.order.OrderVO;
+import com.zcpbysj.campusidletrade_server.entity.vo.common.PageVO;
 import com.zcpbysj.campusidletrade_server.service.IOrderService;
 import com.zcpbysj.campusidletrade_server.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
