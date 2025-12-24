@@ -62,10 +62,6 @@
 
     <view class="input-area animate-slide-up">
       <view class="input-toolbar">
-        <view class="icon-btn">
-          <u-icon name="mic" size="26" color="#64748B"></u-icon>
-        </view>
-
         <view class="input-box">
           <input
               v-model="inputText"
