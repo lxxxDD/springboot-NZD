@@ -241,11 +241,21 @@ paid → refunded (退款给买家，恢复商品)
 
 ## 九、部署配置
 
-### 9.1 开发环境启动命令
+### 9.1 Maven配置
+
+| 配置项 | 值 |
+|--------|-----|
+| **Maven路径** | D:\ADaiMaLianXiooooooooo\apache-maven-3.9.9 |
+| **Maven版本** | 3.9.9 |
+
+### 9.2 开发环境启动命令
 
 **后端服务:**
 ```bash
 cd CampusLifeServer
+# 使用完整路径
+D:\ADaiMaLianXiooooooooo\apache-maven-3.9.9\bin\mvn spring-boot:run
+# 或添加环境变量后
 mvn spring-boot:run
 ```
 
