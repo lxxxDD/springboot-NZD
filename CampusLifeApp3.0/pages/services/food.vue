@@ -313,6 +313,21 @@ function handleQuickAddToCart(item, event) {
     });
     return;
   }
+  
+  // 检查库存限制
+  const cart = getCart();
+  const existItem = cart.find(i => i.id === item.id);
+  const currentQty = existItem ? existItem.qty : 0;
+  const maxStock = item.stock > 0 ? item.stock : 99;
+  
+  if (currentQty >= maxStock) {
+    uni.showToast({
+      title: `库存不足，最多可购买${maxStock}个`,
+      icon: 'none',
+    });
+    return;
+  }
+  
   // 保存当前食堂信息
   if (currentCanteen.value) {
     setCartCanteen(currentCanteen.value)
