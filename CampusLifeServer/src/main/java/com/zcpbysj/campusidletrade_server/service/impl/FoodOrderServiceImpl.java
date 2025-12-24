@@ -67,6 +67,18 @@ public class FoodOrderServiceImpl extends ServiceImpl<FoodOrderMapper, FoodOrder
             if (!"available".equals(foodItem.getStatus())) {
                 throw new RuntimeException("菜品已下架: " + foodItem.getName());
             }
+            
+            // 检查库存是否充足（-1表示不限库存）
+            if (foodItem.getStock() != null && foodItem.getStock() >= 0) {
+                if (foodItem.getStock() < itemDTO.getQuantity()) {
+                    throw new RuntimeException("库存不足: " + foodItem.getName() + "，剩余库存: " + foodItem.getStock());
+                }
+                // 使用乐观锁扣减库存（通过条件更新确保并发安全）
+                int updated = foodItemMapper.deductStock(foodItem.getId(), itemDTO.getQuantity(), foodItem.getStock());
+                if (updated == 0) {
+                    throw new RuntimeException("库存扣减失败，请重试: " + foodItem.getName());
+                }
+            }
 
             BigDecimal subtotal = foodItem.getPrice().multiply(BigDecimal.valueOf(itemDTO.getQuantity()));
             totalAmount = totalAmount.add(subtotal);
