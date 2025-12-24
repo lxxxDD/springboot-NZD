@@ -87,13 +87,6 @@
 			}
 		},
 		{
-			"path": "pages/market/order-detail",
-			"style": {
-				"navigationBarTitleText": "订单详情",
-				"navigationStyle": "custom"
-			}
-		},
-		{
 			"path": "pages/market/manage",
 			"style": {
 				"navigationBarTitleText": "交易管理",
@@ -192,9 +185,16 @@
 			}
 		},
 		{
-			"path": "pages/orders/detail",
+			"path": "pages/orders/food-detail",
 			"style": {
-				"navigationBarTitleText": "订单详情",
+				"navigationBarTitleText": "食堂订单详情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/orders/market-detail",
+			"style": {
+				"navigationBarTitleText": "二手订单详情",
 				"navigationStyle": "custom"
 			}
 		},

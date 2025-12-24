@@ -55,7 +55,7 @@ function formatTime(timestamp) {
 }
 
 function goOrderDetail(order) {
-  uni.navigateTo({ url: `/pages/market/order-detail?id=${order.id}` })
+  uni.navigateTo({ url: `/pages/orders/market-detail?id=${order.id}` })
 }
 
 function contactUser(name) {

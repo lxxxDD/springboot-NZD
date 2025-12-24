@@ -289,9 +289,9 @@ function formatTime(dateStr) {
 
 function showDetail(order) {
   if (order.type === 'market') {
-    uni.navigateTo({ url: `/pages/market/order-detail?id=${order.orderId}` });
+    uni.navigateTo({ url: `/pages/orders/market-detail?id=${order.orderId}` });
   } else {
-    uni.navigateTo({ url: `/pages/orders/detail?id=${order.orderId}` });
+    uni.navigateTo({ url: `/pages/orders/food-detail?id=${order.orderId}` });
   }
 }
 

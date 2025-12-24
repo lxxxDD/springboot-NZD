@@ -230,7 +230,7 @@ async function handlePay() {
       // 跳转到食堂订单详情
       setTimeout(() => {
         uni.redirectTo({
-          url: `/pages/orders/detail?id=${createdOrderId.value}`
+          url: `/pages/orders/food-detail?id=${createdOrderId.value}`
         })
       }, 2000)
       
@@ -261,8 +261,8 @@ async function handlePay() {
 
       setTimeout(() => {
         const detailUrl = orderType.value === 'market'
-          ? `/pages/market/order-detail?id=${createdOrderId.value}`
-          : `/pages/orders/detail?id=${createdOrderId.value}`;
+          ? `/pages/orders/market-detail?id=${createdOrderId.value}`
+          : `/pages/orders/food-detail?id=${createdOrderId.value}`;
 
         uni.redirectTo({
           url: detailUrl
