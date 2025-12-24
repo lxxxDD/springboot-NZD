@@ -137,10 +137,10 @@
     </scroll-view>
 
     <view class="bottom-action-bar animate-slide-up">
-      <button class="submit-btn" @click="submit">
+      <u-button type="primary" shape="circle" :loading="submitting" :disabled="submitting" customStyle="width: 100%; height: 48px; background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%); border: none; font-size: 16px; font-weight: 600;" @click="submit">
         <text>立即提交</text>
-        <u-icon name="arrow-right" color="#fff" size="14"></u-icon>
-      </button>
+        <u-icon name="arrow-right" color="#fff" size="14" v-if="!submitting" style="margin-left: 6px"></u-icon>
+      </u-button>
     </view>
 
     <u-picker :show="showPlaceType" :columns="[placeTypes]" @confirm="e=>{ placeType = e.value[0]; showPlaceType = false; }" @cancel="showPlaceType = false"></u-picker>

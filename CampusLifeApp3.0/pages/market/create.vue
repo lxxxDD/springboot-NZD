@@ -123,10 +123,10 @@
     </scroll-view>
 
     <view class="bottom-bar animate-slide-up">
-      <button class="submit-btn" @click="submit">
-        <u-icon name="checkmark" color="#fff" size="18" style="margin-right: 6px"></u-icon>
+      <u-button type="primary" shape="circle" :loading="submitting" :disabled="submitting" customStyle="width: 100%; height: 48px; background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%); border: none; font-size: 16px; font-weight: 600;" @click="submit">
+        <u-icon name="checkmark" color="#fff" size="18" style="margin-right: 6px" v-if="!submitting"></u-icon>
         <text>立即发布</text>
-      </button>
+      </u-button>
     </view>
   </view>
 </template>

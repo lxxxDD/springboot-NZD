@@ -23,7 +23,7 @@
           <text class="value">Computer Science</text>
         </view>
       </view>
-      <button class="save-btn" @click="save">保存</button>
+      <u-button type="primary" shape="circle" :loading="loading" :disabled="loading" customStyle="margin-top: 24px; width: 100%; height: 48px; background: #2563eb; border: none; font-size: 15px; font-weight: 600; box-shadow: 0 8px 24px rgba(37, 99, 235, .24);" @click="save">保存</u-button>
     </scroll-view>
   </view>
 </template>

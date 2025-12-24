@@ -31,7 +31,7 @@
         </view>
       </view>
 
-      <button class="submit-btn" @click="topup">确认充值</button>
+      <u-button type="primary" shape="circle" :loading="loading" :disabled="loading" customStyle="height: 50px; width: 100%; font-size: 16px; font-weight: 600;" @click="topup">确认充值</u-button>
       <view style="height:40px" />
     </scroll-view>
   </view>
