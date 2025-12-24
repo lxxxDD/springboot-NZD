@@ -87,7 +87,6 @@ async function topup(){
       balance.value = res.data.newBalance
       
       uni.showToast({ title:'充值成功', icon:'success' })
-      setTimeout(()=> uni.navigateBack(), 500)
     }
   } catch (error) {
     console.error('充值失败:', error)
