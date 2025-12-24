@@ -36,7 +36,7 @@
             >
               <view class="cart-item">
                 <view class="item-inner">
-                  <u-image :src="it.img" width="80px" height="80px" radius="16" mode="aspectFill" class="item-img"></u-image>
+                  <u-image :src="it.image" width="80px" height="80px" radius="16" mode="aspectFill" class="item-img"></u-image>
 
                   <view class="item-info">
                     <view class="info-top">
