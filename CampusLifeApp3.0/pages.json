@@ -204,6 +204,13 @@
 				"navigationBarTitleText": "充值",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/profile/user-detail",
+			"style": {
+				"navigationBarTitleText": "用户主页",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {
