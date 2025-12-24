@@ -106,7 +106,7 @@
           <text>更多</text>
         </view>
 
-        <!-- 卖家操作: 待发货 -> 确认发货 -->
+        <!-- 卖家操作: 待确认 -> 确认交易 -->
         <u-button
             v-if="isSeller && order.status === 'paid'"
             type="primary"
@@ -114,10 +114,10 @@
             customStyle="flex: 1; height: 44px; margin-left: 16px; background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%); border: none; font-weight: 700;"
             @click="confirmShipment"
         >
-          确认发货
+          确认交易
         </u-button>
 
-        <!-- 买家操作: 发货中 -> 确认收货 -->
+        <!-- 买家操作: 待自提 -> 确认收货 -->
         <u-button
             v-else-if="isBuyer && order.status === 'shipping'"
             type="primary"
@@ -154,7 +154,7 @@ const userInfo = ref(uni.getStorageSync('userInfo') || {})
 // 二手交易状态定义
 const steps = [
   { key: 'paid', label: '已付款' },
-  { key: 'shipping', label: '发货中' },
+  { key: 'shipping', label: '待自提' },
   { key: 'completed', label: '已完成' }
 ]
 
@@ -181,8 +181,8 @@ const statusTitle = computed(() => {
   if (!order.value) return ''
   switch(order.value.status) {
     case 'pending': return '等待支付'
-    case 'paid': return '等待发货'
-    case 'shipping': return '卖家已发货'
+    case 'paid': return '等待卖家确认'
+    case 'shipping': return '待自提'
     case 'completed': return '交易已完成'
     case 'cancelled': return '交易已取消'
     case 'refunded': return '已退款'
@@ -194,8 +194,8 @@ const statusDesc = computed(() => {
   if (!order.value) return ''
   switch(order.value.status) {
     case 'pending': return '请尽快完成支付'
-    case 'paid': return '请等待卖家发货'
-    case 'shipping': return '收到商品后请确认收货'
+    case 'paid': return '请等待卖家确认交易'
+    case 'shipping': return '请联系卖家约定自提时间和地点'
     case 'completed': return '好物已归您所有'
     case 'cancelled': return '订单已取消'
     default: return ''
@@ -263,17 +263,17 @@ function contactCounterparty() {
   uni.navigateTo({ url: `/pages/messages/chat?userId=${target.id}&name=${target.name}&avatar=${encodeURIComponent(target.avatar || '')}` })
 }
 
-// 卖家确认发货
+// 卖家确认交易
 function confirmShipment() {
   uni.showModal({
-    title: '确认发货',
-    content: '确认已将商品交付给买家或已发出快递？',
+    title: '确认交易',
+    content: '确认后订单将进入“待自提”状态，请联系买家约定自提时间和地点。',
     success: async (res) => {
       if (res.confirm) {
         try {
           await updateOrderStatus(order.value.id, 'shipping')
           order.value.status = 'shipping'
-          uni.showToast({ title: '已确认发货', icon: 'success' })
+          uni.showToast({ title: '已确认交易', icon: 'success' })
         } catch (e) {
           uni.showToast({ title: '操作失败', icon: 'none' })
         }

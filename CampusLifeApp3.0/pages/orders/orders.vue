@@ -310,8 +310,8 @@ function getStatusText(status) {
   switch(status) {
     case 'Completed': return '已完成';
     case 'Pending': return '待支付';
-    case 'Paid': return '待发货';
-    case 'Shipping': return '配送中';
+    case 'Paid': return '待确认';
+    case 'Shipping': return '待自提';
     case 'Cancelled': return '已取消';
     case 'Refunded': return '已退款';
     default: return '进行中';

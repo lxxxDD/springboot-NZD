@@ -37,12 +37,6 @@
     <scroll-view scroll-y class="content-scroll">
       <view class="main-wrapper">
         
-        <!-- 2. 轮播图 Banner (视觉重心) -->
-        <swiper class="banner-swiper" circular autoplay interval="5000" indicator-dots indicator-active-color="#fff" indicator-color="rgba(255,255,255,0.5)">
-          <swiper-item v-for="(item, index) in banners" :key="index">
-            <image :src="item" mode="aspectFill" class="banner-img"></image>
-          </swiper-item>
-        </swiper>
 
         <!-- 3. 金刚区 (微渐变图标) -->
         <view class="grid-card">
