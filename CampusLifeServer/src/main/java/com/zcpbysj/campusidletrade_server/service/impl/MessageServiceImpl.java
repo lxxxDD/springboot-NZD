@@ -67,6 +67,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
                 Message lastMsg = getById(conv.getLastMessageId());
                 if (lastMsg != null) {
                     vo.setLastMessage(lastMsg.getContent());
+                    vo.setLastMessageType(lastMsg.getMessageType());
                 }
             }
             vo.setLastMessageTime(conv.getLastMessageTime());

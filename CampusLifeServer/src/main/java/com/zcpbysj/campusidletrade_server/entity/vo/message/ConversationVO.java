@@ -33,6 +33,11 @@ public class ConversationVO {
     private String lastMessage;
     
     /**
+     * 最后一条消息类型 (text/image)
+     */
+    private String lastMessageType;
+    
+    /**
      * 最后消息时间
      */
     private LocalDateTime lastMessageTime;

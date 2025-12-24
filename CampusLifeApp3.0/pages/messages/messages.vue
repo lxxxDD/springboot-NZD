@@ -196,9 +196,6 @@ async function loadConversations() {
 function formatLastMessage(msg, msgType) {
   if (!msg) return ''
   if (msgType === 'image') return '[图片]'
-  if (msg.startsWith('http') && (msg.includes('/uploads/') || msg.includes('.png') || msg.includes('.jpg') || msg.includes('.jpeg') || msg.includes('.gif'))) {
-    return '[图片]'
-  }
   return msg
 }
 
