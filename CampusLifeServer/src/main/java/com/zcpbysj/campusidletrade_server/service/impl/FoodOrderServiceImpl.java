@@ -1,6 +1,7 @@
 package com.zcpbysj.campusidletrade_server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zcpbysj.campusidletrade_server.entity.*;
@@ -74,7 +75,12 @@ public class FoodOrderServiceImpl extends ServiceImpl<FoodOrderMapper, FoodOrder
                     throw new RuntimeException("库存不足: " + foodItem.getName() + "，剩余库存: " + foodItem.getStock());
                 }
                 // 使用乐观锁扣减库存（通过条件更新确保并发安全）
-                int updated = foodItemMapper.deductStock(foodItem.getId(), itemDTO.getQuantity(), foodItem.getStock());
+                LambdaUpdateWrapper<FoodItem> updateWrapper = new LambdaUpdateWrapper<>();
+                updateWrapper.eq(FoodItem::getId, foodItem.getId())
+                        .eq(FoodItem::getStock, foodItem.getStock())
+                        .ge(FoodItem::getStock, itemDTO.getQuantity())
+                        .setSql("stock = stock - " + itemDTO.getQuantity());
+                int updated = foodItemMapper.update(null, updateWrapper);
                 if (updated == 0) {
                     throw new RuntimeException("库存扣减失败，请重试: " + foodItem.getName());
                 }
