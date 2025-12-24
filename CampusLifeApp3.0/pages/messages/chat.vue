@@ -63,7 +63,7 @@
     <view class="input-area animate-slide-up">
       <view class="input-toolbar">
         <view class="icon-btn" @click="showEmojiTip">
-          <u-icon name="heart" size="26" color="#64748B"></u-icon>
+          <text style="font-size: 26px;">😊</text>
         </view>
 
         <view class="input-box">
