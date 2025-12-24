@@ -62,8 +62,8 @@
 
     <view class="input-area animate-slide-up">
       <view class="input-toolbar">
-        <view class="icon-btn">
-          <u-icon name="mic" size="26" color="#64748B"></u-icon>
+        <view class="icon-btn" @click="showEmojiTip">
+          <u-icon name="heart" size="26" color="#64748B"></u-icon>
         </view>
 
         <view class="input-box">
@@ -75,7 +75,7 @@
               :focus="isFocus"
               @confirm="sendMessage"
           />
-                  </view>
+        </view>
 
         <view class="icon-btn" @click="handleSendClick">
           <view v-if="inputText.trim()" class="send-btn">
@@ -224,6 +224,10 @@ function previewImage(url) {
 
 
 const isFocus = ref(false)
+
+function showEmojiTip() {
+  uni.showToast({ title: '表情功能开发中', icon: 'none' })
+}
 
 function handleSendClick() {
   if (inputText.value.trim()) {
