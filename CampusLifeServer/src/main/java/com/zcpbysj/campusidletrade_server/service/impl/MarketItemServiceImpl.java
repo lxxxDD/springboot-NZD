@@ -322,6 +322,7 @@ public class MarketItemServiceImpl extends ServiceImpl<MarketItemMapper, MarketI
         User seller = userMapper.selectById(item.getSellerId());
         if (seller != null) {
             vo.setSellerName(seller.getUsername());
+            vo.setSellerAvatar(seller.getAvatar());
         }
         
         return vo;

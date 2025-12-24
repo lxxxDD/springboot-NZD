@@ -19,6 +19,11 @@ public class MarketItemListVO {
     private String sellerName;
     
     /**
+     * 卖家头像
+     */
+    private String sellerAvatar;
+    
+    /**
      * 商品标题
      */
     private String title;
