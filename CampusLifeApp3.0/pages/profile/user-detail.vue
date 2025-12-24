@@ -44,33 +44,24 @@
             <u-icon name="chat" color="#fff" size="16"></u-icon>
             <text>发消息</text>
           </view>
-          <view class="btn-secondary" @click="toggleFollow">
-            <u-icon :name="isFollowing ? 'checkmark' : 'plus'" color="#6366F1" size="16"></u-icon>
-            <text>{{ isFollowing ? '已关注' : '关注' }}</text>
-          </view>
         </view>
       </view>
 
       <!-- 统计数据 -->
       <view class="stats-card animate-enter" style="--delay: 0.1s">
-        <view class="stat-item" @click="showFollowers">
-          <text class="stat-value">{{ userInfo.followers }}</text>
-          <text class="stat-label">粉丝</text>
-        </view>
-        <view class="divider"></view>
-        <view class="stat-item" @click="showFollowing">
-          <text class="stat-value">{{ userInfo.following }}</text>
-          <text class="stat-label">关注</text>
-        </view>
-        <view class="divider"></view>
         <view class="stat-item">
           <text class="stat-value">{{ userInfo.posts }}</text>
           <text class="stat-label">发布</text>
         </view>
         <view class="divider"></view>
         <view class="stat-item">
-          <text class="stat-value">{{ userInfo.rating }}</text>
-          <text class="stat-label">评分</text>
+          <text class="stat-value">{{ userInfo.tradeCount || 0 }}</text>
+          <text class="stat-label">交易</text>
+        </view>
+        <view class="divider"></view>
+        <view class="stat-item">
+          <text class="stat-value">{{ userInfo.creditLevel || '良好' }}</text>
+          <text class="stat-label">信用</text>
         </view>
       </view>
 
@@ -85,32 +76,14 @@
         <text class="bio-text">{{ userInfo.bio }}</text>
       </view>
 
-      <!-- Tab切换 -->
-      <view class="tabs-wrapper animate-enter" style="--delay: 0.3s">
-        <view class="tabs">
-          <view 
-            class="tab-item" 
-            :class="{ active: activeTab === 'market' }"
-            @click="activeTab = 'market'"
-          >
-            <u-icon name="gift" size="18" :color="activeTab === 'market' ? '#6366F1' : '#94A3B8'"></u-icon>
-            <text>在售商品</text>
-            <view class="tab-badge" v-if="marketItems.length > 0">{{ marketItems.length }}</view>
-          </view>
-          <view 
-            class="tab-item" 
-            :class="{ active: activeTab === 'activity' }"
-            @click="activeTab = 'activity'"
-          >
-            <u-icon name="calendar" size="18" :color="activeTab === 'activity' ? '#6366F1' : '#94A3B8'"></u-icon>
-            <text>发起活动</text>
-            <view class="tab-badge" v-if="activities.length > 0">{{ activities.length }}</view>
-          </view>
-        </view>
+      <!-- 商品标题 -->
+      <view class="section-header animate-enter" style="--delay: 0.3s">
+        <text class="section-title">在售商品</text>
+        <text class="section-count" v-if="marketItems.length > 0">{{ marketItems.length }}件</text>
       </view>
 
       <!-- 商品列表 -->
-      <view class="items-grid" v-if="activeTab === 'market'">
+      <view class="items-grid">
         <view 
           class="market-item animate-enter" 
           v-for="(item, index) in marketItems" 
@@ -135,45 +108,7 @@
         </view>
       </view>
 
-      <!-- 活动列表 -->
-      <view class="items-list" v-if="activeTab === 'activity'">
-        <view 
-          class="activity-item animate-enter" 
-          v-for="(item, index) in activities" 
-          :key="item.id"
-          :style="{ '--delay': (0.4 + index * 0.05) + 's' }"
-          @click="goActivityDetail(item.id)"
-        >
-          <image :src="item.image" class="activity-image" mode="aspectFill"></image>
-          <view class="activity-info">
-            <text class="activity-title">{{ item.title }}</text>
-            <view class="activity-meta">
-              <view class="meta-item">
-                <u-icon name="clock" color="#94A3B8" size="12"></u-icon>
-                <text>{{ item.time }}</text>
-              </view>
-              <view class="meta-item">
-                <u-icon name="map" color="#94A3B8" size="12"></u-icon>
-                <text>{{ item.location }}</text>
-              </view>
-            </view>
-            <view class="activity-bottom">
-              <view class="participants">
-                <u-icon name="account" color="#6366F1" size="14"></u-icon>
-                <text>{{ item.participants }}/{{ item.maxParticipants }}</text>
-              </view>
-              <view class="activity-status" :class="item.status">
-                {{ item.status === 'ongoing' ? '进行中' : '已结束' }}
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class="empty-state" v-if="activities.length === 0">
-          <u-icon name="calendar" color="#CBD5E1" size="48"></u-icon>
-          <text class="empty-text">暂无发起的活动</text>
-        </view>
-      </view>
-
+      
       <view style="height: 40px"></view>
     </scroll-view>
   </view>
@@ -185,8 +120,6 @@ import { onLoad } from '@dcloudio/uni-app'
 import { getUserById, getUserMarketItems } from '@/api/user.js'
 import { baseURL } from '@/api/request.js'
 
-const activeTab = ref('market')
-const isFollowing = ref(false)
 const loading = ref(true)
 
 // 用户信息
@@ -210,8 +143,6 @@ const userInfo = reactive({
 // 在售商品
 const marketItems = ref([])
 
-// 发起的活动
-const activities = ref([])
 
 onLoad((options) => {
   if (options.userId) {
@@ -315,28 +246,8 @@ function sendMessage() {
   })
 }
 
-function toggleFollow() {
-  isFollowing.value = !isFollowing.value
-  uni.showToast({ 
-    title: isFollowing.value ? '已关注' : '已取消关注', 
-    icon: 'none' 
-  })
-}
-
-function showFollowers() {
-  uni.showToast({ title: '粉丝列表开发中', icon: 'none' })
-}
-
-function showFollowing() {
-  uni.showToast({ title: '关注列表开发中', icon: 'none' })
-}
-
 function goMarketDetail(id) {
   uni.navigateTo({ url: `/pages/market/detail?id=${id}` })
-}
-
-function goActivityDetail(id) {
-  uni.navigateTo({ url: `/pages/activity/detail?id=${id}` })
 }
 </script>
 
@@ -615,13 +526,22 @@ $text-sub: #64748B;
   margin-bottom: 20px;
 }
 
-.tabs {
-  background: #fff;
-  border-radius: 16px;
-  padding: 6px;
+.section-header {
   display: flex;
-  gap: 6px;
-  box-shadow: 0 4px 12px rgba(148, 163, 184, 0.05);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: $text-main;
+}
+
+.section-count {
+  font-size: 13px;
+  color: $text-sub;
 }
 
 .tab-item {
