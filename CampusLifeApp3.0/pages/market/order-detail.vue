@@ -50,15 +50,9 @@
             <text class="seller-name">{{ counterparty.name || '未知用户' }}</text>
             <text class="seller-tag">{{ counterparty.label }}</text>
           </view>
-          <view class="btn-group">
-            <view class="contact-btn" @click="contactCounterparty">
-              <u-icon name="chat-fill" color="#6366F1" size="16"></u-icon>
-              <text>联系</text>
-            </view>
-            <view class="profile-btn" @click="goUserProfile">
-              <text>主页</text>
-              <u-icon name="arrow-right" color="#6366F1" size="12"></u-icon>
-            </view>
+          <view class="profile-btn" @click="goUserProfile">
+            <text>主页</text>
+            <u-icon name="arrow-right" color="#6366F1" size="12"></u-icon>
           </view>
         </view>
       </view>
@@ -107,9 +101,9 @@
 
     <view v-if="order" class="bottom-bar animate-slide-up">
       <view class="bar-inner">
-        <view class="service-btn hover-scale">
-          <u-icon name="more-circle" size="24" color="#64748B"></u-icon>
-          <text>更多</text>
+        <view class="service-btn hover-scale" @click="contactCounterparty">
+          <u-icon name="chat-fill" size="24" color="#6366F1"></u-icon>
+          <text>联系</text>
         </view>
 
         <!-- 卖家操作: 待确认 -> 确认交易 -->
@@ -431,7 +425,7 @@ $text-sub: #64748B;
 .bar-inner { display: flex; align-items: center; }
 .service-btn {
   display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 12px;
-  text { font-size: 10px; color: $text-sub; font-weight: 600; }
+  text { font-size: 10px; color: $primary; font-weight: 600; }
 }
 
 /* 动画 */
