@@ -180,18 +180,57 @@ onShow(() => {
 async function loadWeather() { weather.value = { city: '南宁', temp: '26', text: '多云', icon: 'partly_cloudy_day' } }
 async function loadRepairs() { repairList.value = [{id:'R20231001', issue:'Electric', location:'D栋 405', status:'In Progress'}] }
 async function loadActivities() {
-    activityList.value = [
-        {id:1, title:'校园十佳歌手大赛总决赛', date:'10.24', image:'https://images.unsplash.com/photo-1514525253440-b393452e3726?w=400&q=80'},
-        {id:2, title:'秋季篮球联赛', date:'10.26', image:'https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=400&q=80'},
-        {id:3, title:'读书分享会', date:'11.01', image:'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&q=80'}
-    ]
+  try {
+    const res = await getActivities({ page: 1, size: 5 })
+    if (res.code === 200 && res.data) {
+      const list = res.data.list || res.data
+      activityList.value = list.map(item => ({
+        id: item.id,
+        title: item.title,
+        date: formatActivityDate(item.startTime),
+        image: item.coverImage
+      }))
+    }
+  } catch (e) {
+    console.error('加载活动失败:', e)
+  }
 }
+
+function formatActivityDate(dateStr) {
+  if (!dateStr) return ''
+  const date = new Date(dateStr)
+  return `${date.getMonth() + 1}.${date.getDate().toString().padStart(2, '0')}`
+}
+
 async function loadNews() {
-   newsList.value = [
-       {id:1, title:'2024年秋季学期期末考试安排通知', time:'10分钟前', image: null},
-       {id:2, title:'我校在创新创业大赛斩获金奖', time:'1小时前', image: 'https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=200&q=80'},
-       {id:3, title:'图书馆闭馆时间调整通知', time:'昨天', image: null}
-   ]
+  try {
+    const res = await getNewsList({ page: 1, size: 5 })
+    if (res.code === 200 && res.data) {
+      const list = res.data.list || res.data
+      newsList.value = list.map(item => ({
+        id: item.id,
+        title: item.title,
+        time: formatNewsTime(item.createTime || item.publishTime),
+        image: item.coverImage
+      }))
+    }
+  } catch (e) {
+    console.error('加载资讯失败:', e)
+  }
+}
+
+function formatNewsTime(dateStr) {
+  if (!dateStr) return ''
+  const now = new Date()
+  const date = new Date(dateStr)
+  const diff = now - date
+  const minutes = Math.floor(diff / 60000)
+  if (minutes < 60) return `${minutes}分钟前`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours}小时前`
+  const days = Math.floor(hours / 24)
+  if (days === 1) return '昨天'
+  return `${days}天前`
 }
 </script>
 
