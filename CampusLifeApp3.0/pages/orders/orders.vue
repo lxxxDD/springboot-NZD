@@ -66,9 +66,9 @@
                 <text class="time">{{ order.time }}</text>
               </view>
             </view>
-            <view class="status-tag" :class="order.status === 'Completed' ? 'completed' : 'processing'">
-              <view v-if="order.status !== 'Completed'" class="pulse-dot"></view>
-              {{ order.status === 'Completed' ? '已完成' : '配送中' }}
+            <view class="status-tag" :class="getStatusClass(order.status)">
+              <view v-if="order.status !== 'Completed' && order.status !== 'Cancelled' && order.status !== 'Refunded'" class="pulse-dot"></view>
+              {{ getStatusText(order.status) }}
             </view>
           </view>
 
@@ -294,6 +294,29 @@ function showDetail(order) {
     uni.navigateTo({ url: `/pages/orders/detail?id=${order.orderId}` });
   }
 }
+
+// 获取状态样式类
+function getStatusClass(status) {
+  switch(status) {
+    case 'Completed': return 'completed';
+    case 'Cancelled': 
+    case 'Refunded': return 'cancelled';
+    default: return 'processing';
+  }
+}
+
+// 获取状态文本
+function getStatusText(status) {
+  switch(status) {
+    case 'Completed': return '已完成';
+    case 'Pending': return '待支付';
+    case 'Paid': return '待发货';
+    case 'Shipping': return '配送中';
+    case 'Cancelled': return '已取消';
+    case 'Refunded': return '已退款';
+    default: return '进行中';
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -433,6 +456,11 @@ $card-radius: 20px;
   &.processing {
     background: #EFF6FF;
     color: $primary;
+  }
+
+  &.cancelled {
+    background: #FEF2F2;
+    color: #EF4444;
   }
 }
 
