@@ -69,7 +69,7 @@
             <text class="seller-name">{{ item.seller }}</text>
             <text class="seller-credit">信用极好 • 交易 23 次</text>
           </view>
-          <view class="follow-btn" v-if="!isOwner">
+          <view class="follow-btn" v-if="!isOwner" @click="goUserProfile">
             <text>主页</text>
             <u-icon name="arrow-right" color="#6366F1" size="10"></u-icon>
           </view>
@@ -287,6 +287,20 @@ function previewImage(index) {
   uni.previewImage({
     current: index,
     urls: swiperList.value
+  })
+}
+
+function goUserProfile() {
+  if (!item.value.sellerId) {
+    uni.showToast({ title: '用户信息不完整', icon: 'none' })
+    return
+  }
+  uni.navigateTo({
+    url: `/pages/profile/user-detail?userId=${item.value.sellerId}`,
+    fail: (err) => {
+      console.error('跳转失败:', err)
+      uni.showToast({ title: '页面跳转失败', icon: 'none' })
+    }
   })
 }
 
