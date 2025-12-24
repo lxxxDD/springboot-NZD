@@ -49,6 +49,7 @@
                       <u-number-box
                           v-model="it.qty"
                           :min="1"
+                          :max="it.stock > 0 ? it.stock : 99"
                           :button-size="26"
                           bgColor="#F1F5F9"
                           color="#1E293B"
