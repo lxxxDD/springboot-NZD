@@ -75,10 +75,7 @@
               :focus="isFocus"
               @confirm="sendMessage"
           />
-          <view class="emoji-btn">
-            <text class="material-symbols-outlined" style="font-size: 24px; color: #64748B;">sentiment_satisfied</text>
-          </view>
-        </view>
+                  </view>
 
         <view class="icon-btn" @click="handleSendClick">
           <view v-if="inputText.trim()" class="send-btn">
