@@ -163,6 +163,13 @@ import { ref, computed } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { getMarketItemDetail, updateMarketItemStatus, deleteMarketItem, toggleFavorite } from '@/api/market.js'
 import { getOrCreateConversation } from '@/api/messages.js'
+import { baseURL } from '@/api/request.js'
+
+function formatAvatarUrl(url) {
+  if (!url) return 'https://via.placeholder.com/100'
+  if (url.startsWith('http')) return url
+  return baseURL + url
+}
 
 const item = ref({
   id: '',
@@ -256,7 +263,7 @@ async function loadItemDetail(id) {
       desc: data.description,
       seller: data.sellerName || data.seller,
       sellerId: data.sellerId || data.userId || data.seller_id,
-      avatar: data.sellerAvatar || data.avatar || 'https://via.placeholder.com/100',
+      avatar: formatAvatarUrl(data.sellerAvatar || data.avatar),
       status: data.status || 'active',
       rejectReason: data.rejectReason,  // 违规原因
       images: data.images || [],
