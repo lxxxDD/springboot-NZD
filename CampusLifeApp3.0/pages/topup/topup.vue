@@ -76,6 +76,10 @@ async function topup(){
   
   try {
     const paymentMethod = paymentOptions.value[paymentMethodIndex.value].title
+    
+    // 模拟2秒支付处理时间
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
     const res = await topupApi({
       amount: a,
       paymentMethod: paymentMethod
