@@ -181,16 +181,25 @@ async function loadConversations() {
       userId: item.userId,
       name: item.username,
       avatar: item.avatar || 'https://via.placeholder.com/100/6366f1/fff',
-      lastMsg: item.lastMessage,
+      lastMsg: formatLastMessage(item.lastMessage, item.lastMessageType),
       time: formatTime(item.lastMessageTime),
       unread: item.unreadCount || 0,
-      online: false // API 未返回在线状态
+      online: false
     }))
   } catch (err) {
     console.error('加载会话列表失败:', err)
   } finally {
     loading.value = false
   }
+}
+
+function formatLastMessage(msg, msgType) {
+  if (!msg) return ''
+  if (msgType === 'image') return '[图片]'
+  if (msg.startsWith('http') && (msg.includes('/uploads/') || msg.includes('.png') || msg.includes('.jpg') || msg.includes('.jpeg') || msg.includes('.gif'))) {
+    return '[图片]'
+  }
+  return msg
 }
 
 function formatTime(dateStr) {

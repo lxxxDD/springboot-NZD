@@ -21,7 +21,7 @@
         class="chat-content"
         :scroll-into-view="scrollIntoViewId"
         :scroll-with-animation="true"
-        @click="hideKeyboard"
+        @click="closeAllInput"
     >
       <view class="content-inner">
         <view class="time-divider">
@@ -60,27 +60,58 @@
       </view>
     </scroll-view>
 
-    <view class="input-area animate-slide-up">
-      <view class="input-toolbar">
-        <view class="input-box">
-          <input
-              v-model="inputText"
-              class="input-field"
-              placeholder="发送消息..."
-              confirm-type="send"
-              :focus="isFocus"
-              @confirm="sendMessage"
-          />
-          <view class="emoji-btn">
-            <text class="material-symbols-outlined" style="font-size: 24px; color: #64748B;">sentiment_satisfied</text>
+    <!-- 底部区域：包含输入框和表情面板 -->
+    <view class="footer-area">
+      <view class="input-area">
+        <view class="input-toolbar">
+          <view class="input-box">
+            <input
+                v-model="inputText"
+                class="input-field"
+                placeholder="想要不？聊聊看..."
+                confirm-type="send"
+                :focus="isFocus"
+                @focus="onInputFocus"
+                @confirm="sendMessage"
+            />
+            <view class="emoji-btn" @click.stop="toggleEmojiPanel">
+              <!-- 图标动画：增加 active 类 -->
+              <text 
+                class="material-symbols-outlined emoji-icon" 
+                :class="{ 'icon-active': showEmoji }"
+              >sentiment_satisfied</text>
+            </view>
+          </view>
+
+          <view class="icon-btn" @click="handleSendClick">
+            <view v-if="inputText.trim()" class="send-btn animate-bounce-in">
+              <u-icon name="arrow-up" size="18" color="#fff" bold></u-icon>
+            </view>
+            <u-icon v-else name="plus-circle" size="26" color="#64748B"></u-icon>
           </view>
         </view>
+      </view>
 
-        <view class="icon-btn" @click="handleSendClick">
-          <view v-if="inputText.trim()" class="send-btn">
-            <u-icon name="arrow-up" size="18" color="#fff" bold></u-icon>
-          </view>
-          <u-icon v-else name="plus-circle" size="26" color="#64748B"></u-icon>
+      <!-- 表情面板 (移除 v-if，改为 class 控制高度动画) -->
+      <view class="emoji-panel-wrapper" :class="{ 'panel-open': showEmoji }">
+        <view class="emoji-panel-inner">
+          <scroll-view scroll-y class="emoji-scroll">
+            <view v-for="(group, gIndex) in emojiGroups" :key="gIndex" class="emoji-group">
+              <view class="emoji-group-title">{{ group.title }}</view>
+              <view class="emoji-grid">
+                <view 
+                  v-for="(emoji, index) in group.list" 
+                  :key="index" 
+                  class="emoji-item"
+                  @click="addEmoji(emoji)"
+                >
+                  <text class="emoji-text">{{ emoji }}</text>
+                </view>
+              </view>
+            </view>
+            <!-- 底部留白 -->
+            <view style="height: 30px;"></view>
+          </scroll-view>
         </view>
       </view>
     </view>
@@ -89,10 +120,36 @@
 
 <script setup>
 import { ref, nextTick } from 'vue'
-import { onLoad, onShow } from '@dcloudio/uni-app'
+import { onLoad, onShow, onUnload } from '@dcloudio/uni-app'
 import { getChatMessages, sendMessage as sendMessageApi } from '@/api/messages.js'
 import { uploadFile } from '@/api/request.js'
 import { baseURL } from '@/api/request.js'
+import { websocket } from '@/utils/websocket.js'
+
+// 状态管理
+const showEmoji = ref(false)
+const isFocus = ref(false)
+const inputText = ref('')
+const scrollIntoViewId = ref('')
+const loading = ref(false)
+const page = ref(1)
+const hasMore = ref(true)
+
+// === 定制：校园二手交易专用表情组 ===
+const emojiGroups = [
+  {
+    title: '交易沟通',
+    list: ['🤝','💰','🉑','🙅','🔪','👀','🤔','🆗','👋','🙏','📦','📍','🚇','⏳','💸','🚀']
+  },
+  {
+    title: '物品状态',
+    list: ['✨','🆕','🎁','🧾','🛡️','🔧','🧹','📉','🏷️','💯','✅','🔋','☠️']
+  },
+  {
+    title: '校园闲置',
+    list: ['📚','💻','📱','🎧','📷','⌚','🚲','🛵','🛹','🏀','🏸','🎸','👟','👗','👜','💄','🧴','🧸','🎮','🎫']
+  }
+]
 
 // 获取当前用户信息
 const userInfo = uni.getStorageSync('userInfo') || {}
@@ -113,21 +170,9 @@ const targetUser = ref({
   avatar: ''
 })
 
-const inputText = ref('')
-const scrollIntoViewId = ref('')
-const loading = ref(false)
-const page = ref(1)
-const hasMore = ref(true)
-
-// 消息列表
 const messageList = ref([])
 
-import { websocket } from '@/utils/websocket.js'
-
-// ... (existing code)
-
 onLoad((options) => {
-  // 支持两种方式：从消息列表进入(有id)或从商品详情进入(有userId)
   if (options.id || options.userId) {
     targetUser.value.id = options.id || options.userId
     targetUser.value.userId = options.userId || options.id || ''
@@ -135,58 +180,89 @@ onLoad((options) => {
     targetUser.value.avatar = formatAvatarUrl(options.avatar ? decodeURIComponent(options.avatar) : '')
   }
   
-  console.log('聊天页面参数:', options)
-  console.log('目标用户:', targetUser.value)
-  
   loadMessages()
   
-  // 如果是首次联系，自动发送"你好"
   if (options.autoSend === 'true') {
     setTimeout(() => {
-      inputText.value = '你好'
+      inputText.value = '你好，这件东西还在吗？'
       sendMessage()
     }, 500)
   }
   
-  // 监听消息
   uni.$on('websocket-message', (msg) => {
-    console.log('收到新消息', msg)
-    // 判断是否是当前会话的消息
-    // msg.senderId 是发送者ID
     if (msg.senderId == targetUser.value.userId) {
-      // 添加到列表
       messageList.value.push({
         id: msg.id,
         content: msg.content,
         messageType: msg.messageType || 'text',
-        isMe: false, // 既然是收到的，肯定不是自己发的
+        isMe: false, 
         senderAvatar: msg.senderAvatar,
         createTime: msg.createTime
       })
       scrollToBottom()
-    } else {
-      // 如果不是当前会话，可以显示红点提示等（这里暂不处理）
-      // 注意：chat.vue 是在聊天详情页，如果收到其他人的消息，通常只提示
-      // uni.showToast({ title: '收到新消息', icon: 'none' })
     }
   })
 })
 
-import { onUnload } from '@dcloudio/uni-app'
 onUnload(() => {
-  // 移除监听
   uni.$off('websocket-message')
 })
 
-// 加载聊天记录
+// === 表情与键盘逻辑 ===
+
+// 切换表情面板显示
+function toggleEmojiPanel() {
+  if (showEmoji.value) {
+    // 关闭表情，打开键盘
+    showEmoji.value = false
+    // 稍微延迟，等待高度动画开始收缩后再聚焦，避免闪烁
+    setTimeout(() => {
+      isFocus.value = true
+    }, 50)
+  } else {
+    // 打开表情，关闭键盘
+    isFocus.value = false
+    uni.hideKeyboard()
+    
+    // 这里的延时是为了让键盘先收起一部分，避免面板直接把输入框顶出屏幕外（视平台而定）
+    // 或者让动画看起来是衔接键盘的
+    setTimeout(() => {
+      showEmoji.value = true
+      scrollToBottom()
+    }, 50)
+  }
+}
+
+// 输入框获得焦点（键盘弹出）
+function onInputFocus() {
+  // 如果表情面板打开，先关掉它
+  if (showEmoji.value) {
+    showEmoji.value = false
+  }
+  isFocus.value = true
+  scrollToBottom()
+}
+
+// 点击内容区域，收起所有（键盘和表情）
+function closeAllInput() {
+  uni.hideKeyboard()
+  isFocus.value = false
+  showEmoji.value = false
+}
+
+// 添加表情到输入框
+function addEmoji(emoji) {
+  inputText.value += emoji
+}
+
+// === 发送逻辑 ===
+
 async function loadMessages() {
   if (loading.value || !hasMore.value) return
   loading.value = true
   
   try {
     const res = await getChatMessages(targetUser.value.id, { page: page.value, size: 20 })
-    // 根据 API 文档，返回 PageVOMessageVO
-    // MessageVO 字段: id, senderId, senderName, senderAvatar, content, messageType, isMine, createTime
     const data = res.data
     const list = (data.list || []).map(item => ({
       id: item.id,
@@ -197,7 +273,6 @@ async function loadMessages() {
       createTime: item.createTime
     }))
     
-    // 历史消息在前面
     if (page.value === 1) {
       messageList.value = list.reverse()
     } else {
@@ -219,10 +294,6 @@ function previewImage(url) {
     urls: [url]
   })
 }
-
-
-
-const isFocus = ref(false)
 
 function handleSendClick() {
   if (inputText.value.trim()) {
@@ -273,14 +344,14 @@ async function sendMessage(content = '', type = 'text') {
     msgContent = inputText.value
     inputText.value = ''
     
-    // 重新获取焦点
-    isFocus.value = false
-    nextTick(() => {
-      isFocus.value = true
-    })
+    // 发送后保持状态：如果是表情面板，保持打开；如果是键盘模式，保持聚焦
+    if (!showEmoji.value) {
+        nextTick(() => {
+             isFocus.value = true
+        })
+    }
   }
   
-  // 先在本地添加消息（乐观更新）
   const tempId = Date.now()
   messageList.value.push({
     id: tempId,
@@ -291,8 +362,6 @@ async function sendMessage(content = '', type = 'text') {
   scrollToBottom()
   
   try {
-    // 调用发送消息 API
-    // 请求参数: { receiverId, content, type }
     await sendMessageApi({
       receiverId: parseInt(targetUser.value.userId),
       content: msgContent,
@@ -300,7 +369,6 @@ async function sendMessage(content = '', type = 'text') {
     })
   } catch (err) {
     console.error('发送消息失败:', err)
-    // 发送失败，移除本地消息
     const idx = messageList.value.findIndex(m => m.id === tempId)
     if (idx > -1) {
       messageList.value.splice(idx, 1)
@@ -313,10 +381,6 @@ function scrollToBottom() {
   nextTick(() => {
     scrollIntoViewId.value = 'msg-' + (messageList.value.length - 1)
   })
-}
-
-function hideKeyboard() {
-  uni.hideKeyboard()
 }
 </script>
 
@@ -345,21 +409,11 @@ $text-sub: #64748B;
   position: relative;
 }
 
-.status-dot {
-  position: absolute;
-  bottom: 0; right: 0;
-  width: 10px; height: 10px;
-  background: #10B981;
-  border: 2px solid #fff;
-  border-radius: 50%;
-}
-
 .nav-info {
   display: flex;
   flex-direction: column;
 
   .nav-name { font-size: 15px; font-weight: 700; color: $text-main; line-height: 1.2; }
-  .nav-status { font-size: 10px; color: #10B981; font-weight: 500; }
 }
 
 /* 聊天内容区 */
@@ -367,7 +421,7 @@ $text-sub: #64748B;
   flex: 1;
   background: $bg-page;
   box-sizing: border-box;
-  overflow: hidden; /* 防止整体滚动 */
+  overflow: hidden; 
 }
 
 .content-inner {
@@ -410,7 +464,6 @@ $text-sub: #64748B;
     }
   }
 
-  /* 对方的消息样式 */
   &:not(.is-me) {
     .msg-bubble {
       background: #fff;
@@ -462,19 +515,26 @@ $text-sub: #64748B;
   margin-right: 4px;
 }
 
-/* 底部输入栏 */
-.input-area {
+/* 底部区域（包含输入栏和面板） */
+.footer-area {
   background: #fff;
-  padding: 10px 16px;
-  padding-bottom: calc(10px + env(safe-area-inset-bottom));
   box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
   position: relative;
   z-index: 10;
 }
 
+/* 只有输入栏 */
+.input-area {
+  padding: 10px 16px;
+  /* 移除底部 padding，由面板或 wrapper 负责撑开 */
+  background: #fff; 
+  position: relative; 
+  z-index: 2;
+}
+
 .input-toolbar {
   display: flex;
-  align-items: center; /* 垂直居中对齐 */
+  align-items: center;
   gap: 12px;
 }
 
@@ -502,11 +562,29 @@ $text-sub: #64748B;
   flex: 1;
   font-size: 15px;
   color: $text-main;
-  /* 如果需要支持多行，可以将 input 换成 textarea 并控制高度 */
 }
 
 .emoji-btn {
   margin-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:active {
+      opacity: 0.7;
+  }
+}
+
+/* 图标动画效果 */
+.emoji-icon {
+  font-size: 24px; 
+  color: #64748B;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* 弹性过渡 */
+  
+  &.icon-active {
+    color: $primary;
+    transform: scale(1.15); /* 稍微放大 */
+  }
 }
 
 .send-btn {
@@ -515,18 +593,70 @@ $text-sub: #64748B;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
-  transition: transform 0.1s;
-
-  &:active { transform: scale(0.9); }
+  
+  &.animate-bounce-in {
+    animation: bounceIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
 }
 
-/* 动画 */
-.animate-slide-up {
-  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+@keyframes bounceIn {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
 }
 
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+/* 表情面板容器动画 */
+.emoji-panel-wrapper {
+  height: 0;
+  overflow: hidden;
+  background: #F8FAFC;
+  transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1); /* 流畅的展开曲线 */
+  will-change: height;
+  
+  &.panel-open {
+    height: 280px; /* 目标高度 */
+    border-top: 1px solid #E2E8F0;
+  }
+}
+
+.emoji-panel-inner {
+  height: 280px; /* 内部内容保持固定高度，避免内容挤压 */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.emoji-scroll {
+  height: 100%;
+}
+
+.emoji-group {
+  margin-bottom: 8px;
+}
+
+.emoji-group-title {
+  font-size: 12px;
+  color: #94A3B8;
+  padding: 12px 16px 4px;
+  font-weight: 500;
+  background: #F8FAFC;
+}
+
+.emoji-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 5px;
+}
+
+.emoji-item {
+  width: 12.5%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  
+  &:active {
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 8px;
+  }
 }
 </style>
