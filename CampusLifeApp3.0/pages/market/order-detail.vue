@@ -106,37 +106,74 @@
           <text>联系</text>
         </view>
 
+        <!-- 待支付: 可取消订单 -->
+        <u-button
+            v-if="isBuyer && order.status === 'pending'"
+            type="error"
+            plain
+            shape="circle"
+            customStyle="height: 44px; margin-left: 12px; border: 1px solid #FCA5A5; color: #EF4444; font-weight: 600; padding: 0 20px;"
+            @click="handleCancelOrder"
+        >
+          取消订单
+        </u-button>
+
+        <!-- 已支付未发货: 买家可申请退款 -->
+        <u-button
+            v-if="isBuyer && order.status === 'paid'"
+            type="warning"
+            plain
+            shape="circle"
+            customStyle="height: 44px; margin-left: 12px; border: 1px solid #FCD34D; color: #D97706; font-weight: 600; padding: 0 20px;"
+            @click="handleRefund"
+        >
+          申请退款
+        </u-button>
+
         <!-- 卖家操作: 待确认 -> 确认交易 -->
         <u-button
             v-if="isSeller && order.status === 'paid'"
             type="primary"
             shape="circle"
-            customStyle="flex: 1; height: 44px; margin-left: 16px; background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%); border: none; font-weight: 700;"
+            customStyle="flex: 1; height: 44px; margin-left: 12px; background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%); border: none; font-weight: 700;"
             @click="confirmShipment"
         >
           确认交易
         </u-button>
 
+        <!-- 待自提: 买家可申请售后 -->
+        <u-button
+            v-if="isBuyer && order.status === 'shipping'"
+            type="warning"
+            plain
+            shape="circle"
+            customStyle="height: 44px; margin-left: 12px; border: 1px solid #FCD34D; color: #D97706; font-weight: 600; padding: 0 20px;"
+            @click="handleAfterSale"
+        >
+          申请售后
+        </u-button>
+
         <!-- 买家操作: 待自提 -> 确认收货 -->
         <u-button
-            v-else-if="isBuyer && order.status === 'shipping'"
+            v-if="isBuyer && order.status === 'shipping'"
             type="primary"
             shape="circle"
-            customStyle="flex: 1; height: 44px; margin-left: 16px; background: linear-gradient(135deg, #10B981 0%, #059669 100%); border: none; font-weight: 700; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);"
+            customStyle="flex: 1; height: 44px; margin-left: 12px; background: linear-gradient(135deg, #10B981 0%, #059669 100%); border: none; font-weight: 700; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);"
             @click="confirmReceipt"
         >
           确认收货
         </u-button>
 
+        <!-- 已完成/已取消/其他状态 -->
         <u-button
-            v-else
+            v-if="order.status === 'completed' || order.status === 'cancelled' || order.status === 'refunded'"
             type="info"
             plain
             shape="circle"
-            customStyle="flex: 1; height: 44px; margin-left: 16px; border: 1px solid #CBD5E1; color: #64748B; font-weight: 700;"
+            customStyle="flex: 1; height: 44px; margin-left: 12px; border: 1px solid #CBD5E1; color: #64748B; font-weight: 700;"
             @click="goBack"
         >
-          {{ order.status === 'completed' ? '交易已完成' : (order.status === 'cancelled' ? '已取消' : '返回') }}
+          {{ order.status === 'completed' ? '交易已完成' : (order.status === 'refunded' ? '已退款' : '已取消') }}
         </u-button>
       </view>
     </view>
@@ -146,7 +183,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import { getOrderDetail, updateOrderStatus } from '@/api/orders.js'
+import { getOrderDetail, updateOrderStatus, cancelOrder } from '@/api/orders.js'
 
 const order = ref(null)
 const userInfo = ref(uni.getStorageSync('userInfo') || {})
@@ -308,6 +345,76 @@ function confirmReceipt() {
 
 function goBack() {
   uni.navigateBack()
+}
+
+// 取消订单（待支付状态）
+function handleCancelOrder() {
+  uni.showModal({
+    title: '取消订单',
+    content: '确定要取消此订单吗？',
+    success: async (res) => {
+      if (res.confirm) {
+        try {
+          await cancelOrder(order.value.id, '买家主动取消')
+          order.value.status = 'cancelled'
+          uni.showToast({ title: '订单已取消', icon: 'success' })
+        } catch (e) {
+          uni.showToast({ title: '取消失败', icon: 'none' })
+        }
+      }
+    }
+  })
+}
+
+// 申请退款（已支付未发货状态）
+function handleRefund() {
+  uni.showModal({
+    title: '申请退款',
+    content: '卖家尚未确认交易，您可以申请全额退款。确定要申请退款吗？',
+    confirmText: '确认退款',
+    success: async (res) => {
+      if (res.confirm) {
+        try {
+          await cancelOrder(order.value.id, '买家申请退款')
+          order.value.status = 'refunded'
+          uni.showToast({ title: '退款成功，款项已原路退回', icon: 'success' })
+        } catch (e) {
+          uni.showToast({ title: '退款申请失败', icon: 'none' })
+        }
+      }
+    }
+  })
+}
+
+// 申请售后（待自提状态）
+function handleAfterSale() {
+  uni.showActionSheet({
+    itemList: ['商品有问题，申请退款', '联系卖家协商', '联系平台客服'],
+    success: async (res) => {
+      if (res.tapIndex === 0) {
+        uni.showModal({
+          title: '申请售后退款',
+          content: '请先与卖家沟通协商。如卖家同意，款项将全额退回。',
+          confirmText: '申请退款',
+          success: async (result) => {
+            if (result.confirm) {
+              try {
+                await cancelOrder(order.value.id, '买家申请售后退款')
+                order.value.status = 'refunded'
+                uni.showToast({ title: '退款成功', icon: 'success' })
+              } catch (e) {
+                uni.showToast({ title: '请先联系卖家协商', icon: 'none' })
+              }
+            }
+          }
+        })
+      } else if (res.tapIndex === 1) {
+        contactCounterparty()
+      } else if (res.tapIndex === 2) {
+        uni.showToast({ title: '客服功能开发中', icon: 'none' })
+      }
+    }
+  })
 }
 </script>
 
