@@ -62,8 +62,8 @@
 
     <view class="input-area animate-slide-up">
       <view class="input-toolbar">
-        <view class="icon-btn" @click="showEmojiTip">
-          <text style="font-size: 26px;">😊</text>
+        <view class="icon-btn">
+          <u-icon name="mic" size="26" color="#64748B"></u-icon>
         </view>
 
         <view class="input-box">
@@ -75,6 +75,9 @@
               :focus="isFocus"
               @confirm="sendMessage"
           />
+          <view class="emoji-btn">
+            <text class="material-symbols-outlined" style="font-size: 24px; color: #64748B;">sentiment_satisfied</text>
+          </view>
         </view>
 
         <view class="icon-btn" @click="handleSendClick">
@@ -224,10 +227,6 @@ function previewImage(url) {
 
 
 const isFocus = ref(false)
-
-function showEmojiTip() {
-  uni.showToast({ title: '表情功能开发中', icon: 'none' })
-}
 
 function handleSendClick() {
   if (inputText.value.trim()) {
