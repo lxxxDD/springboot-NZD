@@ -115,7 +115,8 @@
             <view class="info-main">
               <text class="food-name u-line-1">{{ item.name }}</text>
               <text class="food-cat">{{ item.category }}</text>
-              <text class="food-stock" v-if="item.stock > 0">库存: {{ item.stock }}</text>
+              <text class="food-stock soldout" v-if="item.stock === 0">已售罄</text>
+              <text class="food-stock" v-else-if="item.stock > 0">库存: {{ item.stock }}</text>
               <text class="food-stock unlimited" v-else>库存充足</text>
             </view>
             <view class="add-btn" @click.stop="handleQuickAddToCart(item, $event)">
@@ -692,6 +693,9 @@ $text-sub: #64748B;
   font-weight: 500;
   &.unlimited {
     color: #10B981;
+  }
+  &.soldout {
+    color: #EF4444;
   }
 }
 
