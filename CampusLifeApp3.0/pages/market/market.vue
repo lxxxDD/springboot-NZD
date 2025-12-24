@@ -85,8 +85,15 @@ import BottomNav from '@/components/BottomNav.vue'
 import MarketFilter from '@/components/MarketFilter.vue'
 // 用户信息从本地存储获取
 import { getMarketItems, getMarketCategories } from '@/api/market.js'
+import { baseURL } from '@/api/request.js'
 import { computed, ref, watch } from 'vue'
 import { onLoad, onReachBottom, onShow } from '@dcloudio/uni-app'
+
+function formatAvatarUrl(url) {
+  if (!url) return '/static/avatar/1.png'
+  if (url.startsWith('http')) return url
+  return baseURL + url
+}
 
 const unreadCount = ref(0)
 const cats = ref(['全部'])
@@ -200,7 +207,7 @@ async function loadMore() {
       title: item.title,
       price: item.price,
       seller: item.sellerName,
-      sellerAvatar: item.sellerAvatar,
+      sellerAvatar: formatAvatarUrl(item.sellerAvatar),
       image: item.coverImage,
       category: item.category || 'Other',
       status: item.status
