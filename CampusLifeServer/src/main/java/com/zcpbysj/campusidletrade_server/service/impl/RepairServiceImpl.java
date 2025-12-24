@@ -39,15 +39,8 @@ public class RepairServiceImpl extends ServiceImpl<RepairMapper, Repair> impleme
 
     @Override
     public List<RepairVO> getRepairs(Long userId, String status) {
-        // 先查询所有记录，调试用
-        List<Repair> allRepairs = list();
-        System.out.println("=== 数据库所有报修记录 ===");
-        for (Repair r : allRepairs) {
-            System.out.println("  id=" + r.getId() + ", user_id=" + r.getUserId() + ", user_id类型=" + (r.getUserId() != null ? r.getUserId().getClass().getName() : "null"));
-        }
-        
         LambdaQueryWrapper<Repair> wrapper = new LambdaQueryWrapper<>();
-        // 按用户ID过滤
+        
         if (userId != null) {
             wrapper.eq(Repair::getUserId, userId);
         }
@@ -58,10 +51,7 @@ public class RepairServiceImpl extends ServiceImpl<RepairMapper, Repair> impleme
         
         wrapper.orderByDesc(Repair::getCreateTime);
         
-        List<Repair> repairs = list(wrapper);
-        System.out.println("=== 查询报修列表 userId=" + userId + " (类型:" + userId.getClass().getName() + "), 结果数量=" + repairs.size() + " ===");
-        
-        return repairs.stream()
+        return list(wrapper).stream()
                 .map(this::convertToVO)
                 .collect(Collectors.toList());
     }

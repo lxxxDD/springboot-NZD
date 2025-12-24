@@ -8,18 +8,18 @@
       <view class="card status-card animate-enter" style="--delay: 0s">
         <view class="status-header">
           <view class="status-text">
-            <h2 class="status-title">{{ order.status === 'Completed' ? '订单已完成' : '商家制作中' }}</h2>
-            <p class="status-desc">{{ order.status === 'Completed' ? '希望您用餐愉快' : '预计 10-15 分钟内出餐' }}</p>
+            <h2 class="status-title">{{ order.status === 'completed' ? '订单已完成' : '商家制作中' }}</h2>
+            <p class="status-desc">{{ order.status === 'completed' ? '希望您用餐愉快' : '预计 10-15 分钟内出餐' }}</p>
           </view>
-          <view class="status-icon-box" :class="{ completed: order.status === 'Completed' }">
-            <u-icon :name="order.status === 'Completed' ? 'checkmark' : 'hourglass'"
+          <view class="status-icon-box" :class="{ completed: order.status === 'completed' }">
+            <u-icon :name="order.status === 'completed' ? 'checkmark' : 'hourglass'"
                     color="#fff" size="32"></u-icon>
           </view>
         </view>
 
         <view class="progress-container">
           <view class="progress-track">
-            <view class="progress-fill" :class="{ completed: order.status === 'Completed' }"></view>
+            <view class="progress-fill" :class="{ completed: order.status === 'completed' }"></view>
           </view>
           <view class="steps-row">
             <view v-for="(step, index) in steps" :key="index" class="step-item">
@@ -162,12 +162,15 @@ onLoad(async (options) => {
   }
 });
 
-const steps = computed(() => [
-  { label: '已下单', active: true },
-  { label: '制作中', active: true },
-  { label: '请取餐', active: order.value?.status !== 'Processing' },
-  { label: '已完成', active: order.value?.status === 'Completed' }
-]);
+const steps = computed(() => {
+  const status = order.value?.status;
+  return [
+    { label: '已下单', active: true },
+    { label: '制作中', active: status === 'paid' || status === 'completed' },
+    { label: '请取餐', active: status === 'completed' },
+    { label: '已完成', active: status === 'completed' }
+  ];
+});
 
 const isCurrentStep = (index) => {
   const activeSteps = steps.value.filter(s => s.active);

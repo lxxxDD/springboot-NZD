@@ -92,6 +92,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             throw new RuntimeException("不能购买自己的商品");
         }
         
+        // 【商品锁定】检查是否有未支付的订单占用此商品
+        LambdaQueryWrapper<OrderItem> existingWrapper = new LambdaQueryWrapper<>();
+        existingWrapper.eq(OrderItem::getItemId, dto.getItemId());
+        List<OrderItem> existingOrderItems = orderItemMapper.selectList(existingWrapper);
+        for (OrderItem oi : existingOrderItems) {
+            Order existingOrder = getById(oi.getOrderId());
+            if (existingOrder != null && "pending".equals(existingOrder.getStatus())) {
+                throw new RuntimeException("该商品有其他用户正在下单中，请稍后再试");
+            }
+        }
+        
         // 创建订单
         Order order = new Order();
         order.setOrderNo(generateOrderNo());
@@ -135,38 +146,23 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             throw new RuntimeException("余额不足");
         }
         
-        // 扣除买家余额
+        // 扣除买家余额（担保交易：钱暂时冻结，确认收货后再打给卖家）
         BigDecimal newBuyerBalance = buyer.getBalance().subtract(order.getTotalAmount());
         buyer.setBalance(newBuyerBalance);
         userMapper.updateById(buyer);
         
-        // 记录买家交易
+        // 记录买家交易（备注为冻结中）
         Transaction buyerTx = new Transaction();
         buyerTx.setUserId(userId);
         buyerTx.setType("payment");
         buyerTx.setAmount(order.getTotalAmount().negate());
         buyerTx.setBalanceAfter(newBuyerBalance);
         buyerTx.setOrderId(order.getId());
-        buyerTx.setDescription("购买商品");
+        buyerTx.setDescription("购买商品（担保中）");
         transactionMapper.insert(buyerTx);
         
-        // 增加卖家余额
-        User seller = userMapper.selectById(order.getSellerId());
-        BigDecimal newSellerBalance = seller.getBalance().add(order.getTotalAmount());
-        seller.setBalance(newSellerBalance);
-        userMapper.updateById(seller);
-        
-        // 记录卖家交易
-        Transaction sellerTx = new Transaction();
-        sellerTx.setUserId(order.getSellerId());
-        sellerTx.setType("income");
-        sellerTx.setAmount(order.getTotalAmount());
-        sellerTx.setBalanceAfter(newSellerBalance);
-        sellerTx.setOrderId(order.getId());
-        sellerTx.setDescription("商品售出");
-        transactionMapper.insert(sellerTx);
-        
-        // 更新订单状态
+        // 【重要】支付后不立即给卖家打款，等确认收货后再打款
+        // 更新订单状态为已支付，等待卖家发货
         order.setPaymentMethod(paymentMethod);
         order.setStatus("paid");
         order.setPaidAt(LocalDateTime.now());
@@ -188,19 +184,55 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
+    @Transactional
     public void updateOrderStatus(Long id, Long userId, String status) {
         Order order = getById(id);
         if (order == null) {
             throw new RuntimeException("订单不存在");
         }
-        if (!order.getBuyerId().equals(userId) && !order.getSellerId().equals(userId)) {
-            throw new RuntimeException("无权操作此订单");
+        
+        String currentStatus = order.getStatus();
+        
+        // 验证状态转换是否合理
+        if ("shipping".equals(status)) {
+            // 发货：只有卖家可以操作，且订单必须是已支付状态
+            if (!order.getSellerId().equals(userId)) {
+                throw new RuntimeException("只有卖家可以确认发货");
+            }
+            if (!"paid".equals(currentStatus)) {
+                throw new RuntimeException("只有已支付的订单才能发货");
+            }
+        } else if ("completed".equals(status)) {
+            // 确认收货：只有买家可以操作，且订单必须是配送中状态
+            if (!order.getBuyerId().equals(userId)) {
+                throw new RuntimeException("只有买家可以确认收货");
+            }
+            if (!"shipping".equals(currentStatus)) {
+                throw new RuntimeException("只有配送中的订单才能确认收货");
+            }
+            
+            // 【担保交易】确认收货后，将款项打给卖家
+            User seller = userMapper.selectById(order.getSellerId());
+            BigDecimal newSellerBalance = seller.getBalance().add(order.getTotalAmount());
+            seller.setBalance(newSellerBalance);
+            userMapper.updateById(seller);
+            
+            // 记录卖家收入
+            Transaction sellerTx = new Transaction();
+            sellerTx.setUserId(order.getSellerId());
+            sellerTx.setType("income");
+            sellerTx.setAmount(order.getTotalAmount());
+            sellerTx.setBalanceAfter(newSellerBalance);
+            sellerTx.setOrderId(order.getId());
+            sellerTx.setDescription("商品售出（买家已确认收货）");
+            transactionMapper.insert(sellerTx);
+            
+            order.setCompletedAt(LocalDateTime.now());
+        } else {
+            throw new RuntimeException("不支持的状态操作");
         }
         
         order.setStatus(status);
-        if ("completed".equals(status)) {
-            order.setCompletedAt(LocalDateTime.now());
-        }
         updateById(order);
     }
 
@@ -214,13 +246,54 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         if (!order.getBuyerId().equals(userId)) {
             throw new RuntimeException("无权取消此订单");
         }
-        if (!"pending".equals(order.getStatus())) {
-            throw new RuntimeException("只能取消待支付的订单");
+        
+        String currentStatus = order.getStatus();
+        
+        // 待支付订单可以直接取消
+        if ("pending".equals(currentStatus)) {
+            order.setStatus("cancelled");
+            order.setRemark(reason);
+            updateById(order);
+            return;
         }
         
-        order.setStatus("cancelled");
-        order.setRemark(reason);
-        updateById(order);
+        // 已支付但未发货的订单可以申请退款
+        if ("paid".equals(currentStatus)) {
+            // 退款给买家
+            User buyer = userMapper.selectById(userId);
+            BigDecimal newBuyerBalance = buyer.getBalance().add(order.getTotalAmount());
+            buyer.setBalance(newBuyerBalance);
+            userMapper.updateById(buyer);
+            
+            // 记录退款交易
+            Transaction refundTx = new Transaction();
+            refundTx.setUserId(userId);
+            refundTx.setType("refund");
+            refundTx.setAmount(order.getTotalAmount());
+            refundTx.setBalanceAfter(newBuyerBalance);
+            refundTx.setOrderId(order.getId());
+            refundTx.setDescription("订单退款");
+            transactionMapper.insert(refundTx);
+            
+            // 恢复商品状态
+            List<OrderItem> orderItems = orderItemMapper.selectList(
+                new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, order.getId())
+            );
+            for (OrderItem oi : orderItems) {
+                MarketItem item = marketItemMapper.selectById(oi.getItemId());
+                if (item != null && "sold".equals(item.getStatus())) {
+                    item.setStatus("active");
+                    marketItemMapper.updateById(item);
+                }
+            }
+            
+            order.setStatus("refunded");
+            order.setRemark(reason);
+            updateById(order);
+            return;
+        }
+        
+        throw new RuntimeException("当前订单状态不支持取消/退款");
     }
     
     private String generateOrderNo() {

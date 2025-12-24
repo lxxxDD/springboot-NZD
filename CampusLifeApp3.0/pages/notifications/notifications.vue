@@ -3,7 +3,7 @@
     <u-navbar title="通知" :autoBack="true" bgColor="#f7f8fa" placeholder></u-navbar>
     <scroll-view scroll-y class="content">
       <view class="list">
-        <view class="item" v-for="n in list" :key="n.id">
+        <view class="item" v-for="n in list" :key="n.id" @click="handleRead(n)">
           <view class="icon-wrapper">
             <u-icon name="bell-fill" color="#2563eb" size="24"></u-icon>
           </view>

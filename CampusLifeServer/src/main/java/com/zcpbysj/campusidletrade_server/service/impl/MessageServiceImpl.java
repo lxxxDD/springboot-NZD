@@ -1,6 +1,7 @@
 package com.zcpbysj.campusidletrade_server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zcpbysj.campusidletrade_server.entity.Conversation;
@@ -71,8 +72,11 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
             vo.setLastMessageTime(conv.getLastMessageTime());
             
             // 统计未读消息数
-            Integer unreadCount = baseMapper.countUnread(conv.getId(), userId);
-            vo.setUnreadCount(unreadCount);
+            Long unreadCount = count(new LambdaQueryWrapper<Message>()
+                    .eq(Message::getConversationId, conv.getId())
+                    .eq(Message::getReceiverId, userId)
+                    .eq(Message::getIsRead, 0));
+            vo.setUnreadCount(unreadCount.intValue());
             
             result.add(vo);
         }
@@ -98,7 +102,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
     @Override
     public Map<String, Object> getOrCreateConversation(Long userId, Long otherUserId) {
         // 查找或创建会话
-        Conversation conversation = conversationMapper.findByUsers(userId, otherUserId);
+        Conversation conversation = findConversationByUsers(userId, otherUserId);
         
         if (conversation == null) {
             conversation = new Conversation();
@@ -117,7 +121,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
     @Transactional
     public Long sendMessage(Long senderId, SendMessageDTO dto) {
         // 查找或创建会话
-        Conversation conversation = conversationMapper.findByUsers(senderId, dto.getReceiverId());
+        Conversation conversation = findConversationByUsers(senderId, dto.getReceiverId());
         
         if (conversation == null) {
             conversation = new Conversation();
@@ -156,7 +160,22 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
 
     @Override
     public void markAsRead(Long conversationId, Long userId) {
-        baseMapper.markAsRead(conversationId, userId);
+        update(new LambdaUpdateWrapper<Message>()
+                .eq(Message::getConversationId, conversationId)
+                .eq(Message::getReceiverId, userId)
+                .eq(Message::getIsRead, 0)
+                .set(Message::getIsRead, 1));
+    }
+    
+    private Conversation findConversationByUsers(Long user1Id, Long user2Id) {
+        return conversationMapper.selectOne(new LambdaQueryWrapper<Conversation>()
+                .and(w -> w
+                        .eq(Conversation::getUser1Id, user1Id)
+                        .eq(Conversation::getUser2Id, user2Id))
+                .or(w -> w
+                        .eq(Conversation::getUser1Id, user2Id)
+                        .eq(Conversation::getUser2Id, user1Id))
+                .last("LIMIT 1"));
     }
 
     @Override

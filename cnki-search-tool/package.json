@@ -1,0 +1,25 @@
+{
+  "name": "cnki-search-tool",
+  "version": "1.0.0",
+  "description": "知网论文自动搜索工具 - 基于Playwright自动化搜索知网文献",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "web": "node server.js",
+    "install-browser": "npx playwright install chromium"
+  },
+  "keywords": [
+    "cnki",
+    "知网",
+    "论文搜索",
+    "playwright"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mammoth": "^1.11.0",
+    "playwright": "^1.40.0",
+    "word-extractor": "^1.0.4"
+  }
+}

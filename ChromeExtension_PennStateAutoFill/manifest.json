@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "PSU Account Auto-Filler",
+  "version": "1.0",
+  "description": "Automatically fills Personal Information on Penn State account creation page.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://accounts.psu.edu/*"],
+      "js": ["content.js"]
+    }
+  ]
+}

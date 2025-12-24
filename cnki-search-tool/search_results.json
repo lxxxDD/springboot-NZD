@@ -1,0 +1,788 @@
+[
+  {
+    "keyword": "校园综合服务平台 设计与实现",
+    "items": [
+      {
+        "title": "校园综合服务平台设计与实现",
+        "authors": "范敬義;范俊杰;蔡月亮;薛翔尹;吴奕茜;华泽",
+        "source": "现代计算机",
+        "date": "2023-12-10",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1see005k--a-kMUMzdS6GYkKlV9-n21Fwrp9cm8-yUnHStr1stRQeAECJf5CrOIfogT4Jw7Wx_qz1K_kkc-C60gyy6xiAAnavg0I6LX9cKSGZObUzp734grS3cSMBHEvfGJfjf6_qgAWYsNqewJVcrbgbaEBEzXQfpfyRTdiQxtIEg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校综合服务平台小程序的设计与实现",
+        "authors": "何渺渺;李腾跃;程付超",
+        "source": "福建电脑",
+        "date": "2021-12-10",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdb_DAY9rll_lGPBBfdfZTz3YLc3Mf6DOpvbeCOg5DZHGNjrWOQI1XFJ2FgC0nEbAKjvBSfCUUcK-nP4thsPowT0L1HVE5lF63veoX-cK4_9LFJg0Or-LXeqXodEBEE-k2aIyMfzpile2kVxfJlXHI4xoSMjV1_c_AaCh_YRb6nEw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "校园生活综合服务平台小程序的设计与实现",
+        "authors": "左佳丽;刘文珊;张玲乐",
+        "source": "无线互联科技",
+        "date": "2021-06-10",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdb_DAY9rll_lGPBBfdfZTz3YLc3Mf6DOpcYFEKTImJQrRuUYt1AtBfEUjGwAcytvCR8zLoFHRlGXjCIZf-1jMvB7xyjbVQ-Y9b8Baq-TVgZngugIxTF7bnGq8JUvqIgav1ISQSoF0kR_lQUH1ne5DWxlJrFLKqbE2rqaTtGR2EKg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "校园生活综合服务平台小程序的设计与实现",
+        "authors": "闫鹏博;李芳;彭冰",
+        "source": "电脑知识与技术",
+        "date": "2021-03-05",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scUhBZAGnLYpMSUg1JLWFeAUVhmzQwXA0t4v0LBE5ciiDjR4BIO2qy7TGQLWtWHvQOmky_DM33WyqyiMJoNyystJh7yE-iTrMfMa-cDx7caqPVt1BizPySxAEWLNT8mRJgj67flDsIS8F8xtquG9rZVk5yTbn9q46aKjH4ukd4XnA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校校园网络综合服务平台的设计与实现",
+        "authors": "李兴鹏;陈张勇;密君英",
+        "source": "电脑知识与技术",
+        "date": "2016-05-11 16:21",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scUhBZAGnLYpMSUg1JLWFeAUVhmzQwXA0t4v0LBE5ciiCLkS7k4nNHgRBaME1k5yncfIXYaYKtLRMxPKhHTnnj-HMI6QFqwBO-8_s82RsELskX9zoAJkgH5nhp842Qbut7_Nj9UUkluJKzkHA-ja21ezqqAKWAOIEx3y5W95DLaVw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于SSH2和jQuery的大学生校园综合服务平台的设计与实现",
+        "authors": "赵晓君;崔建涛;邓璐娟;陈浩然",
+        "source": "郑州轻工业学院学报(自然科学版)",
+        "date": "2014-06-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfvYy0HfyEKTdc6B2B3ELaSuy_mu2pyg-Z3GAX1MLORKrCTPIm_8JALwHsfzNoD2vjAzycd09_nE_3zZi4T-CgSP8CtXvr4n4taW9vwkBIPbyedTFunbmx8MghGOK5MWdA5Qk70paX0bvFaDH5t6dh4Win_JWDtd1ow4fyhbu89ag==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "智慧校园 一站式服务",
+    "items": [
+      {
+        "title": "“一站式”学生社区智慧校园建设创新路径：系统一站式服务智能化的实施与影响",
+        "authors": "孙小昆;郭冉",
+        "source": "科技与创新",
+        "date": "2025-10-30",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1seEsRbCUDfIoTJiHj2PQiU5dJjlpCJGqGDJjJbNBSzSwnW-ijZScZnkentXTc1URqXVLB8yA9yp3Pfs-DOgpBPjCBDYTFYtxkRWZKjdP0Gz8-Gr9AypeCwuATWrprdRLTdYxxVWpe5y5bQVep44_b-O5-UTBbv_6JYZHyq63ZeLSQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "明德物业：一站式服务管理云平台  共创数智物业新时代",
+        "authors": "",
+        "source": "中国物业管理",
+        "date": "2024-11-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1seEsRbCUDfIoTJiHj2PQiU5dJjlpCJGqGDeQPaQyq4OSqiFwc8cLCDQ9pvxU8vTRgCU7G_bNrO2XvRlHv7dX9JSs--RpD7YZNgWpbw9rZMAwSdeDD5XXTH2U5mN6agP_cqNmpz3syQEUmb-Lh95E0HlxOU9xeGIRoa_5xVY_8VKmw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于一站式服务平台的学生画像研究",
+        "authors": "王晓敏",
+        "source": "电脑知识与技术",
+        "date": "2024-08-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfkgMkwOCFUpKIM-HNwiw0CKM4kGNT6brDf0y8be8Affgx4FjZjk27YLiSIhQhAmCfLTUelvYktjrWfi-cT0LP419_tt18fOG3XdYBzYv_PxI0yfCmZK7sLfiLp9QAQnYDnRJ74p3bAHh3AZbOpOdRjYR9IVmPPPPBPFJvbhufzUQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "大数据背景下智慧校园平台建设研究",
+        "authors": "蔡萌萌;陈晓;郑玉娟;刘静",
+        "source": "网络安全技术与应用",
+        "date": "2024-08-05",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfkgMkwOCFUpKIM-HNwiw0CKM4kGNT6brDX-52RFLeIr1gFiiLcYC-xk5FuHTswaA69LZSdiLHKwTqFf6hFW51G5LF99iru9tAYQy6X-cTqUCe-tJmO25J72Tway_E8LcDIhkcMNEgf5x3qWZ8OVj1Fh7BFJbEyMciPp5WF48cypQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于校园卡的一站式服务平台构建与实践探索",
+        "authors": "胡诚皓",
+        "source": "电脑知识与技术",
+        "date": "2024-07-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfkgMkwOCFUpKIM-HNwiw0CKM4kGNT6brDf0y8be8AffgJYI9bjgO1biV-B0vKc3-qtfZeJ3-FUpKK18kelblPaiiwddIdz6MWGGARB1HLYI7iKKYR96tEnLhbJsIZAkZm6j8KZlqgpbUsk6PzRnAjmoK_cruKPsU2zXsMuQryXDw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校一站式服务平台设计应用",
+        "authors": "蔡宝玉;孙小江",
+        "source": "信息记录材料",
+        "date": "2024-05-01",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1se-hYl-crgpMjum-Ll-RjQEw8BLOAxUkPjRv0lbDmfpPHxjMRheR4ddt8fUj37C4Gt6M4WSCIc8aD0PsiX2WUQeHHGp327Gn94ySvvQNTLLZYKjx79xHnbqhcTbjgbiBse4R2IJQzDFt9u7sSag6oSLbwSkkcHJ9yOlWQkszhzyZg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于教育信息化的智慧校园顶层设计探索",
+        "authors": "吴永谊",
+        "source": "中国多媒体与网络教学学报(中旬刊)",
+        "date": "2023-06-11",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1se-hYl-crgpMjum-Ll-RjQEw8BLOAxUkPjp5G30EVEHa2J9sVAh3KgaiKrV2oLMfC6tLUfgMIECyWqyDwEvT9FhfdbDP7-hT54_P9iA3TJ-pqxhV2OZ8LAYaxubi9GmwtjXeXytVw7J_7E8sSVnpaoLNmAcIUQFN_z8aWssNAIUmQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于区块链技术的一站式服务平台研究",
+        "authors": "王晓敏",
+        "source": "电脑知识与技术",
+        "date": "2023-04-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1se-hYl-crgpMjum-Ll-RjQEw8BLOAxUkPiIEZnjGyl-bqwAMnwKAkdG87atXx1pGqHdB3b4kyGQ_nl_n4cEOdHyIqO5aQS2axfvHKeYZr5tnDZPltvr7RbVrWUiaotUV0Q5NsLUAEZlrXzD_qZqLR6Jzs5k4BrLzAuAVK5MaIkQVQ==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "高校生活服务系统 Spring Boot",
+    "items": []
+  },
+  {
+    "keyword": "校园服务平台 微信小程序",
+    "items": [
+      {
+        "title": "校园学习生活小助手微信小程序的设计与实现",
+        "authors": "张强志;郑庆;黄志芳;黄杰贤;张铭",
+        "source": "电脑知识与技术",
+        "date": "2025-03-05",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scZQ8qjSdMs_jKkSOI5qjVIzDRgReqF5hmzZE-O4Ol0PHUxZ9Zi-kYJaTZhmQniLIS9NU5UEw3hKB4ngN9PntoUAPdFUrTWsUB3ah-EiSWv6xTx-DYZyW5ehxYRzMMgJXvhldvKJaAa5AaauGBYEZg8JdBjcOvOR7fBP92KZ0ufWA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "健康校园视角下阅读疗愈“三微”服务平台建设研究",
+        "authors": "刘若贤;刘洋;徐彤;孙俊豪;周思延;李辉扬;汪凯舟",
+        "source": "黑龙江科学",
+        "date": "2024-05-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scZQ8qjSdMs_jKkSOI5qjVIzDRgReqF5hkopx5H1rgPfTMZpwgC01VbKr_K8nWaUfPwK-2TW357Ja_qYyKk6CouMTVHVxNh-2_FiEB8Mo8BSwqjitXhqsELrwi4223i2hoIO-TtZFErWALOH1Ff4XXsS5_E-u_JgE3eZ5IXCoO71A==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于微信小程序的智慧校园平台设计",
+        "authors": "高敏钦",
+        "source": "河北软件职业技术学院学报",
+        "date": "2024-03-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdzh8fdZlpQGyXucysQff6w63SxoixNJMUfW4kH9dJR_OTmi7obbXVuHKf3pyYKdYnrSmbkFiPBi8wrHDDi1BatIFnOJRe4i7qd8jpBHtGMbwuIRBFuE6n8_w8JK1pm-s0U8iInvC3hAKowSmhHYwnzGR_yOHGkEvqYuAK4rf24dg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于微信小程序的校园互助平台设计",
+        "authors": "孙浩天;朱乔裕;乔雨",
+        "source": "电子制作",
+        "date": "2023-06-01",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdzh8fdZlpQGyXucysQff6w63SxoixNJMUPNKmG2SQ3kfa7KEM5A4jYh9uzUPMQegfFkJp6XZrG9nM5khho06Zx6PEa6UmxT2Q532LXHFondEI8dvRinp85NDx0zx6Z4AL1DrpANKRRlm0bACqpcKfLEfNEGH3e8XnJH7XI1Dy-yw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于微信小程序的校园服务平台设计与应用",
+        "authors": "张志云",
+        "source": "信息与电脑(理论版)",
+        "date": "2023-05-10",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdzh8fdZlpQGyXucysQff6w63SxoixNJMVWRVpe0D9r-zcBiOdKjOCGrcUR3kqbssYsdXLbVEOXZvvWRpHmGAspVbr_TK_lkiQ7aZvPMJMzsNkePrcoBG2DyqT0rzOkSzrQMlUBK9puI6pr3KDETa9IS0U92uHLvJIGcqhz_Td4Bw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于微信小程序的高校校园信息整合平台的设计与实现",
+        "authors": "张昕腾",
+        "source": "科技与创新",
+        "date": "2023-04-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdvNiMc42uc_k5rD5kzSSbZ9wF2EHiqAm352SnqVAngUmaDRBeM_CmRwv0lXVWs6ZV05iS2JaCF4UUT9ZpnqINg0GK4rX5EDlbAmb4FbvG7WOLqOjDbOISb9SBRzhjOd42QJVI9_Y4Jg-7H7_qE8X9wNxvYwgmCqjbUjeu6EGTKAQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于微信小程序的校园服务平台",
+        "authors": "丰溢云;刘苑;代明阳;高子妍;陈安雅",
+        "source": "电脑编程技巧与维护",
+        "date": "2023-02-18",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdvNiMc42uc_k5rD5kzSSbZ9wF2EHiqAm2EbZXIeO_nfX-uAdHZJ5gbPR8UeMBF439hyQI_mTSk485K117G5C_-6OrXYcnJrJq1PduB5HyolZtoaTrm6plF1Y_ouAykhQGUohlnTfCEhQD-dv1qM9tW_4M1_cFsCwDnjhhlOsoabA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于小程序的校园服务平台的设计和实现",
+        "authors": "许潼歆;何晋乐;邱勋拥",
+        "source": "电子技术与软件工程",
+        "date": "2022-07-01",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdvNiMc42uc_k5rD5kzSSbZ9wF2EHiqAm1AncUeL7wdCli4mHGDQiCL13ENP-MXqZNdeh5_1CP6wcIV2xhuFmUD7GJz7BaTDCzlm94mehgOofJTj8mBPc98CVCfZuzGfMApiBkoCvn5s9T-RZuY1KRn-bkAu0hzs7EU0MY_Gxn13A==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "高校二手交易 Spring Boot",
+    "items": []
+  },
+  {
+    "keyword": "校园闲置物品交易平台",
+    "items": [
+      {
+        "title": "基于微信云开发实现校园二手交易的平台设计",
+        "authors": "郭林盛;张晓艳;赵妍;李玥",
+        "source": "现代计算机",
+        "date": "2024-11-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sf0-NOdaPbxv0PPtu2244lQ6q6QkpNfY74x6kUJA0SBWZY-gnKnMFlSYWVnq0o9UZfFSz6qe3FogqDdQ6P0LjQGHLkwp0a_wzrKQuEie8Wak99G5S1J2drb6pBL98ie3ynpcAjEsBZMDmm0yra6Ul6tnlVseKdzfFzzTf7R3FMJJQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "社区闲置交易系统开发实施的前景分析",
+        "authors": "刘珉彤;朱敏娜;潘柯文;王岚;张国梁;熊高强",
+        "source": "经济研究导刊",
+        "date": "2024-05-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfN-n9q9CZxSyYetiNm7PIXqQZJhte7GDu0rzny3dzsjDV8nZ3ssbgAl0QNyHTJTldm4UtXxfI5zSbslJeJ3AYU_do96liw8ACWCOxV_hQudVsFJB6XpFhO51x1bwr-b8UQNJl2lFrvgMiDYsOimhF2hwnhpz7z5cdejXjoawckGw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "大学校园二手交易平台构建与运营——以E大学“花梨闲转”微信小程序为例",
+        "authors": "孙丽;王皓;戴璐;帕合尔敦·加马力;梁丹露",
+        "source": "科技与创新",
+        "date": "2024-02-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfN-n9q9CZxSyYetiNm7PIXqQZJhte7GDs7bFYRb0Colp07stwXRiY3CPGiOyO8M9SUEyCRFD7Cgioi4_WHO3cVKGML_LXoxjD0fCs0kG_iaJk1GlTaVHdHSLnDWG_cuHIPtBeCAFdDDWR9K063IWCZPorw2Bm9bBedetDY_SCLRA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于微服务架构的高校闲置物品交易平台",
+        "authors": "张皓;闫宁;崔春雨;杨明桢;张诗豪",
+        "source": "电脑知识与技术",
+        "date": "2023-10-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfPc9R6meHEZVG8EoufjHMk97tWVe0JMepB8vm65xQvGOU2aOJr5a_yImVMyjRlgrBWI272q3BFwkD5mGa7KijwpVHpagmbafxsc4CeXSOB5ZxUaN1CvmVpNZ513DF2MK1ZMcukf514VB5Gzy15mUxD2KqUAj61Mof9oLREI13iCA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "大学生旧物互联共享的现状及对策研究",
+        "authors": "张远路;李旭",
+        "source": "现代商贸工业",
+        "date": "2023-07-07",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfPc9R6meHEZVG8EoufjHMk97tWVe0JMerN-1TnX3UL649hGvUNMb79vL-8ceEvtdmqzWNWSvwARu2w11oD-buOcWJrAmGrIGSct2xEdBQixAEizH7zbwxbZu8ueGyvkhPK6jF1_X3FWUfcZGnGvMMxpiZDWR9zB2pvdXl156yEMw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "大学跳蚤市场网站设计与实现",
+        "authors": "王海峰;孙海涛;曾佳峰",
+        "source": "电子制作",
+        "date": "2023-04-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfPc9R6meHEZVG8EoufjHMk97tWVe0JMeplOZ1aLDMYjCOu2Ny8hzVAn7k4WH8cYxDZWlSGr2RU1pwSeAI7Gv6oPR7p6Dgv9ykuSQjIKVYd_oYHW_t-GmzkvRyrrm16S3bptjL0IrnkWeCKRVp_C-wrYO00dAOYmeAv5aeZPjB0Ww==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "绿色校园背景下的校园二手交易平台",
+        "authors": "曹振兴;刘亚娇;邹敏;涂蓉蓉;刘键铮",
+        "source": "数字通信世界",
+        "date": "2023-01-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdQF28DXKnaVImFDbe_82Rbu563pQXxW2uA6JIpM3BNuTLV6KTwl_CiCxzikxjGDFQSLb4bGPoPT5dO-gY6xMBvbOfxt3ANsfooB_EaCtUeS1ltQkWftAl_G01i4IvdLcIKjOvgOTXyK_B5j7R_ajZgAY4x1AHvj6HSNk_BpleHcQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Web的新型校园二手交易平台实践研究——以“校易集市”为例",
+        "authors": "高耀;许诺;李博;王国帧",
+        "source": "中国商论",
+        "date": "2023-01-11",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdQF28DXKnaVImFDbe_82Rbu563pQXxW2uUa7R-Lzl_Wji03lsU_ra71xBTqtxBvaL6wNp59N2rVvANy8lXbv9xQf9snGiDVrfB8sWCrrJyG2oefmr-rFIvGTsuryxusZiFcB_8CdPBBELUKjTa62wtbSXBqGTuFkDmBMDbXYf15w==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "C2C二手交易系统设计",
+    "items": []
+  },
+  {
+    "keyword": "高校食堂订餐系统",
+    "items": [
+      {
+        "title": "高校食堂工作餐订餐系统的开发与应用",
+        "authors": "蒋昕",
+        "source": "高校后勤研究",
+        "date": "2025-04-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scfwjPhvHEMpuLZ2L_n5cl4RgkJRGky9ScxCNueeIovY_wGWG4N-DhP8PF9GPmU8lIlo1k8BxthIhyNEHFgQb1k-IEbWJz7OUBpxQ7XJUluFvOGHtK4n5Fhdp6QG97J1LDoidJPK5d8d2gQKtCpbxFr3H0Oaa0NYLnhLUMhw7Li8w==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Android的高校食堂订餐系统“掌上校园帮”设计与开发",
+        "authors": "孙杰;张涛鹏;杨洁;王君怡",
+        "source": "计算机时代",
+        "date": "2023-01-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sc9woVfU4ao3N-XVCeOYOuT26z79Im3VipdfUzIZNhgt_qTd83_ShRLryvksFsSYIOx2qmqq6Sar2mLRMjvCCVxb9guV2DZtM03ohbINFAKNM4MsJU8xRr7PJzqwYfx0tnHoqFr_puKSM7q5iZGuTMDrL2RtiY8Eo7ia26__WN4kA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校食堂订餐系统的研究与分析",
+        "authors": "张紫微",
+        "source": "经济研究导刊",
+        "date": "2018-05-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scaDfrpLqnqC4axFZeoe3kajTeT4wbuhVDeP13STrhOCA2orsXLjE9i28mO0JUxoTpUvT5vYEHN-NgDQtCI0CdRqjVVfuyY18U7vyl9s3d9OkyvOAd89Jgk_bsvlZAELtpSilDsa4_4Sc6poqtZ6VxgMIgpTOe_jWCFQG-124GUCA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于移动互联网技术的高校食堂特色订餐系统的设计",
+        "authors": "钱丽丹",
+        "source": "计算机时代",
+        "date": "2017-03-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scaDfrpLqnqC4axFZeoe3kajTeT4wbuhVD8i6UnuQ0wqkiUjjRiD1__Xsj_HGVT0wMle5eTDHKHehkBx6_gfd1jAebFvEl_DpJVVr0Hv-Iukcc9jN1ziwvSBvTG19pcjlSDld1csxqWaB6ZUK1ix30Af4D9LVv1hNs2T8ftNmkcMw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校食堂网上订餐系统",
+        "authors": "陈爽",
+        "source": "电脑知识与技术",
+        "date": "2010-08-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sf-NX0-MORNyVjpnW0OrSWeAW3q9VtGbqiFLT173iCGv8IZ5hKDIU6jMYkCoBw9mdM4OxLaW72bGt57QZ85KEr8wQnjBt8vxfZkmzymEMcbIQNSxGmMgjVGQomvzDRZ18Mv3vqNrbKF-uUN5py1n_JoNDXNpIATOm2Pt2ymqr2N7w==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "在线点餐系统 设计与实现",
+    "items": [
+      {
+        "title": "在线点餐系统的设计与实现",
+        "authors": "刘永立",
+        "source": "电脑编程技巧与维护",
+        "date": "2025-01-28",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfqOoAqmBczG4FFdzSvL8UdAQHiugq4ZnGcp2aW-HoZg1rWFGQweOTPjY3jkNRLOlNtOoEmnObt58B7h6NwkSn4awLPuy5ZY39qjh-hur4VLu-LemI5H4D7AbKpTVAGmnk5Zg4TA_o06WeUvVi9y8T3jeMi0snGaUBMizf0zkIkdA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "在线点餐系统的设计与实现",
+        "authors": "徐玲利;李唯",
+        "source": "电脑知识与技术",
+        "date": "2018-11-05",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfqOoAqmBczG4FFdzSvL8UdAQHiugq4ZnGcp2aW-HoZg2lSwrvcmesYMcxBw0ylyFEBrc1Hu6JpKVgmb5irTvxSrMfrjKz9RGg5cZ-u3W3pCXAhzDyojWIAiJvmMQydxsvoBbI5MnELdMz-P73n_F10eqoGWO-Y68w8B0OW2vKtOw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "大学生食堂在线点餐系统的设计与实现",
+        "authors": "邹泽庆;曹亚楠;王宏阳",
+        "source": "经济研究导刊",
+        "date": "2018-05-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfG6cOFrNmtoFyGjaaWGitW5VN0ORD0ZcLvAhbwf0Rb4g_nAC2Fmos4anc4XdgPL903D9634mJr3m7x1dj6BuJqMvBq7xrWsm-1Sd9YB1toE0t_2aKq0pYKdXcAJ0_jJNhu_XwGuRbMjNvUsXeThZ1lAU28rhfB4_coHa_JL0Wn4g==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Web的在线订餐系统的架构设计与实现",
+        "authors": "徐洪军",
+        "source": "计算机应用与软件",
+        "date": "2009-05-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfG6cOFrNmtoFyGjaaWGitW5VN0ORD0ZcKQz0EJGtZ-EUCe8n7NFZGQa305MM4miySDDd-6cPWUgM0TkkkfQPbKmvw6-VjHhKtK-qnSLRyYhh-OiJtJHG3Weyydz-2owreLgOMaAndKLBCYWae_Td-KIHsJrxCcjQSfVbjSNB4yTQ==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "智慧食堂 小程序",
+    "items": [
+      {
+        "title": "企事业单位基地智慧管理平台的设计与应用",
+        "authors": "张小双;吴剑;李峥;张高娜",
+        "source": "地矿测绘",
+        "date": "2025-09-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sco17BH4zYFByf0vcoZPDfbr6yrid99SVFO0JXP4s-AQpYfAwhOfBXPzS3pupBFjDwnMUGGsxnEWJxDYa3VgWXnKMgmpSvH34GA6vaQ4GfeumNqOa22cB60I1zWa9KVRSh44SSlM3ksKnuUgTs6lR7zzMdnItfpqdZp47f4jwlw3A==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "2025年食堂领域手机端App璀璨明星：乐牛食堂小程序",
+        "authors": "",
+        "source": "食品安全导刊",
+        "date": "2025-07-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sco17BH4zYFByf0vcoZPDfbr6yrid99SVEuvfS7cHWeuphk8hVGfF1KqNGlNuSu3ZyygB9UE-k-oBR0dwbnrajJLFLsB3yDERtNACd4eGMmHVUHPdhjI5mS1JPca-uA3eft51iCuEff5MWvWvLqj3Dtq_X5GDKzHtSSajRUQ94HRQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "智能楼宇系统的设计与实现",
+        "authors": "蒲晓虎;何奇;薛帅宁;钟美",
+        "source": "现代信息科技",
+        "date": "2025-03-10",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sco17BH4zYFByf0vcoZPDfbr6yrid99SVG9nviZfUShscDRvmYdu-5H1p55niNbloYmFQbRnn83MPFMXlibN0bpSfia8vshRtrKRNzTk3DDOYyc8Ivxettf8I-nrop5YYIzmUv0_bdTuLBTtNbxrNbEo-UePtumv-qRUNqheRmyiw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "数据驱动的高校食堂智慧报修小程序设计与应用——以中国科学技术大学为例",
+        "authors": "何磊;洪军;王杰;王磊;彭政",
+        "source": "现代食品",
+        "date": "2024-06-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1seT59hnPU5LpTO0-FhikugvSlbtleXxxxVe1S0KvkaosjdzS7s2nJOd_MdBr54cvCzA9S7nsD2usV74vlk4hEPJa2lwakZJwQhEZ4yIomsKov9vpWmBQTGn4EXFsAYqQ3n0pJmc8A4Xi7P-S0iQzb0dz5pooPOPYpI9kCcHRGocGQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于“小程序+取餐柜”模式的智慧食堂",
+        "authors": "邸赫炎;韩慧萍",
+        "source": "高校后勤研究",
+        "date": "2024-01-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1seT59hnPU5LpTO0-FhikugvSlbtleXxxxUWZk1PNuBHu3wGYkO1M9KL3o6BR6Y6qoiNsV8rY34RBZdLBsbFpdu5XEXYlpjlPBMO313MGyLOGFkiyVBltAlcA6g93uGFvzLO3_mxXkZdqVdQqhqJZOu5ZaR0j8k_GAwTS47q64o2Qg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于物联网技术的智慧食堂管理系统设计与实现",
+        "authors": "潘焜;朱晓文;李广兴;李征;姜明璇;李敏",
+        "source": "科技资讯",
+        "date": "2023-06-05",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scREEWc8VQxi_LbdvXUKDasT-i0FCYHscBZRec-OB5JMXQoZdsmZlNtFMqw6Dqqqkbofmv7XCT7IStpF-DCQE5sh4HQo0SNj1mgYgIoOb0h9AQDH_uzHvTuGRgWyhZ28Yy-zgh_nRIJDVDbtgqLZ9OWWcZuQDJZWm4fUd_c6Rqp_A==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于健康管理的智慧食堂平台设计与研究",
+        "authors": "潘焜;朱晓文;李广兴;李征;姜哲愚;薄明会",
+        "source": "科技资讯",
+        "date": "2023-05-05",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scREEWc8VQxi_LbdvXUKDasT-i0FCYHscBZRec-OB5JMQ-lqdyseyrdghgyoZP6S7MOAhnV-g7KKGroXTnbozPCpLiYaSdbg-pM1E-c8i962Rst0_giSWSpWXZRjRUN0HFERxOQ0aXmMqg1FQx3SzwdJ2aq-P_aTvDK3X2TQ07coA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "甘肃农村金融机构智慧场景建设的创新和思考",
+        "authors": "胡亚西;宁泽远",
+        "source": "中国商论",
+        "date": "2022-05-18",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1seknLUXS204nFQDzRc5tyPC5AwcmptEieUC_Hq9sql3TD9dX7o9HMxtNMqMag52uj37YrJFF9PNLPN5UGXWcz-yomhLaiecIqK7EJycjcEuxTww-DLBBDEWrGwWo9pqKrf_tITYJOVDb8e6qtBQPDdvNocq01EfiZQylpm_mZ7Vvw==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "高校后勤报修系统",
+    "items": [
+      {
+        "title": "高校后勤固定资产管理存在的问题及对策",
+        "authors": "徐美燕",
+        "source": "销售与管理",
+        "date": "2025-11-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scivwjJuwA83KY6IQ--jrK0tZJDMRUnnO72kQJsBJn8kvrRtlCnlmGPoJOmGJ01MiavT97LtKbDxpkc4VpVXlzhToKRnfRxKitvhyAzjQLQ0wIPxwXfE4yjq8dMM399kMWbiprmMnamjE-VYLcX5UcH31Xf_mkUa6JyD3O3n9na6g==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "大数据赋能高校后勤管理的智慧化路径构建",
+        "authors": "程珊;张子恒;郭峘",
+        "source": "高校后勤研究",
+        "date": "2025-09-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdpSPx5N_ko39qHKXNSE7rfa_we7diMQxyRPT_p-YkVKAhFvAWxAbrQhKcjY76PvdrMZkReqPNM54xm6kzw8_ViTMq93xbpHCAw2Ng2c040a9K5yzXGLy4FFZOHQxB50OtASpbr3xkavjvOJkOktQLGl8pgNSQwD6JKTme-xh8zaQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校后勤信息化建设的探索与实践——以河南林业职业学院为例",
+        "authors": "王晋晋",
+        "source": "河南教育(教师教育)",
+        "date": "2024-12-30",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdpSPx5N_ko39qHKXNSE7rfa_we7diMQxy5ksM42k_FHxjmtT6Cg_qV4x3ywP88p5zFG-Bti-881MH8_QYifA35B9h_xtg6cwWg4Re0cbiP49K9TtejcCdliaZq-qFpKOoiFGNE-TtojpsXDrKRjgE0teMmu1Gq0uVzbcUZ-55IHA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "新时代高校后勤改革与创新研究",
+        "authors": "程世超;李骁",
+        "source": "济南职业学院学报",
+        "date": "2023-10-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdpSPx5N_ko39qHKXNSE7rfa_we7diMQxx5dASND4Wqs1bgrTxQwJ5dzVZ9bujPWH_sYGArN7cVJpcAxwHbId9U-uf9N3H-CSjQk0hU8ridmHyXAHspg2t5_H6fJtvWYiRFPqbA3KLBCmfcYTd6A8aAqQ0xJXuOLpUdDmVMiwdTgg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "报修系统在高校后勤管理中的应用研究——以南开大学物业报修系统为例",
+        "authors": "任东帅;王德静",
+        "source": "高校后勤研究",
+        "date": "2022-10-18",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdpSPx5N_ko39qHKXNSE7rfa_we7diMQxyRPT_p-YkVKIUue7O9ycLWClUKYKZbhUywX49ibl3MpCGbDLeh9oZcp7uqooGvZiTRpa6dEnzaBVS0WQzwopSkzuDc2QPCdGg_QGzNaviu9_jMtneMr5kuVNoAw4uyNnBYgWONeZhEgg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于“服务”理念提升高校后勤精细化管理",
+        "authors": "毛艳;樊宏舸",
+        "source": "办公室业务",
+        "date": "2022-06-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sclTNFJtqQEcdpsp0eAC78bLlEK3DAT8EDpaDnamwoY9zm3twTUJnCBJkdclb5tT9fKJNxytRb4psEDd8H4U7m8gOeCoDQIh8sC1rv1l52diNWTlIMOeqAF_B24VEshaOdk2dLySSBxxzKdc99aIyIvuEfGpIlIT54LL2QGBTRPUQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校后勤参与“三全育人”的路径及案例研究——以北京林业大学“智慧后勤”建设为例",
+        "authors": "刘雄军;满达;伍宏芳",
+        "source": "高校后勤研究",
+        "date": "2022-01-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sclTNFJtqQEcdpsp0eAC78bLlEK3DAT8EC8syCk6ST5Q602KHAacNgUuTRgSork6jtRrubnvleS3O3edqXWQT4TWXsqtVwIc5IMp1_fXwIeI5gf8fFIb4EH5Kyfx8Pnr8BVXrMWGxhi_BAUZaAJ87CMIBRQIJRM2agn9l-axCnalw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于MUI的企业报修管理系统",
+        "authors": "雷晖;孙伟;李文俊",
+        "source": "电脑知识与技术",
+        "date": "2021-10-05",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sclTNFJtqQEcdpsp0eAC78bLlEK3DAT8EB8zk1_oOGHnFiGKlWeQ5dowKV3sZ1xzz275O4QJGRJaqLNFYy02-yO_g12gHgkZZv_fryEvM1M8OY3Fwe49OD8qLYVLftaHSW_AqvLfseaDD_SmpApCnzx3A-DAZ4gnXW6wQ8s-oDedw==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "宿舍维修管理系统",
+    "items": [
+      {
+        "title": "公安海警学院学员宿舍报修维修管理系统设计",
+        "authors": "刘宗霖",
+        "source": "电子技术与软件工程",
+        "date": "2016-01-10 12:37",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdsSNtQLxEWNgnN0UE-3qjtRYxbH0l9HQ2UryP5syzRk00zgBTk4E_GaNlp0B1sbIpCes9u1CNwL2YoX38VxX4uHfqwFtHUXWL7GEV4cT5F75E5h2cvozOsj1fMGOQhLmvzS9WnkQHf7kgZZLgKtoSb1QLG_5QD9P5P5v2Tt8SRQQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Android的学生宿舍维修管理系统的设计与实现",
+        "authors": "戴智明",
+        "source": "微型电脑应用",
+        "date": "2013-01-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdsSNtQLxEWNgnN0UE-3qjtRYxbH0l9HQ09lqXUO6jWor8JVRYW2vaeoa3yoIWs-BiJykeiom_HjiaCB3YoxQSXxvq1EAVzSsbrEI3ffcrxryhgtgRXONA6jEgI8zS9SCkOiAwRdVVwKBJr6rODDxvPZ0MNxWAjwbM_0ltTZkfDvg==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "报修工单系统 设计",
+    "items": [
+      {
+        "title": "基于微信小程序的电气故障报修系统设计与实现",
+        "authors": "孙志成",
+        "source": "自动化应用",
+        "date": "2024-11-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scQNydUIVs5i_Q-4J0T2HUFlglSFI8xA9X22Lypec37RIkLP4UJIE8GaQAkS8KVxawjTPSQN5auwT4lRB4bIUj43L8EqBW-MmotzVU1_gMCo0lvNCOkQTn3os4ylsUAQSH9Tn1VrVEl5BILEIrJYmIljxMVnP394FFUFCQYh1P0ug==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于物联网的医院设备信息化管理系统的分析与设计",
+        "authors": "王颖;张翠萍;李胜旭",
+        "source": "电脑知识与技术",
+        "date": "2022-12-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfRGPMw7BxuowSSLy9bhxfG4QKuM3DHhR098GEWgE7aNQG6IOVKh6Cn3oIQgKAY8d3-4Ey4cXj75V0D05U4esmmpGxzdD8ri66wno2UNRkJLGzsn4KiEYFiRK1tT5sbVJLo2KX7G0rUn6Th0V7NqVlj3nSPxWf6hH8sRDXAPBitTA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "一种基于微信公众号的报修管理系统设计",
+        "authors": "张凯;陈山;邵云蛟;宫政;程轶红",
+        "source": "机电信息",
+        "date": "2020-11-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfRGPMw7BxuowSSLy9bhxfG4QKuM3DHhR2CVlP2nluzW-RYNXMYEAEymC5QVVhJtZjzHgRX9LPjhc6ABvTdsVG-9n75FbXH5VwbJf1Vu9zIWiBNVRPEI8QdH_mma6iB-M94hV46K5G81DyXyEjrsv0Cgl2khQ8O-Fl66CTcUgZhIA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "电网停电信息自动上报系统开发研究",
+        "authors": "张霖;刘航航;朱小倩;任虎",
+        "source": "电子技术与软件工程",
+        "date": "2016-04-19 17:19",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdqqeMaMx5a41JUBPdSpKpffUmL-I2hUu8INaqGjurR3IJ4moSGb-wZjWOuN0JXZ-T0ESujEGCkRkGvdD2BuQw4McxLm2dnkkWvBZ5CsuMhLpEu8U5TxQvHxyjXHZUc6H0d_TYZXbCyTEdqy73g6NpK0bcKwmeuMXg3-YItG6gKag==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "校园活动管理系统 设计与实现",
+    "items": [
+      {
+        "title": "基于SpringBoot+Vue的校园活动管理系统设计与实现",
+        "authors": "钟育伙",
+        "source": "电子技术",
+        "date": "2024-10-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1seuIGIixEJA7ezPE968h0MsXIiqH3PqE2yigzvQqpBJ5-26Fl0x4FcBQ84uwMn3u23FEZe7vVSqS3YYOVj4uzFEHOJGWWKhMSNta1N2xKE9WQZhOiD5M5ZKYkP8w5SWjEt_M6OV8WxRdPDCqostC_aVPjOWFrG4nUXqr7iQktHDcQ==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "高校社团活动平台",
+    "items": [
+      {
+        "title": "信息化背景下高校社团建设与管理的创新研究",
+        "authors": "张晨;韩超",
+        "source": "信息与电脑(理论版)",
+        "date": "2024-07-10",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scxZqL-USTLbmBjPvVkRepI7SxL-KWVdc6Y9C2UhIynsKpdROx7_9SSC_KdUg1OpJ_qg5Q4naOJjYtu-LAwXY_KEX4h_RK_fLhOdXwlOdZOChIDch8UGtNaouJUrVQkmHrBhbK05-GE7IOJxZhGKG-2wBZlGMoSqYcms_mP924usA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校社团信息化建设的现状研究与对策分析",
+        "authors": "孙鹏;张晨",
+        "source": "信息与电脑(理论版)",
+        "date": "2024-06-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfkM3GUrKu4dwfX2iZyOo676pZOoTz0Iz85g7_Q9febk1lps0qsC51FT6hIlmHVoa24rhowT-YwaxEBOFmsfAMAMAJETsZi31ebU_-VUZ56drqSbzHrEpPoDqTM7vSXBjFjxjL5jTMQyoVx3umQ2kXQJT_jlEshQVxVlO5i3lcXAQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "“互联网+”视域下高校社团管理的观念转变与路径创新",
+        "authors": "张楠",
+        "source": "呼伦贝尔学院学报",
+        "date": "2023-04-30",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfC4Z3pwECcak9fX9ZVHSi3fNa7CyJdW_-DYDfsa103g3m49dQszThYp67qhdIPooOOuj3R9Q_V-FvbklkwssyJACalX_WTfWhH_BjPFjVF-kQs2zky-Daouha7zQJAwtJoqFWngs1WQbRq_ineLe0lSj-jz7QXF7HpFpxgCRK5yQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校课外体育活动智慧化管理策略研究",
+        "authors": "刘勇;耿文光;宋崇丽;毛亚琛",
+        "source": "教育学术月刊",
+        "date": "2022-06-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scChu5VyAqHW4uHnL6ygCJRes7KceiNBwC0B4Rh_uFLGnvZsRWTUdeCloopoMba_SXddi9obc00CYlYeXMLjRJJHX86zKgasBHwWia7NTRq3Ly8u2nJbzNX6aXt--AVh0wpK0u8wb2WPXYb003G92iy9hzKlhz5tzwzdM8ZxDwmaQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "“互联网+”高校社团建设与管理机制探索",
+        "authors": "刘丽;袁建勤",
+        "source": "甘肃教育研究",
+        "date": "2022-05-28",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scChu5VyAqHW4uHnL6ygCJRes7KceiNBwA8bEn5TpO11dxSQ70001A0f7AmJgV3dwUtywxpWLGFS0IlTC3akX26Db2wdSQhRQ-70lBTUXfBtIeXOf-Mhb_0J-Bvn6W16g_dm3qPzJr1KD8fCw-kik9WETBo8pm1sLulgulf9UG7Nw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校社团管理平台服务学生社团发展探索",
+        "authors": "宁伟;王在俊",
+        "source": "高校后勤研究",
+        "date": "2022-03-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfYyvajilj-B5XZ574F8ajmjm1kv-hX_gWboesW0ccs_6FbLcOYEzDHp_J3rYxqrCQxCC7x8XX5jYSUblOpOlKfi7gyRNDRvrOs6JTGTswB02dH_LI5NxXwWSBQXxLAW4lBhFxtpax9CVjX7G2GxXM5pqwmhW6tKQTHaSWPny0eJg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "高校社团运营存在的问题及探讨",
+        "authors": "李洪儒;吴翊都;石浩;潘源源;赵永辉;刘于水",
+        "source": "科教文汇(上旬刊)",
+        "date": "2021-08-10",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sexeVh5zbx3S-LERgoomHih1S9q4mxO4bpewAuaPuzhLyU5VpIHiOI7M2U9tKUw3rMOE_8hHtQ-b9PDP_RfLwDk809zZqWsj_MzuVJGoUMlZwJwS4_b7F3HmTP8WDWEVlwo1wBbAz_FE-KYLPAntgTeSC6X6fYR7ca0rt52QkUKBw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Web视角下高校社团一站式网络服务平台设计与研究",
+        "authors": "曹一博",
+        "source": "电脑知识与技术",
+        "date": "2021-05-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sca2tm3BXX3vD5p1cayicCPpr8EPha4oXb9pRErC4iEN0-75kM1zzG3s3k7WRjBk243P-rC3otuHhnVf346YpFs07583jw8G65-7ad11wNJjB9VUwQRcKe3Xm3g4_xkT6F_idlqHQRt9d4ipmwmnRFVcg5oFFsu8S5IY0iy_FIR4w==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "WebSocket 在线聊天系统",
+    "items": [
+      {
+        "title": "基于Spring Boot和WebSocket的点对点聊天系统研发与部署",
+        "authors": "黎志伟",
+        "source": "科学技术创新",
+        "date": "2020-06-24",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdai5cF1eKHaOiWit9eQh_lQdMoHc-7GjOTEWzCNfwCmrOtqUmY8C1TDrRXUa1mwvpZxkNIFZnVDQA1j3VDGThFzYI1oo9yXhM-LkDJ-y16CeW6XNyNBejJqhbFu6YiWnJx3T2m3F-pGGFeYjNAW0IOrxmuCKv1TY4y_SFAhKhhKQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Jersey和Retrofit框架的在线聊天系统的设计与实现",
+        "authors": "邓居旺;王杰;许敏",
+        "source": "电脑知识与技术",
+        "date": "2020-02-05",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1se9OFMynF1iTVoxebKVplNX1gn8-mMC3QVtwddRHd0-6CK4k6uuS4gSa_rLYzYz1PTXzrOxNj_e5RecqOJHeX9Wh1S0I3PCBi6R9D9VLTP9m1hgX28W2gyS1yehyn5zikBQbASq2L3mZ6d3136NJZtCiHUsqCDYMj3uflA3gudVTg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于ASP.NET的校园在线聊天系统的设计与实现",
+        "authors": "周莹",
+        "source": "办公自动化",
+        "date": "2015-05-01",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfl7tl8N75q_Gjpmh5fv7bMkn7RvJwd0KZm3GJGG70k-kDRMp8ePGf4Wbmd3YHveY2iOpYu-O5ZQaIov7eFpqJ6bmYoco5jmy6UUIYx5pFR94xpkzfblsUQ7NmptXmeTv-rNCPJPueKMsVyPJsHGZSpgd3UrEPqpBLyVV2uVFipXw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "Java在线聊天系统分析",
+        "authors": "刘晓阳",
+        "source": "信息与电脑(理论版)",
+        "date": "2013-06-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfl7tl8N75q_Gjpmh5fv7bMkn7RvJwd0Ka27tZg44yU03GiY-ls74Y-bpd4ZW8kHLhFVWclh6I2tWkzPQhhlkucVPylmyvpQ9PZWgz4oPD-KAKCyXWbw16kaBTlmu44Nc7LM3aS2jZlyt02cClICcPvGFHMGVlZocNVFPm4Rg-jTw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "关于高校图书馆电子阅览室在线聊天系统进行资源共享的设计与实现",
+        "authors": "王洋",
+        "source": "硅谷",
+        "date": "2011-11-08",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1se-P9AxbBbV8vxqQNrSj1dWO2vG9BfN0Otw5xIxLq9etzWIQUuLuH5RKFedRvXFieewPnmvsd9SdwWhCOg-cDWfW-AVy06SBtI4XYB5CfhxA86RbfxZs9-GeWrYWrxSCQQhE4A1ut_pLNoV0JL_YzXfY-IXbO3I0nvxExpLnsmTMg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Java语言的在线实时聊天系统的设计与实现",
+        "authors": "徐伟",
+        "source": "数字技术与应用",
+        "date": "2011-05-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfdyHWrG8R4VCsJZSUAeP5R_flVQlN2FkAQ0Bj-R6ecj2mnETuqysq1oqeVIfH7UKCZrYIwlw7W_7rzfM5Hs_255mQC--Q-g5hZrgf3qDDC_7XE2c4vZD8ue07FQlS-ii8Krx9DA95kSSVPAbkiNx_Pe-yJjVqnHkT3mlZia4ps6A==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "Java Web在线聊天系统雏形研究",
+        "authors": "黄俊;吕振洪",
+        "source": "今日科苑",
+        "date": "2010-07-23",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfdyHWrG8R4VCsJZSUAeP5R_flVQlN2FkDMdHY81PCDPmoOX5_I39FivilA5sslAO1_uXnvAz5IdR4W9BymMdPMMKlS8vCbEsfb5PuUQXTa4mTuBHuJNBLL0LhXI3xSaxbQib1ozUo4g-lCA1GZX82XL7l4c-YdhOlbgqdUHe2k_A==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于腾讯聊天系统实施远程在线辅导的实践与认识",
+        "authors": "周道祥",
+        "source": "皖西学院学报",
+        "date": "2009-04-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdLZPzQ2iFngdBnAUFtgyezkNKtlt8rwn1llxXwBrMv0g68qYWlU1C2IpQYMUmOzlc6RGIw9mhPERD4A2bjkUscVxwtGg63H6-gKV-mW-7Q8wCU_-Nngz6pawsRlqjC4J9hep9Qr7v_xGeWrahJgkuGoMKejpOxn86gZ-LJMUNU6Q==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "即时通讯 Spring Boot",
+    "items": []
+  },
+  {
+    "keyword": "前后端分离 Spring Boot Vue",
+    "items": [
+      {
+        "title": "基于Vue.js的学生选课系统的设计与实现",
+        "authors": "杨文霞;霍甜甜",
+        "source": "办公自动化",
+        "date": "2025-09-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scagD7mysxQUSyc9jKNYDx3K-UbePjG7Dh44nN1j3ZS8ZEy36IXYJ5v-TUQ2E-vWv51h34ztOA2V-wIXdnNwMgk8vYgoCrxT0hsSgpIHAU8YMMIPz-fDeJnhAXxrWXVy2egKA3wOavfugJUUU0CWbDnbGEFaWxo51gJ2DrO_uKlOg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Spring Boot和Element UI的中小型超市ERP系统的开发",
+        "authors": "闫俊甫",
+        "source": "电脑知识与技术",
+        "date": "2025-06-05",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scagD7mysxQUSyc9jKNYDx3K-UbePjG7Dhh995_wdmVdR1Xap4puGWDBOslzoyZ8e_5xkypze4pDYcHutvXzIXhSjw9hQOmfZFTepOCwj-KvCI8KIBl0ZsRZyFb_g7eGPDoglBI73KDVlCY6DnLANjSfVOd7KcCLUsZGCPDoAWoIg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Spring Boot+Vue框架的阅览室现刊查询系统设计与实现——以上海图书馆为例",
+        "authors": "孔倩",
+        "source": "现代信息科技",
+        "date": "2025-04-10",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sf4Y_TBPzApA5EMnudF7a7eJh7BkTPaU3-PAuvvvcSBsEylOvyABJ3EwvXs0HoOPyaVidM86Gkp25qRFHtdJWXifIdMyFv797hdZAUcHQzSNmjjtuKNDe_Pp_277feIDsTHbLMLeyNdSloR9MbAT0wveYZk3K-uay--W7uXNhlcjQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于前后端分离的热等静压点巡检系统的设计与实现",
+        "authors": "吴慧珠",
+        "source": "化工自动化及仪表",
+        "date": "2025-03-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sf4Y_TBPzApA5EMnudF7a7eJh7BkTPaU3_TcEvoQP6el7AkaoOB2284EXdMj5ltNjqB2GbEDPX7Y-WZfTPwtTw1QtvRFqzOZp3FnOkLMe4NkzDVyL_6nTD99mGKkH_94ir4eC_NZayZ3Ry_HIdg4UN3N0xsWPB8IVX1KdQ3irireQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Vue前后端分离技术的海产品饲料信息追溯系统设计",
+        "authors": "张植才;张福峰",
+        "source": "办公自动化",
+        "date": "2025-02-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sf4Y_TBPzApA5EMnudF7a7eJh7BkTPaU3-1_LkdPSf0oOF910r20WIXd5yo4dd7-W8zmnFCxDpDB34F3pjHQY_2j5PWsGLzbj1yQUVSiPKxD8BrcJZdvLxEgUu2fNvNhLETSsoyC8yZHEBxMBaBlw6hezzg9dwqY7l8AJK2xkS8sg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于B/S架构的在线实验系统的设计与实现",
+        "authors": "魏武华;黄业坤;于豪;李森鑫;郝茵茵;梁静;刘少华",
+        "source": "现代计算机",
+        "date": "2024-10-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scROt5bRd357YryJvWkGX7BQV8Rb2UTyt4ge9H_17SEKxqdHeay26YzUHMq3N7Zi7udtdbPIKSaBmPCJ7ugCjClDmZg_D9y4RXiRzXIKa405FfieWUIULGCSZ-Dwo_V8gsal8MeTv4oqdaXMbQiPqHnvtjPH2yQ8gXIXifRzRzkOA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于前后端分离开发的GMDSS VHF模拟器设计与研究",
+        "authors": "葛佳薇;许志远;赵琦;任重霖",
+        "source": "船电技术",
+        "date": "2024-06-07",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1scROt5bRd357YryJvWkGX7BQV8Rb2UTyt5SMuU3geG_PFMl2Opr1MXz-YVWEsuRqwMAuAe1M0lZBHIBz3g0kA-XHDwzxu5nO9wpFjShWOFJykWXbyl_QUxOikLGTX2gC7piMc2_325NCZYjKhCfRKXDbxdxo0P-P6exVuERjGxwLg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于前后端分离技术的天地一体化数据管理系统设计",
+        "authors": "李晓琳;高献伟;韩妍妍",
+        "source": "北京电子科技学院学报",
+        "date": "2023-09-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdhWBOEw2WXJMZosAY-kIpUv4Nka0q5nJODnKL7Vtse9ljyDvigqTJpsL_ee0TsU5rBBeeRlhhfZljsR7Gy0y_bVOvt2D1oaXFuTSZfM_BBeJCoahkS82-4ycLrW3CdKS9TLybR7wLhB0H-4K3x_tMWF6GWEKlWjM4pisBm9-zebA==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "uni-app 移动端开发",
+    "items": [
+      {
+        "title": "基于uni-app的掌上污水处理系统的研究与应用",
+        "authors": "付兴;杜树新",
+        "source": "物联网技术",
+        "date": "2024-01-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1seTdqcN2AW7Lb-OCpWJI-9kN0EjngZyv61rgYF2Ai30g0_RcqnJLIPeU3SSO38XX4uhMNDL8m4923zqtPO_vx3-lkPVPiAqFUdjdE-q53o-16xZw6WuvLOfqUv-UfPIou4QbdeTM1NQAVNaaluqTUHKaLdPI2H3iuxu8iaPy3fcYg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "Uni-APP移动应用开发技术分析",
+        "authors": "任远;丁玲;戚伟",
+        "source": "电子技术与软件工程",
+        "date": "2023-02-01",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdu2lpBYhUEEB9EJoT5s7keQC_SdqoPmfl0njsfyuCLTU8P-ay898aoi3F2ShLe6mwIoEik-5fNhCToSln7VDUsnqa7S0gb5qDKmmlDRd4wHC1_AS5VLypAi869zYc7j-VxXMqdvnHax9Y_kKOnj4bMfS7nFxABCMqVhXaDiifDog==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于跨平台移动开发框架的环境评估咨询App设计",
+        "authors": "李昂",
+        "source": "电脑知识与技术",
+        "date": "2021-08-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdvQKekezrPk8P3LH24LkzOMp8DeeZ7EyAUqPIceSrqDp6jowZ_hOL8MSqCwAo0UHijudPxKOWQ1cH48rScd4xZCodbFvSYW9ht_6EKQgsLKJxbH_xNB4TEnZUNj_4NFO0WjPXNvwQqKGSfrvEN5ha_bqo4-3d3LjyhDCROOeyRsQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Web前端开发在企业信息化应用中的实践",
+        "authors": "陈嘉霖;田力",
+        "source": "电子元器件与信息技术",
+        "date": "2021-03-20",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sdvQKekezrPk8P3LH24LkzOMp8DeeZ7EyCB26i2kD_PGGkUwYS2oJGunC9IjDucg8pjAl4RK5YPKXgIFtR1V0Swnzb5caeO179V17-i9D0_2bjILllZS2pDNyaopszAPIwVzAjqPG2rVCZyUIoRYXcAIrviIerdkVm0gM0bq14AHw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于HBuilder快速开发移动端APP的设计与实现",
+        "authors": "许溜溜",
+        "source": "电脑知识与技术",
+        "date": "2020-04-05",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sda5rxJBRThTD3LT-DXspI8r0dLPUSKCUWC1tCz2M3-UTvre1brcjwagB_6KITB-_FiIqpw6INO4_T5xSHch14rqKybcCn_wbPx3E8LqgTjUykl0bVBxIzHt0vqSycnXKEbiyfcU7GYLKBTYnJBv21k_4kogycg9RKwuXQUE2lLlQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "大型煤炭企业综合考核评价系统的设计与实现",
+        "authors": "张雷;姜进成;闫传法;张琦",
+        "source": "煤炭加工与综合利用",
+        "date": "2019-06-25",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sferlKjNF41rSn7ftxG5E5vAfZeCNQt9DvaT1YlUkXR2ddlUB6MndikMrdm-gBcT32R_Sa4-cZpSXlaHqixwy68FGAs80tKJGYD7ndEL_sTlexB6PVlpQKY0AWD3IDVQv6a-4pmXPThH2-xu-uyqorGSHPTms3rjTUplA7i1BoSqg==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "JWT Token 身份认证",
+    "items": [
+      {
+        "title": "基于JWT的EAST实验数据用户身份和服务权限认证",
+        "authors": "申正阳;王枫;任环宇",
+        "source": "计算机应用与软件",
+        "date": "2024-05-12",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1seq9AbkHhvMYum1DA2N3C50_mf7f7OA5Z3OBh02XTv2j1CSR5LymhFkEC0Ff3vtoeFp9aHWHArBQO0iev24_lyW28lgBol79NNE8egz0RzBwUPbFGn_zpxNYuCgHbcQrRLfVObNEpuXafpffNoNRW6k7RZ1NyEX_Lnv7qnrQBJ9Kg==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于SM9的JWT强身份认证方案",
+        "authors": "罗娇燕;左黎明;陈艺琳;郝恬",
+        "source": "计算机技术与发展",
+        "date": "2024-03-10",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1seq9AbkHhvMYum1DA2N3C50_mf7f7OA5Z2vtqswwSBARUuipZlQQBVdiCaNKlzHfdyPqxflt3OxATy9_R3nCysYKNU08WgHU-4VcUjLgU7YhVELt2K7B7g2ZNmY8Y2qVahbfrjjxS1XxQ037HTRO18ArWGCEdgUpxtpnmvRAS3cJw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "Uni-app框架下基于Token的身份认证及持久化登录设计与实现",
+        "authors": "吴建成;杨亚",
+        "source": "数字技术与应用",
+        "date": "2024-03-01",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfh-ELkRpH6WNB0F4MXy3qzGX_caxnPghuF0_3ALGSdXzlWQzcqKaHJmiFsA0aGa5rrRXXUWOC3hzmdAHhx-sF36YIlGthn1nhrKCsPd5AccW0v7L27mZhIiJSv_s0y3I6CYYaZc_QDGhn3B7PwWBK4jHaSGbrIACjYWc_nkJt4wA==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "统一身份认证技术在企业信息化系统中的应用研究",
+        "authors": "闵晓霜;董岩;王皓;刘红;刘雪飞;杨跃;李奉原",
+        "source": "电子技术应用",
+        "date": "2022-09-06",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sfh-ELkRpH6WNB0F4MXy3qzGX_caxnPghtMEGKuxLqnrLpMBd_XpRMwDRJqETAK5Tr01Bk-xYBQ43GEhfipiakHLvXzB5NF-cg9Fgho93TIQqfPC846Yp0y8-nDJgGcMeN1lT5uKUYh9U6TTAmKor1w1Hi71Zix4L09HTcktlpKTQ==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Token的物联网云平台系统身份认证机制研究",
+        "authors": "黄伟民;陈可新",
+        "source": "智库时代",
+        "date": "2018-10-15",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sd3XojSQqrHPXcGZt9db360zPBDOJhk6TUB8OOsEPnuAzFGJSYWPPZw2YO8YkHW379etQnIXSoCiyQv9eVxeJo9I7XLLm_Y3elS-frX2iiVY5fTLDgwAlpoB956M5f11MApuNKwoSEvV5kmJO-BKE-Qg7liMCWo_gAZAEJOmatIBw==&uniplatform=NZKPT&language=CHS"
+      },
+      {
+        "title": "基于Token的身份认证在高校实训互动平台中的应用研究",
+        "authors": "邹军国",
+        "source": "无线互联科技",
+        "date": "2018-09-10",
+        "link": "https://kns.cnki.net/kcms2/article/abstract?v=zYSMMY9t1sd3XojSQqrHPXcGZt9db360zPBDOJhk6TVY1CAbZsHjP-SBqD6ChsWP63PBtepfm-EotWWMksXTkGQovV_p-XRjqFQzn7jS7Z-z2f4pgNCSEDtlgXIsVzgueoEoZWolwFEGqbB2lIbyjVB47JnCvwhaEXvNXtDyJqqT9ghWnlfnOQ==&uniplatform=NZKPT&language=CHS"
+      }
+    ]
+  },
+  {
+    "keyword": "MyBatis-Plus 数据持久层",
+    "items": []
+  }
+]

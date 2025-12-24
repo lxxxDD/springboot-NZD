@@ -24,7 +24,7 @@
         customStyle="background:#f1f5f9; padding: 16px; border-radius: 16px; margin-top: 16px;"
       ></u-input>
 
-      <view class="forgot-password">
+      <view class="forgot-password" @click="handleForgotPassword">
         <text>忘记密码?</text>
       </view>
 
@@ -114,6 +114,15 @@ async function login() {
 
 function goToRegister() {
   uni.navigateTo({ url: '/pages/register/register' });
+}
+
+function handleForgotPassword() {
+  uni.showModal({
+    title: '忘记密码',
+    content: '请联系学校管理员重置密码，或前往学校行政服务中心办理。',
+    showCancel: false,
+    confirmText: '我知道了'
+  })
 }
 </script>
 

@@ -7,22 +7,22 @@
 
     <scroll-view scroll-y class="content">
       <view class="menu">
-        <view class="item">
+        <view class="item" @click="showTip('账号与安全')">
           <text class="text">账号与安全</text>
           <u-icon name="arrow-right" color="#9ca3af" size="16"></u-icon>
         </view>
-        <view class="item">
+        <view class="item" @click="showTip('通知设置')">
           <text class="text">通知设置</text>
           <u-icon name="arrow-right" color="#9ca3af" size="16"></u-icon>
         </view>
-        <view class="item">
+        <view class="item" @click="showTip('隐私')">
           <text class="text">隐私</text>
           <u-icon name="arrow-right" color="#9ca3af" size="16"></u-icon>
         </view>
       </view>
 
       <view class="menu">
-        <view class="item">
+        <view class="item" @click="showAbout">
           <text class="text">关于我们</text>
           <u-icon name="arrow-right" color="#9ca3af" size="16"></u-icon>
         </view>
@@ -34,6 +34,23 @@
 <script setup>
 function goBack() {
   uni.navigateBack();
+}
+
+function showTip(name) {
+  uni.showToast({
+    title: `「${name}」功能开发中`,
+    icon: 'none',
+    duration: 1500
+  })
+}
+
+function showAbout() {
+  uni.showModal({
+    title: '关于 CampusPal',
+    content: '版本：1.0.0\n\n校园生活服务平台，为你提供食堂点餐、报修服务、二手交易、校园活动等一站式服务。\n\n© 2024 CampusPal Team',
+    showCancel: false,
+    confirmText: '好的'
+  })
 }
 </script>
 

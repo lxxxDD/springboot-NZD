@@ -130,7 +130,7 @@ public class ChatServiceImpl implements IChatService {
     
     private String getKnowledgeReply(String question) {
         // 从知识库搜索答案
-        List<CampusKnowledge> results = knowledgeMapper.searchByKeywords(question);
+        List<CampusKnowledge> results = searchKnowledgeByKeywords(question);
         
         if (!results.isEmpty()) {
             // 返回最匹配的答案
@@ -144,7 +144,7 @@ public class ChatServiceImpl implements IChatService {
     private String callAiApi(String sessionId, String message) {
         try {
             // 获取历史消息
-            List<ChatMessage> history = messageMapper.getRecentMessages(sessionId, 10);
+            List<ChatMessage> history = getRecentMessages(sessionId, 10);
             
             // 搜索知识库
             String knowledgeAnswer = searchKnowledge(message);
@@ -213,13 +213,31 @@ public class ChatServiceImpl implements IChatService {
     }
     
     private String searchKnowledge(String question) {
-        List<CampusKnowledge> results = knowledgeMapper.searchByKeywords(question);
+        List<CampusKnowledge> results = searchKnowledgeByKeywords(question);
         if (results.isEmpty()) {
             return null;
         }
         return results.stream()
             .map(k -> k.getQuestion() + ": " + k.getAnswer())
             .collect(Collectors.joining("\n"));
+    }
+    
+    private List<CampusKnowledge> searchKnowledgeByKeywords(String keyword) {
+        return knowledgeMapper.selectList(new LambdaQueryWrapper<CampusKnowledge>()
+                .eq(CampusKnowledge::getStatus, 1)
+                .and(w -> w
+                        .like(CampusKnowledge::getQuestion, keyword)
+                        .or()
+                        .like(CampusKnowledge::getKeywords, keyword))
+                .orderByDesc(CampusKnowledge::getPriority)
+                .last("LIMIT 5"));
+    }
+    
+    private List<ChatMessage> getRecentMessages(String sessionId, int limit) {
+        return messageMapper.selectList(new LambdaQueryWrapper<ChatMessage>()
+                .eq(ChatMessage::getSessionId, sessionId)
+                .orderByDesc(ChatMessage::getCreateTime)
+                .last("LIMIT " + limit));
     }
     
     private ChatMessageVO convertToVO(ChatMessage message) {

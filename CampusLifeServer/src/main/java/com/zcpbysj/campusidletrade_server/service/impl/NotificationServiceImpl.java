@@ -1,6 +1,7 @@
 package com.zcpbysj.campusidletrade_server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zcpbysj.campusidletrade_server.entity.Notification;
@@ -35,7 +36,9 @@ public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Not
                 .map(this::convertToVO)
                 .collect(Collectors.toList());
         
-        Integer unreadCount = baseMapper.countUnread(userId);
+        Long unreadCount = count(new LambdaQueryWrapper<Notification>()
+                .eq(Notification::getUserId, userId)
+                .eq(Notification::getIsRead, 0));
         
         Map<String, Object> result = new HashMap<>();
         result.put("list", list);
@@ -61,7 +64,10 @@ public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Not
 
     @Override
     public void markAllAsRead(Long userId) {
-        baseMapper.markAllAsRead(userId);
+        update(new LambdaUpdateWrapper<Notification>()
+                .eq(Notification::getUserId, userId)
+                .eq(Notification::getIsRead, 0)
+                .set(Notification::getIsRead, 1));
     }
 
     @Override

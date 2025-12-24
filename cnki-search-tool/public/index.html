@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS | 知识神经中枢</title>
+  
+  <!-- 引入字体与图标库 -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@300;500;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/element-plus@2.4.4/dist/index.css" rel="stylesheet">
+  <!-- 引入暗黑模式变量 -->
+  <link href="https://cdn.jsdelivr.net/npm/element-plus/theme-chalk/dark/css-vars.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/element-plus@2.4.4/dist/index.full.min.js"></script>
+  <!-- 图标 -->
+  <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+
+  <style>
+    :root {
+      --bg-color: #050505;
+      --card-bg: rgba(20, 20, 25, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary-neon: #00f3ff;
+      --secondary-neon: #bc13fe;
+      --success-neon: #0aff60;
+      --warning-neon: #fce96a;
+      --text-main: #e0e0e0;
+      --text-muted: #6b7280;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Noto Sans SC', sans-serif;
+      --glass-blur: blur(20px);
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      /* 动态背景网格 */
+      background-image: 
+        linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 全屏扫描线覆盖层 */
+    body::after {
+      content: " ";
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+      background-size: 100% 4px;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    @keyframes gridMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 50px 50px; }
+    }
+
+    /* 顶部光晕装饰 */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 243, 255, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+      animation: pulseGlow 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.5; transform: translateX(-50%) scale(0.9); }
+      100% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 60px;
+      position: relative;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      animation: slideDown 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .header h1 {
+      font-family: var(--font-mono);
+      font-size: 3em;
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin: 0;
+      background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+
+    .header .subtitle {
+      font-family: var(--font-sans);
+      color: var(--primary-neon);
+      font-size: 0.9em;
+      letter-spacing: 4px;
+      opacity: 0.8;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    .status-badge {
+      padding: 5px 10px;
+      border: 1px solid var(--success-neon);
+      color: var(--success-neon);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px rgba(10, 255, 96, 0.2);
+      animation: blinkBadge 2s infinite;
+    }
+
+    @keyframes blinkBadge {
+      0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(10, 255, 96, 0.2); }
+      50% { opacity: 0.7; box-shadow: 0 0 2px rgba(10, 255, 96, 0.1); }
+    }
+
+    /* Main Interface */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Glass Panels */
+    .glass-panel {
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--card-border);
+      padding: 30px;
+      border-radius: 4px; /* Brutalist corners */
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      opacity: 0; /* Init for animation */
+      animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    
+    .panel-delay-1 { animation-delay: 0.1s; }
+    .panel-delay-2 { animation-delay: 0.2s; }
+    .panel-delay-3 { animation-delay: 0.3s; }
+    .panel-delay-4 { animation-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .glass-panel:hover {
+      border-color: rgba(0, 243, 255, 0.5);
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.05);
+    }
+
+    /* Decorative Corner Accents */
+    .glass-panel::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 20px; height: 20px;
+      border-top: 2px solid var(--primary-neon);
+      border-right: 2px solid var(--primary-neon);
+      opacity: 0.5;
+      transition: all 0.3s;
+    }
+    
+    .glass-panel:hover::after {
+      width: 100%; height: 100%;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+
+    /* Control Sidebar */
+    .control-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .panel-title {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      display: block;
+      letter-spacing: 1px;
+    }
+
+    /* Custom Input Styling */
+    .nexus-input .el-input__wrapper {
+      background: transparent !important;
+      box-shadow: none !important;
+      border-bottom: 2px solid var(--card-border) !important;
+      border-radius: 0 !important;
+      padding-left: 0 !important;
+      transition: all 0.3s;
+    }
+
+    .nexus-input .el-input__wrapper.is-focus {
+      border-bottom-color: var(--primary-neon) !important;
+    }
+
+    .nexus-input input {
+      color: white !important;
+      font-family: var(--font-sans);
+      font-size: 16px;
+    }
+
+    /* Tags */
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nexus-tag {
+      background: rgba(0, 243, 255, 0.05) !important;
+      border: 1px solid rgba(0, 243, 255, 0.3) !important;
+      color: var(--primary-neon) !important;
+      font-family: var(--font-sans) !important;
+      border-radius: 0 !important;
+    }
+
+    .nexus-tag .el-tag__close:hover {
+      background-color: var(--primary-neon) !important;
+      color: #000 !important;
+    }
+
+    /* Config Controls */
+    .config-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    /* Buttons */
+    .nexus-btn-primary {
+      background: var(--primary-neon) !important;
+      border: none !important;
+      color: #000 !important;
+      font-weight: 800 !important;
+      font-family: var(--font-sans) !important;
+      border-radius: 2px !important;
+      letter-spacing: 1px;
+      height: 45px !important;
+      transition: all 0.2s !important;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* 按钮光扫过效果 */
+    .nexus-btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: 0.5s;
+    }
+    .nexus-btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .nexus-btn-primary:hover {
+      box-shadow: 0 0 20px var(--primary-neon);
+      transform: translateY(-2px);
+    }
+
+    .nexus-btn-ghost {
+      background: transparent !important;
+      border: 1px solid var(--card-border) !important;
+      color: var(--text-muted) !important;
+      font-family: var(--font-sans) !important;
+      transition: all 0.3s !important;
+    }
+
+    .nexus-btn-ghost:hover {
+      border-color: var(--text-main) !important;
+      color: var(--text-main) !important;
+      background: rgba(255,255,255,0.05) !important;
+    }
+
+    /* Terminal */
+    .terminal-window {
+      background: #000;
+      border: 1px solid #333;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 15px;
+      height: 250px;
+      overflow-y: auto;
+      font-size: 12px;
+      color: #33ff00;
+      position: relative;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    }
+
+    .log-line {
+      margin-bottom: 4px;
+      opacity: 0.9;
+      display: flex;
+    }
+    
+    .log-time { color: #555; margin-right: 10px; }
+    .log-sys { color: var(--primary-neon); }
+    .log-err { color: #ff0055; }
+    .log-succ { color: var(--success-neon); }
+
+    /* Results Area */
+    .results-area {
+      min-height: 400px;
+    }
+
+    .result-group-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .result-group-title {
+      font-size: 1.5em;
+      font-weight: 300;
+      color: #fff;
+    }
+
+    .result-count {
+      background: #333;
+      padding: 2px 8px;
+      font-size: 12px;
+      border-radius: 10px;
+      font-family: var(--font-mono);
+    }
+
+    /* Paper Card (Avant-garde) */
+    .paper-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid transparent;
+      margin-bottom: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .paper-card:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(0, 243, 255, 0.4);
+      transform: translateX(10px) scale(1.01);
+      box-shadow: -5px 5px 20px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    
+    .paper-card.selected {
+      background: rgba(0, 243, 255, 0.05);
+      border-left: 2px solid var(--primary-neon);
+    }
+
+    .paper-main {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .paper-title {
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: 500;
+      cursor: pointer;
+      line-height: 1.4;
+      transition: color 0.2s;
+    }
+
+    .paper-title:hover {
+      color: var(--primary-neon);
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    }
+
+    .paper-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .match-container {
+      width: 100%;
+    }
+    .match-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .match-track {
+      height: 6px;
+      background: #222;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+    }
+    .match-fill {
+      height: 100%;
+      box-shadow: 0 0 10px currentColor;
+      transition: width 0.8s ease-out;
+      border-radius: 3px;
+    }
+    .color-high { background: var(--success-neon); color: var(--success-neon); }
+    .color-med { background: var(--warning-neon); color: var(--warning-neon); }
+    .color-low { background: #ff0055; color: #ff0055; }
+
+    /* Sticky Footer */
+    .nexus-footer {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      border-radius: 50px;
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border-top: 1px solid var(--primary-neon);
+    }
+    
+    .nexus-footer .count {
+      font-family: var(--font-mono);
+      color: var(--success-neon);
+      font-weight: bold;
+    }
+
+    /* Custom Checkbox */
+    .el-checkbox__inner {
+      background: transparent !important;
+      border-color: #555 !important;
+      border-radius: 0 !important;
+    }
+    .el-checkbox__input.is-checked .el-checkbox__inner {
+      background-color: var(--primary-neon) !important;
+      border-color: var(--primary-neon) !important;
+      color: #000;
+    }
+
+    /* Dialog styling */
+    .el-dialog {
+      background: #111 !important;
+      border: 1px solid #333 !important;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    }
+    .el-dialog__title { color: #fff !important; font-family: var(--font-mono); }
+    .el-textarea__inner {
+      background: #050505 !important;
+      color: var(--success-neon) !important;
+      font-family: var(--font-mono) !important;
+      border-color: #333 !important;
+    }
+
+    /* Animations - Glitch */
+    
+    .glitch-text {
+      position: relative;
+    }
+    
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-color);
+    }
+    
+    .glitch-text::before {
+      left: 2px;
+      text-shadow: -1px 0 #ff00c1;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+    
+    .glitch-text::after {
+      left: -2px;
+      text-shadow: -1px 0 #00fff9;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim2 5s infinite linear alternate-reverse;
+    }
+    
+    @keyframes glitch-anim {
+      0% { clip: rect(20px, 9999px, 80px, 0); transform: skew(0.5deg); }
+      5% { clip: rect(90px, 9999px, 10px, 0); transform: skew(0.5deg); }
+      10% { clip: rect(10px, 9999px, 90px, 0); transform: skew(-0.5deg); }
+      100% { clip: rect(30px, 9999px, 60px, 0); transform: skew(0); }
+    }
+    @keyframes glitch-anim2 {
+      0% { clip: rect(20px, 9999px, 80px, 0); transform: skew(-0.5deg); }
+      5% { clip: rect(10px, 9999px, 90px, 0); transform: skew(0.5deg); }
+      10% { clip: rect(90px, 9999px, 10px, 0); transform: skew(0); }
+      100% { clip: rect(30px, 9999px, 60px, 0); transform: skew(0); }
+    }
+
+    /* 闪烁光标 */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <div>
+          <h1 class="glitch-text" data-text="NEXUS | 神经中枢">NEXUS | 神经中枢</h1>
+          <div class="subtitle">次世代文献检索终端 // V2.5</div>
+        </div>
+        <div class="status-badge">
+          系统联机 // ONLINE
+        </div>
+      </div>
+
+      <div class="main-grid">
+        <!-- Sidebar Controls -->
+        <aside class="control-panel">
+          <!-- Input Module -->
+          <div class="glass-panel panel-delay-1">
+            <span class="panel-title">01 // 检索指令输入</span>
+            <div style="display:flex; gap:10px; margin-bottom: 20px;">
+              <el-input 
+                v-model="newKeyword" 
+                placeholder="输入检索关键词..."
+                class="nexus-input"
+                @keyup.enter="addKeyword"
+                :disabled="isSearching"
+              ></el-input>
+              <el-button class="nexus-btn-primary" @click="addKeyword" :icon="Plus" style="width: 50px; padding:0;">+</el-button>
+            </div>
+            
+            <div class="tag-container">
+              <el-tag 
+                v-for="(kw, index) in keywords" 
+                :key="index"
+                closable
+                class="nexus-tag"
+                @close="removeKeyword(index)"
+              >
+                {{ kw }}
+              </el-tag>
+              <span v-if="keywords.length === 0" style="color:#444; font-size:12px; font-family: var(--font-mono);">[当前无活跃指令]</span>
+            </div>
+          </div>
+
+          <!-- Configuration Module -->
+          <div class="glass-panel panel-delay-2">
+            <span class="panel-title">02 // 检索参数配置</span>
+            <div class="config-group">
+              <div>
+                <label style="color:#666; font-size:12px; display:block; margin-bottom:5px;">阈值限制</label>
+                <el-select v-model="resultsPerKeyword" class="nexus-select" :disabled="isSearching">
+                  <el-option :value="5" label="05 条目/组" />
+                  <el-option :value="10" label="10 条目/组" />
+                  <el-option :value="20" label="20 条目/组" />
+                </el-select>
+              </div>
+              <div>
+                <label style="color:#666; font-size:12px; display:block; margin-bottom:5px;">排序协议</label>
+                <el-select v-model="sortBy" class="nexus-select" :disabled="isSearching">
+                  <el-option value="SU" label="主题相关" />
+                  <el-option value="PT" label="发表时间" />
+                  <el-option value="CT" label="引用频次" />
+                </el-select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;" class="panel-delay-3" style="animation: fadeInUp 0.6s forwards;">
+            <el-button 
+              class="nexus-btn-primary" 
+              @click="startSearch"
+              :loading="isSearching"
+              :disabled="keywords.length === 0"
+            >
+              {{ isSearching ? '正在扫描...' : '启动全域扫描' }}
+            </el-button>
+            <el-button class="nexus-btn-ghost" @click="clearKeywords" :disabled="isSearching">
+              系统重置
+            </el-button>
+          </div>
+          
+          <el-button class="nexus-btn-ghost panel-delay-3" style="width:100%; margin-top: 10px; animation: fadeInUp 0.6s forwards;" @click="loadPreset" :disabled="isSearching">
+            加载预设协议
+          </el-button>
+
+          <!-- Terminal Module -->
+          <div class="glass-panel panel-delay-4" style="padding:0; border:none;">
+            <div class="terminal-window" ref="logTerminal">
+              <div style="color:#666; margin-bottom:10px;">> NEXUS_TERMINAL_V1.0 已连接...</div>
+              <div v-for="(log, index) in logs" :key="index" class="log-line">
+                <span class="log-time">{{ log.time }}</span>
+                <span :class="getLogClass(log.type)">{{ log.message }}</span>
+              </div>
+              <div v-if="isSearching" class="log-line">
+                <span class="log-time">{{ getCurrentTime() }}</span>
+                <span style="color:yellow; animation: blink 1s infinite;">_</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Results Area -->
+        <main class="results-area">
+          <div class="glass-panel panel-delay-2" style="min-height: 600px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:30px;">
+              <span class="panel-title">03 // 数据流传输</span>
+              <div v-if="results.length > 0">
+                 <el-button link style="color:var(--text-muted)" @click="sortByMatch">排序: 匹配度%</el-button>
+                 <el-button link style="color:var(--text-muted)" @click="selectAll">全选数据</el-button>
+              </div>
+            </div>
+
+            <!-- Empty State -->
+            <div v-if="results.length === 0 && !isSearching" style="text-align:center; padding:100px 0; color:#333;">
+              <div style="font-size:40px; margin-bottom:20px; color:#222; font-family:var(--font-mono);">DATA_VOID</div>
+              <p>等待输入检索参数...</p>
+            </div>
+
+            <!-- Loading State -->
+            <div v-if="isSearching && results.length === 0" style="text-align:center; padding:100px 0;">
+              <div style="color:var(--primary-neon); font-family:var(--font-mono)">
+                正在接入数据库节点... <br>
+                正在解密元数据...
+              </div>
+            </div>
+
+            <!-- Results List -->
+            <div v-for="result in results" :key="result.keyword" style="margin-bottom:40px;">
+              <div class="result-group-header">
+                <span style="color:var(--primary-neon)">#</span>
+                <h3 class="result-group-title">{{ result.keyword }}</h3>
+                <span class="result-count">{{ result.items.length }}</span>
+              </div>
+
+              <div 
+                class="paper-card" 
+                :class="{ selected: isSelected(result.keyword, idx) }"
+                v-for="(paper, idx) in result.items" 
+                :key="idx"
+              >
+                <!-- Checkbox -->
+                <el-checkbox 
+                  :model-value="isSelected(result.keyword, idx)"
+                  @change="toggleSelect(result.keyword, idx, paper)"
+                />
+
+                <!-- Content -->
+                <div class="paper-main">
+                  <div class="paper-title" @click="openPaper(paper.link)">
+                    {{ paper.title }}
+                  </div>
+                  <div class="paper-meta">
+                    <span>作者: {{ paper.authors || '未知' }}</span>
+                    <span style="color:#333">|</span>
+                    <span>期刊: {{ paper.source || '未知' }}</span>
+                    <span style="color:#333">|</span>
+                    <span>{{ paper.date || '未知' }}</span>
+                    <span style="color:#333">|</span>
+                    <span style="color:var(--warning-neon)">引用: {{ paper.cite || 0 }}</span>
+                    <span style="color:#333">|</span>
+                    <span :class="getMatchColorClass(paper._matchScore || 0)">匹配: {{ paper._matchScore || 0 }}%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Floating Footer -->
+      <transition name="el-fade-in">
+        <div class="nexus-footer" v-if="selectedPapers.length > 0">
+          <div class="count">{{ selectedPapers.length }} 个单元已选中</div>
+          <div style="width:1px; height:20px; background:#333;"></div>
+          <el-button size="small" type="primary" plain @click="exportSchoolFormat">学校格式</el-button>
+          <el-button size="small" type="primary" plain @click="exportGBFormat">国标 GB/T</el-button>
+          <el-button size="small" type="primary" plain @click="exportMarkdown">Markdown</el-button>
+          <el-button size="small" type="primary" plain @click="exportBibtex">BibTeX</el-button>
+          <el-button circle :icon="Delete" @click="deselectAll" style="background:transparent; border:none; color:#666;"></el-button>
+        </div>
+      </transition>
+    </div>
+
+    <!-- Export Dialog -->
+    <el-dialog v-model="exportDialogVisible" :title="exportTitle" width="60%">
+      <el-input 
+        type="textarea" 
+        v-model="exportContent" 
+        :rows="15"
+        readonly
+      />
+      <template #footer>
+        <el-button class="nexus-btn-ghost" @click="copyExport">复制数据</el-button>
+        <el-button class="nexus-btn-primary" @click="downloadExport">下载文件</el-button>
+      </template>
+    </el-dialog>
+  </div>
+
+  <script>
+    const { createApp, ref, computed, nextTick } = Vue;
+    const { Plus, Delete } = ElementPlusIconsVue;
+
+    createApp({
+      setup() {
+        const newKeyword = ref('');
+        const keywords = ref([]);
+        const resultsPerKeyword = ref(5);
+        const sortBy = ref('SU');
+        const isSearching = ref(false);
+        const results = ref([]);
+        const selectedPapers = ref([]);
+        const selectedKeys = ref(new Set());
+        const logs = ref([]);
+        const logTerminal = ref(null);
+        
+        const exportDialogVisible = ref(false);
+        const exportTitle = ref('');
+        const exportContent = ref('');
+        const exportFilename = ref('');
+        
+        // 匹配度计算函数
+        const calculateMatchScore = (paper, keyword) => {
+          let score = 0;
+          const title = (paper.title || '').toLowerCase();
+          const kws = keyword.toLowerCase().split(/\s+/);
+          
+          // 1. 关键词匹配度 (50分)
+          let kwScore = 0;
+          kws.forEach(kw => {
+            if (title.includes(kw)) {
+              kwScore += 50 / kws.length;
+            }
+          });
+          score += kwScore;
+          
+          // 2. 被引次数评分 (30分)
+          const cite = parseInt(paper.cite) || 0;
+          if (cite >= 100) score += 30;
+          else if (cite >= 50) score += 25;
+          else if (cite >= 20) score += 20;
+          else if (cite >= 10) score += 15;
+          else if (cite >= 5) score += 10;
+          else if (cite >= 1) score += 5;
+          
+          // 3. 时间新旧评分 (20分)
+          const yearMatch = paper.date?.match(/(\d{4})/);
+          if (yearMatch) {
+            const year = parseInt(yearMatch[1]);
+            const currentYear = new Date().getFullYear();
+            const age = currentYear - year;
+            if (age <= 1) score += 20;
+            else if (age <= 2) score += 16;
+            else if (age <= 3) score += 12;
+            else if (age <= 5) score += 8;
+            else score += 4;
+          }
+          
+          return Math.min(100, Math.round(score));
+        };
+
+        const addLog = (type, msg) => {
+          const time = new Date().toLocaleTimeString('en-GB');
+          logs.value.push({ time, type, message: msg });
+          nextTick(() => {
+            if(logTerminal.value) logTerminal.value.scrollTop = logTerminal.value.scrollHeight;
+          });
+        };
+
+        const addKeyword = () => {
+          const kw = newKeyword.value.trim();
+          if (kw && !keywords.value.includes(kw)) {
+            keywords.value.push(kw);
+            newKeyword.value = '';
+            addLog('sys', `指令已添加: "${kw}"`);
+          }
+        };
+        
+        const removeKeyword = (index) => {
+          addLog('sys', `指令移除: "${keywords.value[index]}"`);
+          keywords.value.splice(index, 1);
+        };
+        
+        const clearKeywords = () => {
+          keywords.value = [];
+          results.value = [];
+          selectedPapers.value = [];
+          selectedKeys.value = new Set();
+          addLog('sys', '系统重置完成');
+        };
+        
+        const loadPreset = () => {
+          keywords.value = [
+            '校园综合服务平台 设计与实现',
+            '高校二手交易平台',
+            '校园食堂订餐系统',
+            '高校后勤报修系统',
+            '校园活动管理系统',
+            'Spring Boot 微信小程序',
+            'uni-app 跨平台开发'
+          ];
+          addLog('succ', '预设协议加载完成');
+        };
+        
+        const startSearch = async () => {
+          isSearching.value = true;
+          results.value = [];
+          logs.value = [];
+          addLog('sys', '正在初始化扫描序列...');
+          
+          try {
+            const res = await fetch('/api/search', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                keywords: keywords.value,
+                resultsPerKeyword: resultsPerKeyword.value,
+                sortBy: sortBy.value
+              })
+            });
+            
+            const data = await res.json();
+            if (data.success) {
+              // 计算每篇文献的匹配度
+              data.results.forEach(r => {
+                r.items.forEach(paper => {
+                  paper._matchScore = calculateMatchScore(paper, r.keyword);
+                });
+              });
+              results.value = data.results;
+              addLog('succ', `扫描完成. 获取到 ${data.totalCount} 个数据单元.`);
+            } else {
+              addLog('err', data.message);
+            }
+          } catch (err) {
+            addLog('err', '连接错误: ' + err.message);
+          } finally {
+            isSearching.value = false;
+          }
+        };
+
+        // ... Existing Helper Functions ...
+        const getMatchColorClass = (score) => {
+          if (score >= 80) return 'color-high';
+          if (score >= 60) return 'color-med';
+          return 'color-low';
+        };
+
+        const getLogClass = (type) => {
+           if(type === 'err') return 'log-err';
+           if(type === 'succ') return 'log-succ';
+           return 'log-sys';
+        };
+
+        const getCurrentTime = () => new Date().toLocaleTimeString('en-GB');
+
+        const openPaper = (link) => {
+          if (link !== '#') window.open(link, '_blank');
+        };
+
+        // Selection Logic
+        const getKey = (keyword, idx) => `${keyword}_${idx}`;
+        const isSelected = (keyword, idx) => selectedKeys.value.has(getKey(keyword, idx));
+        
+        const toggleSelect = (keyword, idx, paper) => {
+          const key = getKey(keyword, idx);
+          if (selectedKeys.value.has(key)) {
+            selectedKeys.value.delete(key);
+            selectedPapers.value = selectedPapers.value.filter(p => p._key !== key);
+          } else {
+            selectedKeys.value.add(key);
+            selectedPapers.value.push({ ...paper, _key: key });
+          }
+        };
+
+        const selectAll = () => {
+          selectedPapers.value = [];
+          selectedKeys.value = new Set();
+          for (const r of results.value) {
+            r.items.forEach((paper, idx) => {
+              const key = getKey(r.keyword, idx);
+              selectedKeys.value.add(key);
+              selectedPapers.value.push({ ...paper, _key: key });
+            });
+          }
+        };
+
+        const deselectAll = () => {
+          selectedPapers.value = [];
+          selectedKeys.value = new Set();
+        };
+
+        // 根据来源判断文献类型
+        const getDocType = (source) => {
+          if (!source) return 'J';
+          const s = source.toLowerCase();
+          // 学位论文
+          if (s.includes('大学') || s.includes('学院') || s.includes('研究生') || s.includes('硕士') || s.includes('博士')) return 'D';
+          // 会议论文
+          if (s.includes('会议') || s.includes('论坛') || s.includes('研讨') || s.includes('symposium') || s.includes('conference')) return 'C';
+          // 报纸
+          if (s.includes('报') && !s.includes('学报')) return 'N';
+          // 默认期刊
+          return 'J';
+        };
+
+        // Export Functions
+        const exportSchoolFormat = () => {
+          let content = '';
+          selectedPapers.value.forEach((paper, i) => {
+            const authors = paper.authors?.replace(/;/g, ',') || '佚名';
+            const docType = getDocType(paper.source);
+            const dateMatch = paper.date?.match(/(\d{4})[-/]?(\d{2})?/);
+            const year = dateMatch?.[1] || '';
+            const issue = dateMatch?.[2] ? `(${parseInt(dateMatch[2])})` : '';
+            content += `[${i + 1}] ${authors}. ${paper.title}[${docType}]. ${paper.source}, ${year}${issue}.\n`;
+          });
+          showExport('学校参考文献格式', content, 'ref_school.txt');
+        };
+        
+        const exportGBFormat = () => {
+           let content = '';
+           selectedPapers.value.forEach((paper, i) => {
+             const docType = getDocType(paper.source);
+             // 超过3个作者用"等"
+             let authorList = paper.authors?.split(/[;,，]/).map(a => a.trim()).filter(a => a) || ['佚名'];
+             let authors = authorList.length > 3 ? authorList.slice(0, 3).join(', ') + ', 等' : authorList.join(', ');
+             const year = paper.date?.match(/(\d{4})/)?.[1] || '';
+             content += `[${i + 1}] ${authors}. ${paper.title}[${docType}]. ${paper.source}, ${year}.\n`;
+           });
+           showExport('GB/T 7714', content, 'ref_gb.txt');
+        };
+
+        const exportMarkdown = () => {
+           let md = `# 参考文献\n\n| ID | 标题 | 作者 |\n|---|---|---|\n`;
+           selectedPapers.value.forEach((p,i) => md += `| ${i+1} | ${p.title} | ${p.authors} |\n`);
+           showExport('Markdown 格式', md, 'ref.md');
+        };
+
+        const exportBibtex = () => {
+           let bib = '';
+           selectedPapers.value.forEach((p,i) => {
+             bib += `@article{ref${i+1}, title={${p.title}}, author={${p.authors}}, year={${p.date}}}\n`;
+           });
+           showExport('BibTeX 格式', bib, 'ref.bib');
+        };
+
+        const showExport = (title, content, filename) => {
+          exportTitle.value = title;
+          exportContent.value = content;
+          exportFilename.value = filename;
+          exportDialogVisible.value = true;
+        };
+
+        const copyExport = () => {
+          navigator.clipboard.writeText(exportContent.value);
+          ElementPlus.ElMessage.success('数据已复制到剪贴板');
+        };
+
+        const downloadExport = () => {
+          const blob = new Blob([exportContent.value], { type: 'text/plain;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = exportFilename.value;
+          a.click();
+        };
+        
+        const sortByMatch = () => {
+          results.value.forEach(r => r.items.sort((a,b) => b._matchScore - a._matchScore));
+        };
+
+        Vue.onMounted(() => {
+          const evtSource = new EventSource('/api/events');
+          evtSource.onmessage = (event) => {
+            const log = JSON.parse(event.data);
+            logs.value.push({ time: log.time, type: log.type === 'success' ? 'succ' : (log.type === 'error' ? 'err' : 'sys'), message: log.message });
+            nextTick(() => {
+              if (logTerminal.value) {
+                logTerminal.value.scrollTop = logTerminal.value.scrollHeight;
+              }
+            });
+          };
+        });
+
+        return {
+          newKeyword, keywords, resultsPerKeyword, sortBy, isSearching, results, selectedPapers, logs, logTerminal,
+          exportDialogVisible, exportTitle, exportContent,
+          addKeyword, removeKeyword, clearKeywords, loadPreset, startSearch, openPaper,
+          getMatchColorClass, getLogClass, getCurrentTime,
+          isSelected, toggleSelect, selectAll, deselectAll,
+          exportSchoolFormat, exportGBFormat, exportMarkdown, exportBibtex, copyExport, downloadExport, sortByMatch,
+          Plus, Delete
+        };
+      }
+    }).use(ElementPlus).mount('#app');
+  </script>
+</body>
+</html>

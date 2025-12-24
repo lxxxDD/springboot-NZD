@@ -1,8 +1,34 @@
 {
-  "hash": "f0f65575",
-  "configHash": "54239976",
+  "hash": "a16d0cf9",
+  "configHash": "db9dd587",
   "lockfileHash": "d2395f0d",
-  "browserHash": "4818e291",
-  "optimized": {},
-  "chunks": {}
+  "browserHash": "40ecbf36",
+  "optimized": {
+    "dayjs": {
+      "src": "../../../../../node_modules/dayjs/dayjs.min.js",
+      "file": "dayjs.js",
+      "fileHash": "1c9ca15e",
+      "needsInterop": true
+    },
+    "dayjs/plugin/relativeTime": {
+      "src": "../../../../../node_modules/dayjs/plugin/relativeTime.js",
+      "file": "dayjs_plugin_relativeTime.js",
+      "fileHash": "56ce180d",
+      "needsInterop": true
+    },
+    "dayjs/locale/zh-cn": {
+      "src": "../../../../../node_modules/dayjs/locale/zh-cn.js",
+      "file": "dayjs_locale_zh-cn.js",
+      "fileHash": "ff90c8f4",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-FLSLHQ4A": {
+      "file": "chunk-FLSLHQ4A.js"
+    },
+    "chunk-Y2F7D3TJ": {
+      "file": "chunk-Y2F7D3TJ.js"
+    }
+  }
 }
