@@ -302,7 +302,18 @@ function contactCounterparty() {
 
 function goUserProfile() {
   const target = counterparty.value
-  uni.navigateTo({ url: `/pages/profile/user-detail?userId=${target.id}` })
+  console.log('跳转用户主页:', target)
+  if (!target.id) {
+    uni.showToast({ title: '用户信息不完整', icon: 'none' })
+    return
+  }
+  uni.navigateTo({ 
+    url: `/pages/profile/user-detail?userId=${target.id}`,
+    fail: (err) => {
+      console.error('跳转失败:', err)
+      uni.showToast({ title: '页面跳转失败', icon: 'none' })
+    }
+  })
 }
 
 // 卖家确认交易
