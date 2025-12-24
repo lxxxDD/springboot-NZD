@@ -23,11 +23,9 @@
 
       <view class="section">
         <text class="sec-title">支付方式</text>
-        <view class="payment-methods">
-          <view v-for="(item, index) in paymentOptions" :key="index" class="payment-btn" :class="{ active: paymentMethodIndex === index }" @click="paymentMethodIndex = index">
-            <u-icon :name="item.icon" size="22" :color="paymentMethodIndex === index ? '#3b82f6' : '#6b7280'"></u-icon>
-            <text class="payment-text">{{ item.title }}</text>
-          </view>
+        <view class="mock-payment">
+          <u-icon name="checkmark-circle-fill" size="22" color="#10B981"></u-icon>
+          <text class="mock-payment-text">模拟支付</text>
         </view>
       </view>
 
@@ -46,14 +44,7 @@ const u = reactive(getUser())
 const balance = ref(u.balance)
 const amount = ref(20)
 const presetAmounts = [10, 20, 50, 100]
-const paymentMethodIndex = ref(0)
 const loading = ref(false)
-
-const paymentOptions = ref([
-  { id: 0, title: '微信支付', icon: 'weixin-fill' },
-  { id: 1, title: '支付宝', icon: 'zhifubao' },
-  { id: 2, title: '银行卡', icon: 'coupon-fill' }
-])
 
 // 加载当前余额
 onMounted(async () => {
@@ -75,7 +66,7 @@ async function topup(){
   loading.value = true
   
   try {
-    const paymentMethod = paymentOptions.value[paymentMethodIndex.value].title
+    const paymentMethod = '模拟支付'
     
     // 模拟2秒支付处理时间
     await new Promise(resolve => setTimeout(resolve, 2000))
@@ -132,6 +123,21 @@ async function topup(){
 }
 .payment-btn.active .payment-text {
   color: #3b82f6;
+}
+.mock-payment {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #10B981;
+  border-radius: 12px;
+  height: 48px;
+  background: #ECFDF5;
+  padding: 0 16px;
+}
+.mock-payment-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #10B981;
 }
 .page { background: #fff; min-height: 100vh; }
 .header { position: relative; text-align: center; padding: 16px; border-bottom: 1px solid #f3f4f6; }
