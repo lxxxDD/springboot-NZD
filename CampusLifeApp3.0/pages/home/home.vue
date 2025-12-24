@@ -181,7 +181,7 @@ async function loadWeather() { weather.value = { city: '南宁', temp: '26', tex
 async function loadRepairs() { repairList.value = [{id:'R20231001', issue:'Electric', location:'D栋 405', status:'In Progress'}] }
 async function loadActivities() {
   try {
-    const res = await getActivities({ page: 1, size: 6 })
+    const res = await getActivities({ page: 1, size: 3 })
     if (res.code === 200 && res.data) {
       const list = res.data.list || res.data
       activityList.value = list.map(item => ({
