@@ -89,4 +89,11 @@ public class UserController {
         data.put("online", isOnline);
         return Result.success(data);
     }
+
+    @Operation(summary = "获取其他用户的公开信息")
+    @GetMapping("/{userId}")
+    public Result<UserInfoVO> getUserById(@PathVariable Long userId) {
+        UserInfoVO vo = userService.getProfile(userId);
+        return Result.success(vo);
+    }
 }

@@ -57,6 +57,22 @@ export function getUserStatus(userId) {
   return get(`/api/user/status/${userId}`)
 }
 
+/**
+ * 获取其他用户的公开信息
+ * @param {number} userId - 用户ID
+ */
+export function getUserById(userId) {
+  return get(`/api/user/${userId}`)
+}
+
+/**
+ * 获取用户发布的商品列表
+ * @param {number} userId - 用户ID
+ */
+export function getUserMarketItems(userId) {
+  return get(`/api/market/items`, { userId, status: 'active' })
+}
+
 export default {
   login,
   register,
@@ -64,5 +80,7 @@ export default {
   updateProfile,
   getBalance,
   topup,
-  getUserStatus
+  getUserStatus,
+  getUserById,
+  getUserMarketItems
 }

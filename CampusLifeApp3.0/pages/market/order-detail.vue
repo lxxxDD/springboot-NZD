@@ -44,15 +44,21 @@
       </view>
 
       <view class="card seller-card animate-enter" style="--delay: 0.2s">
-        <view class="seller-row" @click="contactCounterparty">
-          <u-avatar :src="counterparty.avatar || 'https://via.placeholder.com/100'" size="40"></u-avatar>
-          <view class="seller-info">
+        <view class="seller-row">
+          <u-avatar :src="counterparty.avatar || 'https://via.placeholder.com/100'" size="40" @click="goUserProfile"></u-avatar>
+          <view class="seller-info" @click="goUserProfile">
             <text class="seller-name">{{ counterparty.name || '未知用户' }}</text>
             <text class="seller-tag">{{ counterparty.label }}</text>
           </view>
-          <view class="contact-btn">
-            <u-icon name="chat-fill" color="#6366F1" size="16"></u-icon>
-            <text>联系</text>
+          <view class="btn-group">
+            <view class="contact-btn" @click="contactCounterparty">
+              <u-icon name="chat-fill" color="#6366F1" size="16"></u-icon>
+              <text>联系</text>
+            </view>
+            <view class="profile-btn" @click="goUserProfile">
+              <text>主页</text>
+              <u-icon name="arrow-right" color="#6366F1" size="12"></u-icon>
+            </view>
           </view>
         </view>
       </view>
@@ -263,6 +269,11 @@ function contactCounterparty() {
   uni.navigateTo({ url: `/pages/messages/chat?userId=${target.id}&name=${target.name}&avatar=${encodeURIComponent(target.avatar || '')}` })
 }
 
+function goUserProfile() {
+  const target = counterparty.value
+  uni.navigateTo({ url: `/pages/profile/user-detail?userId=${target.id}` })
+}
+
 // 卖家确认交易
 function confirmShipment() {
   uni.showModal({
@@ -380,7 +391,9 @@ $text-sub: #64748B;
 .seller-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 .seller-name { font-size: 15px; font-weight: 700; color: $text-main; }
 .seller-tag { font-size: 10px; color: #10B981; background: #ECFDF5; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-top: 2px; }
+.btn-group { display: flex; align-items: center; gap: 8px; }
 .contact-btn { display: flex; align-items: center; gap: 4px; padding: 6px 12px; background: #EEF2FF; border-radius: 100px; text { font-size: 12px; color: $primary; font-weight: 600; } }
+.profile-btn { display: flex; align-items: center; gap: 2px; padding: 6px 10px; background: #fff; border: 1px solid #E0E7FF; border-radius: 100px; text { font-size: 12px; color: $primary; font-weight: 600; } &:active { background: #F0F4FF; } }
 
 /* 4. 商品明细 */
 .section-title { font-size: 15px; font-weight: 700; color: $text-main; margin-bottom: 16px; display: block; }

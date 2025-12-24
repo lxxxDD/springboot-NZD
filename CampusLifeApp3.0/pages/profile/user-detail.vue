@@ -182,85 +182,96 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
+import { getUserById, getUserMarketItems } from '@/api/user.js'
 
 const activeTab = ref('market')
 const isFollowing = ref(false)
+const loading = ref(true)
 
 // 用户信息
 const userInfo = reactive({
-  id: '20231001',
-  name: 'Sarah Chen',
-  avatar: 'https://picsum.photos/200/200?random=1',
-  major: 'Computer Science',
-  grade: 'Junior',
-  verified: true,
-  online: true,
-  followers: 328,
-  following: 156,
-  posts: 42,
-  rating: 4.8,
-  bio: '热爱编程和设计 | 喜欢分享生活 | 校园二手市场活跃卖家 🎨'
+  id: '',
+  name: '',
+  avatar: '',
+  major: '',
+  grade: '',
+  verified: false,
+  online: false,
+  followers: 0,
+  following: 0,
+  posts: 0,
+  rating: 0,
+  bio: '',
+  creditLevel: '',
+  tradeCount: 0
 })
 
 // 在售商品
-const marketItems = ref([
-  {
-    id: 1,
-    title: 'MacBook Pro 2021',
-    price: 1299,
-    image: 'https://picsum.photos/300/300?random=10',
-    status: 'selling'
-  },
-  {
-    id: 2,
-    title: 'iPad Air 第五代',
-    price: 499,
-    image: 'https://picsum.photos/300/300?random=11',
-    status: 'selling'
-  },
-  {
-    id: 3,
-    title: '数据结构教材',
-    price: 25,
-    image: 'https://picsum.photos/300/300?random=12',
-    status: 'sold'
-  }
-])
+const marketItems = ref([])
 
 // 发起的活动
-const activities = ref([
-  {
-    id: 1,
-    title: '周末篮球友谊赛',
-    time: '12-25 14:00',
-    location: '体育馆',
-    participants: 8,
-    maxParticipants: 10,
-    image: 'https://picsum.photos/400/200?random=20',
-    status: 'ongoing'
-  },
-  {
-    id: 2,
-    title: '编程学习小组',
-    time: '12-20 19:00',
-    location: '图书馆301',
-    participants: 12,
-    maxParticipants: 15,
-    image: 'https://picsum.photos/400/200?random=21',
-    status: 'ongoing'
-  }
-])
+const activities = ref([])
 
 onLoad((options) => {
   if (options.userId) {
-    // 根据userId加载用户信息
     loadUserInfo(options.userId)
+    loadUserMarketItems(options.userId)
   }
 })
 
-function loadUserInfo(userId) {
-  // TODO: 从服务器加载用户信息
-  console.log('Loading user:', userId)
+async function loadUserInfo(userId) {
+  loading.value = true
+  try {
+    const res = await getUserById(userId)
+    if (res.code === 200 || res.code === 0) {
+      const data = res.data
+      userInfo.id = data.id || userId
+      userInfo.name = data.username || data.nickname || '未知用户'
+      userInfo.avatar = data.avatar || 'https://via.placeholder.com/100'
+      userInfo.major = data.major || ''
+      userInfo.grade = data.grade || ''
+      userInfo.verified = data.verified || false
+      userInfo.bio = data.bio || data.signature || ''
+      userInfo.creditLevel = data.creditLevel || '信用良好'
+      userInfo.tradeCount = data.tradeCount || 0
+      userInfo.rating = data.rating || 5.0
+      userInfo.posts = data.posts || 0
+    }
+  } catch (e) {
+    console.error('加载用户信息失败', e)
+    uni.showToast({ title: '加载失败', icon: 'none' })
+  } finally {
+    loading.value = false
+  }
+}
+
+async function loadUserMarketItems(userId) {
+  try {
+    const res = await getUserMarketItems(userId)
+    if (res.code === 200 || res.code === 0) {
+      const list = res.data?.records || res.data?.list || res.data || []
+      marketItems.value = list.map(item => ({
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        image: parseImage(item.images),
+        status: item.status === 'sold' ? 'sold' : 'selling'
+      }))
+      userInfo.posts = marketItems.value.length
+    }
+  } catch (e) {
+    console.error('加载用户商品失败', e)
+  }
+}
+
+function parseImage(images) {
+  if (!images) return 'https://via.placeholder.com/300'
+  try {
+    const parsed = JSON.parse(images)
+    return Array.isArray(parsed) ? parsed[0] : images
+  } catch {
+    return images.split(',')[0] || images
+  }
 }
 
 function goBack() {
