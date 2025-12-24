@@ -18,7 +18,7 @@ public interface IMarketItemService extends IService<MarketItem> {
     /**
      * 获取商品列表
      */
-    PageVO<MarketItemListVO> getItems(Integer page, Integer size, String category, String keyword, String sort);
+    PageVO<MarketItemListVO> getItems(Integer page, Integer size, String category, String keyword, String sort, Long sellerId);
     
     /**
      * 获取商品详情

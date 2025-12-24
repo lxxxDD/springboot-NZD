@@ -42,10 +42,13 @@ public class MarketItemServiceImpl extends ServiceImpl<MarketItemMapper, MarketI
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public PageVO<MarketItemListVO> getItems(Integer page, Integer size, String category, String keyword, String sort) {
+    public PageVO<MarketItemListVO> getItems(Integer page, Integer size, String category, String keyword, String sort, Long sellerId) {
         LambdaQueryWrapper<MarketItem> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(MarketItem::getStatus, "active");
         
+        if (sellerId != null) {
+            wrapper.eq(MarketItem::getSellerId, sellerId);
+        }
         if (StringUtils.hasText(category)) {
             wrapper.eq(MarketItem::getCategory, category);
         }

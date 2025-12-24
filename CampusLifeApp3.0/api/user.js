@@ -70,7 +70,7 @@ export function getUserById(userId) {
  * @param {number} userId - 用户ID
  */
 export function getUserMarketItems(userId) {
-  return get(`/api/market/items`, { userId, status: 'active' })
+  return get(`/api/market/items`, { sellerId: userId })
 }
 
 export default {

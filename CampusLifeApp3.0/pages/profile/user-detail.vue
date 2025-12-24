@@ -249,15 +249,20 @@ async function loadUserInfo(userId) {
 async function loadUserMarketItems(userId) {
   try {
     const res = await getUserMarketItems(userId)
+    console.log('商品列表返回:', res)
     if (res.code === 200 || res.code === 0) {
       const list = res.data?.records || res.data?.list || res.data || []
-      marketItems.value = list.map(item => ({
-        id: item.id,
-        title: item.title,
-        price: item.price,
-        image: parseImage(item.images),
-        status: item.status === 'sold' ? 'sold' : 'selling'
-      }))
+      console.log('商品数据:', list)
+      marketItems.value = list.map(item => {
+        console.log('商品图片字段:', item.images, item.coverImage, item.image)
+        return {
+          id: item.id,
+          title: item.title,
+          price: item.price,
+          image: parseImage(item.images || item.coverImage || item.image),
+          status: item.status === 'sold' ? 'sold' : 'selling'
+        }
+      })
       userInfo.posts = marketItems.value.length
     }
   } catch (e) {

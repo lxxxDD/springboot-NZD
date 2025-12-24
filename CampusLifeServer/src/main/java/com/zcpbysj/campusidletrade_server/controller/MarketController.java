@@ -40,8 +40,9 @@ public class MarketController {
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) String sort) {
-        PageVO<MarketItemListVO> vo = marketItemService.getItems(page, size, category, keyword, sort);
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) Long sellerId) {
+        PageVO<MarketItemListVO> vo = marketItemService.getItems(page, size, category, keyword, sort, sellerId);
         return Result.success(vo);
     }
 
