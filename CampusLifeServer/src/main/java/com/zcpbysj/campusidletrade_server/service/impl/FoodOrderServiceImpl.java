@@ -69,20 +69,10 @@ public class FoodOrderServiceImpl extends ServiceImpl<FoodOrderMapper, FoodOrder
                 throw new RuntimeException("菜品已下架: " + foodItem.getName());
             }
             
-            // 检查库存是否充足（-1表示不限库存）
+            // 检查库存是否充足（-1表示不限库存），创建订单时只检查不扣减
             if (foodItem.getStock() != null && foodItem.getStock() >= 0) {
                 if (foodItem.getStock() < itemDTO.getQuantity()) {
                     throw new RuntimeException("库存不足: " + foodItem.getName() + "，剩余库存: " + foodItem.getStock());
-                }
-                // 使用乐观锁扣减库存（通过条件更新确保并发安全）
-                LambdaUpdateWrapper<FoodItem> updateWrapper = new LambdaUpdateWrapper<>();
-                updateWrapper.eq(FoodItem::getId, foodItem.getId())
-                        .eq(FoodItem::getStock, foodItem.getStock())
-                        .ge(FoodItem::getStock, itemDTO.getQuantity())
-                        .setSql("stock = stock - " + itemDTO.getQuantity());
-                int updated = foodItemMapper.update(null, updateWrapper);
-                if (updated == 0) {
-                    throw new RuntimeException("库存扣减失败，请重试: " + foodItem.getName());
                 }
             }
 
@@ -137,6 +127,27 @@ public class FoodOrderServiceImpl extends ServiceImpl<FoodOrderMapper, FoodOrder
         User user = userMapper.selectById(userId);
         if (user.getBalance().compareTo(order.getTotalAmount()) < 0) {
             throw new RuntimeException("余额不足");
+        }
+
+        // 支付成功后扣减库存（使用乐观锁确保并发安全）
+        List<FoodOrderItem> orderItems = foodOrderItemMapper.selectList(
+                new LambdaQueryWrapper<FoodOrderItem>().eq(FoodOrderItem::getOrderId, orderId)
+        );
+        for (FoodOrderItem item : orderItems) {
+            FoodItem foodItem = foodItemMapper.selectById(item.getFoodItemId());
+            if (foodItem != null && foodItem.getStock() != null && foodItem.getStock() >= 0) {
+                if (foodItem.getStock() < item.getQuantity()) {
+                    throw new RuntimeException("库存不足: " + item.getFoodName());
+                }
+                LambdaUpdateWrapper<FoodItem> updateWrapper = new LambdaUpdateWrapper<>();
+                updateWrapper.eq(FoodItem::getId, foodItem.getId())
+                        .ge(FoodItem::getStock, item.getQuantity())
+                        .setSql("stock = stock - " + item.getQuantity());
+                int updated = foodItemMapper.update(null, updateWrapper);
+                if (updated == 0) {
+                    throw new RuntimeException("库存扣减失败，请重试: " + item.getFoodName());
+                }
+            }
         }
 
         // 扣除用户余额
