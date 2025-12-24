@@ -96,12 +96,19 @@ import { ref, nextTick } from 'vue'
 import { onLoad, onShow } from '@dcloudio/uni-app'
 import { getChatMessages, sendMessage as sendMessageApi } from '@/api/messages.js'
 import { uploadFile } from '@/api/request.js'
+import { baseURL } from '@/api/request.js'
 
 // 获取当前用户信息
 const userInfo = uni.getStorageSync('userInfo') || {}
 const user = ref({
-  avatar: userInfo.avatar || 'https://via.placeholder.com/100'
+  avatar: formatAvatarUrl(userInfo.avatar)
 })
+
+function formatAvatarUrl(url) {
+  if (!url) return 'https://via.placeholder.com/100'
+  if (url.startsWith('http')) return url
+  return baseURL + url
+}
 
 const targetUser = ref({
   id: '',        // 会话ID
@@ -129,7 +136,7 @@ onLoad((options) => {
     targetUser.value.id = options.id || options.userId
     targetUser.value.userId = options.userId || options.id || ''
     targetUser.value.name = options.name || '用户'
-    targetUser.value.avatar = options.avatar ? decodeURIComponent(options.avatar) : 'https://via.placeholder.com/100'
+    targetUser.value.avatar = formatAvatarUrl(options.avatar ? decodeURIComponent(options.avatar) : '')
   }
   
   console.log('聊天页面参数:', options)
