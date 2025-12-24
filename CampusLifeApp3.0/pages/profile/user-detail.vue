@@ -93,7 +93,7 @@
             :class="{ active: activeTab === 'market' }"
             @click="activeTab = 'market'"
           >
-            <u-icon name="shopping-bag" size="18" :color="activeTab === 'market' ? '#6366F1' : '#94A3B8'"></u-icon>
+            <u-icon name="gift" size="18" :color="activeTab === 'market' ? '#6366F1' : '#94A3B8'"></u-icon>
             <text>在售商品</text>
             <view class="tab-badge" v-if="marketItems.length > 0">{{ marketItems.length }}</view>
           </view>
@@ -183,6 +183,7 @@
 import { ref, reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { getUserById, getUserMarketItems } from '@/api/user.js'
+import { baseURL } from '@/api/request.js'
 
 const activeTab = ref('market')
 const isFollowing = ref(false)
@@ -227,7 +228,7 @@ async function loadUserInfo(userId) {
       const data = res.data
       userInfo.id = data.id || userId
       userInfo.name = data.username || data.nickname || '未知用户'
-      userInfo.avatar = data.avatar || 'https://via.placeholder.com/100'
+      userInfo.avatar = formatImageUrl(data.avatar)
       userInfo.major = data.major || ''
       userInfo.grade = data.grade || ''
       userInfo.verified = data.verified || false
@@ -268,10 +269,18 @@ function parseImage(images) {
   if (!images) return 'https://via.placeholder.com/300'
   try {
     const parsed = JSON.parse(images)
-    return Array.isArray(parsed) ? parsed[0] : images
+    const img = Array.isArray(parsed) ? parsed[0] : images
+    return formatImageUrl(img)
   } catch {
-    return images.split(',')[0] || images
+    const img = images.split(',')[0] || images
+    return formatImageUrl(img)
   }
+}
+
+function formatImageUrl(url) {
+  if (!url) return 'https://via.placeholder.com/100'
+  if (url.startsWith('http')) return url
+  return baseURL + url
 }
 
 function goBack() {
