@@ -53,44 +53,7 @@
           </view>
         </view>
 
-        <view
-            class="method-item"
-            :class="{ active: selectedMethod === 'wechat' }"
-            @click="selectedMethod = 'wechat'"
-        >
-          <view class="left">
-            <view class="icon-box wechat">
-              <u-icon name="weixin-fill" color="#fff" size="24"></u-icon>
-            </view>
-            <view class="info">
-              <text class="name">微信支付</text>
-              <text class="desc">推荐使用</text>
-            </view>
-          </view>
-          <view class="radio-circle" :class="{ checked: selectedMethod === 'wechat' }">
-            <view class="inner-dot" v-if="selectedMethod === 'wechat'"></view>
-          </view>
         </view>
-
-        <view
-            class="method-item"
-            :class="{ active: selectedMethod === 'alipay' }"
-            @click="selectedMethod = 'alipay'"
-        >
-          <view class="left">
-            <view class="icon-box alipay">
-              <u-icon name="zhifubao" color="#fff" size="24"></u-icon>
-            </view>
-            <view class="info">
-              <text class="name">支付宝</text>
-              <text class="desc">数亿用户的选择</text>
-            </view>
-          </view>
-          <view class="radio-circle" :class="{ checked: selectedMethod === 'alipay' }">
-            <view class="inner-dot" v-if="selectedMethod === 'alipay'"></view>
-          </view>
-        </view>
-      </view>
     </scroll-view>
 
     <view class="bottom-bar animate-slide-up">
